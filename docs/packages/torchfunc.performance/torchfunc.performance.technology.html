@@ -1,0 +1,652 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>torchfunc.performance.technology &mdash; torchfunc  documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="https://szymonmaszke.github.io/torchfunc/packages/torchfunc.performance/torchfunc.performance.technology.html"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!-- <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" /> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/katex-math.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="torchfunc.plot" href="../torchfunc.plot.html" />
+    <link rel="prev" title="torchfunc.performance.layers" href="torchfunc.performance.layers.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+  <!-- Preload the theme fonts -->
+
+<link rel="preload" href="../../_static/fonts/FreightSans/freight-sans-book.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../_static/fonts/FreightSans/freight-sans-medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../_static/fonts/IBMPlexMono/IBMPlexMono-Medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../_static/fonts/FreightSans/freight-sans-bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../_static/fonts/FreightSans/freight-sans-medium-italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../_static/fonts/IBMPlexMono/IBMPlexMono-SemiBold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+<!-- Preload the katex fonts -->
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Math-Italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size1-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size4-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size2-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size3-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Caligraphic-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+</head>
+
+<div class="container-fluid header-holder tutorials-header" id="header-holder">
+  <div class="container">
+    <div class="header-container">
+      <div class="main-menu">
+        <ul>
+          <li>
+            <a href="https://szymonmaszke.github.io/torchfunc/#torchfunc">Documentation</a>
+          </li>
+
+          <li>
+            <a href="https://szymonmaszke.github.io/torchfunc/#installation">Installation</a>
+          </li>
+
+          <li>
+            <a href="https://szymonmaszke.github.io/torchfunc/related.html">Related Projects</a>
+          </li>
+
+          <li>
+            <a href="https://github.com/szymonmaszke/torchfunc">Github</a>
+          </li>
+        </ul>
+      </div>
+
+      <a class="main-menu-open-button" href="#" data-behavior="open-mobile-menu"></a>
+    </div>
+
+  </div>
+</div>
+
+
+<body class="pytorch-body">
+
+   
+
+    
+
+    <div class="table-of-contents-link-wrapper">
+      <span>Table of Contents</span>
+      <a href="#" class="toggle-table-of-contents" data-behavior="toggle-table-of-contents"></a>
+    </div>
+
+    <nav data-toggle="wy-nav-shift" class="pytorch-left-menu" id="pytorch-left-menu">
+      <div class="pytorch-side-scroll">
+        <div class="pytorch-menu pytorch-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          <div class="pytorch-left-menu-search">
+            
+
+            
+              
+              
+                <div class="version">
+                  0.1.0
+                </div>
+              
+            
+
+            
+
+
+  
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search Docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+            
+          </div>
+
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../torchfunc.html">torchfunc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../torchfunc.cuda.html">torchfunc.cuda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../torchfunc.module.html">torchfunc.module</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../torchfunc.performance.html">torchfunc.performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../torchfunc.plot.html">torchfunc.plot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../torchfunc.record.html">torchfunc.record</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../related.html">Related projects</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <div class="pytorch-container">
+      <div class="pytorch-page-level-bar" id="pytorch-page-level-bar">
+        <div class="pytorch-breadcrumbs-wrapper">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="pytorch-breadcrumbs">
+    
+      <li>
+        <a href="../../index.html">
+        </a> &gt;
+      </li>
+
+        
+          <li><a href="../torchfunc.performance.html">torchfunc.performance</a> &gt;</li>
+        
+      <li>torchfunc.performance.technology</li>
+    
+    
+      <li class="pytorch-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/packages/torchfunc.performance/torchfunc.performance.technology.rst.txt" rel="nofollow"><img src="../../_static/images/view-page-source-icon.svg"></a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+        </div>
+
+        <div class="pytorch-shortcuts-wrapper" id="pytorch-shortcuts-wrapper">
+          Shortcuts
+        </div>
+      </div>
+
+      <section data-toggle="wy-nav-shift" id="pytorch-content-wrap" class="pytorch-content-wrap">
+        <div class="pytorch-content-left">
+          
+          <div class="rst-content">
+          
+            <div role="main" class="main-content" itemscope="itemscope" itemtype="http://schema.org/Article">
+             <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
+              
+  <div class="section" id="module-torchfunc.performance.technology">
+<span id="torchfunc-performance-technology"></span><h1>torchfunc.performance.technology<a class="headerlink" href="#module-torchfunc.performance.technology" title="Permalink to this headline">¶</a></h1>
+<p><strong>Analyse technological aspects (e.g. compatibility with Tensor Cores) of your module.</strong></p>
+<p>Using functionalities below you can check whether your architecture can use
+technology dependent speed improvements.</p>
+<p>If you want to contribute to this module, please see <code class="xref py py-obj docutils literal notranslate"><span class="pre">ROADMAP.md</span></code> in <a class="reference internal" href="../torchfunc.html#module-torchfunc" title="torchfunc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchfunc</span></code></a> github
+repository.</p>
+<dl class="class">
+<dt id="torchfunc.performance.technology.TensorCores">
+<em class="property">class </em><code class="sig-prename descclassname">torchfunc.performance.technology.</code><code class="sig-name descname">TensorCores</code><span class="sig-paren">(</span><em class="sig-param">linear_types: Tuple[torch.nn.modules.module.Module] = (&lt;class 'torch.nn.modules.linear.Linear'&gt;</em>, <em class="sig-param">&lt;class 'torch.nn.modules.linear.Bilinear'&gt;)</em>, <em class="sig-param">convolution_types: Tuple[torch.nn.modules.module.Module] = (&lt;class 'torch.nn.modules.conv.Conv1d'&gt;</em>, <em class="sig-param">&lt;class 'torch.nn.modules.conv.Conv2d'&gt;</em>, <em class="sig-param">&lt;class 'torch.nn.modules.conv.Conv3d'&gt;)</em>, <em class="sig-param">linear_inputs: Dict[torch.nn.modules.module.Module</em>, <em class="sig-param">Tuple[str]] = None</em>, <em class="sig-param">linear_outputs: Dict[torch.nn.modules.module.Module</em>, <em class="sig-param">Tuple[str]] = None</em>, <em class="sig-param">convolution_inputs: Dict[torch.nn.modules.module.Module</em>, <em class="sig-param">Tuple[str]] = None</em>, <em class="sig-param">convolution_outputs: Dict[torch.nn.modules.module.Module</em>, <em class="sig-param">Tuple[str]] = None</em>, <em class="sig-param">float_types: Tuple = (torch.float16</em>, <em class="sig-param">)</em>, <em class="sig-param">integer_types: Tuple = (torch.int16</em>, <em class="sig-param">)</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/performance/technology.html#TensorCores"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.performance.technology.TensorCores" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Perform Tensor Cores compatibility tests for given module and it’s submodules/children.</strong></p>
+<p>Interpretation of data returned from this function may pose some problems to users
+unfamiliar with ideas standing behind Tensor Cores.</p>
+<p>You can use <code class="xref py py-obj docutils literal notranslate"><span class="pre">torchscripts.performance.tips</span></code> to get user friendly information
+about your <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Module</span></code>.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">half</span><span class="p">(),</span> <span class="c1"># Half precision is compatible</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">half</span><span class="p">(),</span>
+<span class="p">)</span>
+
+<span class="n">analysis</span> <span class="o">=</span> <span class="n">torchscripts</span><span class="o">.</span><span class="n">peformance</span><span class="o">.</span><span class="n">technology</span><span class="o">.</span><span class="n">TensorCores</span><span class="p">()</span><span class="o">.</span><span class="n">children</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="c1"># Should return dictionary indicating problems with second Linear (wrong shape and type)</span>
+<span class="c1"># And last Linear (wrong shape)</span>
+</pre></div>
+</div>
+<dl class="attribute">
+<dt id="torchfunc.performance.technology.TensorCores.linear_types">
+<code class="sig-name descname">linear_types</code><a class="headerlink" href="#torchfunc.performance.technology.TensorCores.linear_types" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tuple of types to be considered linear and which should run with tensor
+cores kernels.</p>
+<p><strong>Default:</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">(torch.nn.Linear,</span> <span class="pre">torch.nn.Bilinear)</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Tuple[torch.nn.Module], optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="torchfunc.performance.technology.TensorCores.convolution_types">
+<code class="sig-name descname">convolution_types</code><a class="headerlink" href="#torchfunc.performance.technology.TensorCores.convolution_types" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tuple of types to be considered convolutional and which should run with tensor
+cores kernels.</p>
+<p><strong>Default:</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">(torch.nn.Conv1d,</span> <span class="pre">torch.nn.Conv2d,</span> <span class="pre">torch.nn.Conv3d)</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Tuple[torch.nn.Module], optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="torchfunc.performance.technology.TensorCores.linear_inputs">
+<code class="sig-name descname">linear_inputs</code><a class="headerlink" href="#torchfunc.performance.technology.TensorCores.linear_inputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dict-like where key is the type of module (e.g. <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Linear</span></code>) and values
+are tuples of attribute names specifying names of input attributes of this type of layer.
+You could use <code class="xref py py-obj docutils literal notranslate"><span class="pre">collections.defaultdict</span></code> for easier specification of prevailing attribute names
+like <code class="xref py py-obj docutils literal notranslate"><span class="pre">in_features</span></code> for torch.nn.Linear.
+More than one input can be specified, as is the case for <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Bilinear</span></code>.</p>
+<p><strong>Default:</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">{default_type:</span> <span class="pre">(&quot;in_features&quot;,),</span> <span class="pre">torch.nn.Bilinear:</span> <span class="pre">(&quot;in_features1&quot;,</span> <span class="pre">&quot;in_features2&quot;)}</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict[torch.nn.Module, Tuple[str]], optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="torchfunc.performance.technology.TensorCores.linear_outputs">
+<code class="sig-name descname">linear_outputs</code><a class="headerlink" href="#torchfunc.performance.technology.TensorCores.linear_outputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dict-like where key is the type of module (e.g. <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Linear</span></code>) and values
+are tuples of attribute names specifying names of output attributes of this type of layer.
+You could use <code class="xref py py-obj docutils literal notranslate"><span class="pre">collections.defaultdict</span></code> for easier specification of prevailing attribute names
+like <code class="xref py py-obj docutils literal notranslate"><span class="pre">out_features</span></code> for <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Linear</span></code>.
+More than one output can be specified, same as <a class="reference internal" href="#torchfunc.performance.technology.TensorCores.linear_inputs" title="torchfunc.performance.technology.TensorCores.linear_inputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">linear_inputs</span></code></a>.</p>
+<p><strong>Default:</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">{default_type:</span> <span class="pre">(&quot;out_features&quot;,)}</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict[torch.nn.Module, Tuple[str]], optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="torchfunc.performance.technology.TensorCores.convolution_inputs">
+<code class="sig-name descname">convolution_inputs</code><a class="headerlink" href="#torchfunc.performance.technology.TensorCores.convolution_inputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dict-like where key is the type of module (e.g. <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Conv2d</span></code>) and values
+are tuples of attribute names specifying names of input channels attributes of this type of layer.
+You could use <code class="xref py py-obj docutils literal notranslate"><span class="pre">collections.defaultdict</span></code> for easier specification of prevailing attribute names
+like <code class="xref py py-obj docutils literal notranslate"><span class="pre">in_channels</span></code> for all torch’s convolutions.
+More than one output can be specified, same as <a class="reference internal" href="#torchfunc.performance.technology.TensorCores.linear_inputs" title="torchfunc.performance.technology.TensorCores.linear_inputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">linear_inputs</span></code></a>.</p>
+<p><strong>Default:</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">{default_type:</span> <span class="pre">(&quot;in_channels&quot;,)}</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict[torch.nn.Module, Tuple[str]], optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="torchfunc.performance.technology.TensorCores.convolution_outputs">
+<code class="sig-name descname">convolution_outputs</code><a class="headerlink" href="#torchfunc.performance.technology.TensorCores.convolution_outputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dict-like where key is the type of module (e.g. torch.nn.Conv2d) and values
+are tuples of attribute names specifying names of output channels attributes of this type of layer.
+You could use collections.defaultdict for easier specification of prevailing attribute names
+like out_channels for all torch’s convolutions.
+More than one output can be specified, same as linear_inputs.</p>
+<p><strong>Default:</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">{default_type:</span> <span class="pre">(&quot;out_channels&quot;,)}</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict[torch.nn.Module, Tuple[str]], optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="torchfunc.performance.technology.TensorCores.float_types">
+<code class="sig-name descname">float_types</code><a class="headerlink" href="#torchfunc.performance.technology.TensorCores.float_types" title="Permalink to this definition">¶</a></dt>
+<dd><p>Floating point types compatible with TensorCores.</p>
+<p><strong>Default:</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">(torch.half,</span> <span class="pre">)</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>typing.Tuple[types], optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="torchfunc.performance.technology.TensorCores.integer_types">
+<code class="sig-name descname">integer_types</code><a class="headerlink" href="#torchfunc.performance.technology.TensorCores.integer_types" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interger types compatible with TensorCores.</p>
+<p><strong>Default:</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">(torch.short,</span> <span class="pre">)</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>typing.Tuple[types], optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="torchfunc.performance.technology.TensorCores.children">
+<code class="sig-name descname">children</code><span class="sig-paren">(</span><em class="sig-param">module: torch.nn.modules.module.Module</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/performance/technology.html#TensorCores.children"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.performance.technology.TensorCores.children" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Check Tensor Cores compatibility using</strong> <a class="reference internal" href="#torchfunc.performance.technology.TensorCores.children" title="torchfunc.performance.technology.TensorCores.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children()</span></code></a> <strong>method (shallow scanning).</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>module</strong> (<em>torch.nn.Module</em>) – Module to be scanned for Tensor Cores compatibility</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>Multilevel dictionary describing modules incompatible with tensor cores.
+First level consists of two fields:</p>
+<ul class="simple">
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code>: incompatible type with TensorCores</p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">shape</span></code>: incompatible types with TensorCores</p></li>
+</ul>
+<p>Second level for type:</p>
+<ul class="simple">
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>: module is floating point type but it’s type is incompatible.</p></li>
+</ul>
+<p>Contains list of submodule’s indices posing this problem.
+- <code class="xref py py-obj docutils literal notranslate"><span class="pre">integer</span></code>: module is integer type but it’s type is incompatible
+Contains list of submodule’s indices posing this problem.</p>
+<p>Second level for shape:</p>
+<ul class="simple">
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>: module is floating point type and has incorrect shape</p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">integer</span></code>: module is integer type and has incorrect shape</p></li>
+</ul>
+<p>Third level for shape’s <code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">integer</span></code>:</p>
+<ul class="simple">
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">input</span></code>: module’s input shape is incompatible with Tensor Cores</p></li>
+</ul>
+<p>Contains list of submodule’s indices posing this problem.
+- <code class="xref py py-obj docutils literal notranslate"><span class="pre">output</span></code>: module’s output shape is incompatible with Tensor Cores
+Contains list of submodule’s indices posing this problem.</p>
+<p>As it’s hard to parse, it is suggested to use tips for readable output.</p>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Nested dictionary</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">convolution_inputs</code><em class="property"> = None</em></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">convolution_outputs</code><em class="property"> = None</em></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">convolution_types</code><em class="property"> = (&lt;class 'torch.nn.modules.conv.Conv1d'&gt;, &lt;class 'torch.nn.modules.conv.Conv2d'&gt;, &lt;class 'torch.nn.modules.conv.Conv3d'&gt;)</em></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">float_types</code><em class="property"> = (torch.float16,)</em></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">integer_types</code><em class="property"> = (torch.int16,)</em></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">linear_inputs</code><em class="property"> = None</em></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">linear_outputs</code><em class="property"> = None</em></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="sig-name descname">linear_types</code><em class="property"> = (&lt;class 'torch.nn.modules.linear.Linear'&gt;, &lt;class 'torch.nn.modules.linear.Bilinear'&gt;)</em></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="torchfunc.performance.technology.TensorCores.modules">
+<code class="sig-name descname">modules</code><span class="sig-paren">(</span><em class="sig-param">module: torch.nn.modules.module.Module</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/performance/technology.html#TensorCores.modules"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.performance.technology.TensorCores.modules" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Check Tensor Cores compatibility using</strong> <a class="reference internal" href="#torchfunc.performance.technology.TensorCores.modules" title="torchfunc.performance.technology.TensorCores.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules()</span></code></a> <strong>method (recursive scanning).</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>module</strong> (<em>torch.nn.Module</em>) – Module to be scanned for Tensor Cores compatibility</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>Multilevel dictionary describing modules incompatible with tensor cores.
+First level consists of two fields:</p>
+<ul class="simple">
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code>: incompatible type with TensorCores</p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">shape</span></code>: incompatible types with TensorCores</p></li>
+</ul>
+<p>Second level for type:</p>
+<ul class="simple">
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>: module is floating point type but it’s type is incompatible.</p></li>
+</ul>
+<p>Contains list of submodule’s indices posing this problem.
+- <code class="xref py py-obj docutils literal notranslate"><span class="pre">integer</span></code>: module is integer type but it’s type is incompatible
+Contains list of submodule’s indices posing this problem.</p>
+<p>Second level for shape:</p>
+<ul class="simple">
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>: module is floating point type and has incorrect shape</p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">integer</span></code>: module is integer type and has incorrect shape</p></li>
+</ul>
+<p>Third level for shape’s <code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">integer</span></code>:</p>
+<ul class="simple">
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">input</span></code>: module’s input shape is incompatible with Tensor Cores</p></li>
+</ul>
+<p>Contains list of submodule’s indices posing this problem.
+- <code class="xref py py-obj docutils literal notranslate"><span class="pre">output</span></code>: module’s output shape is incompatible with Tensor Cores
+Contains list of submodule’s indices posing this problem.</p>
+<p>As it’s hard to parse, it is suggested to use tips for readable output.</p>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Nested dictionary</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+             </article>
+             
+            </div>
+            <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../torchfunc.plot.html" class="btn btn-neutral float-right" title="torchfunc.plot" accesskey="n" rel="next">Next <img src="../../_static/images/chevron-right-orange.svg" class="next-page"></a>
+      
+      
+        <a href="torchfunc.performance.layers.html" class="btn btn-neutral" title="torchfunc.performance.layers" accesskey="p" rel="prev"><img src="../../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+      
+    </div>
+  
+
+    <hr>
+
+  <!-- Spacing. -->
+  <div role="contentinfo">
+  </div>
+    
+      <div>
+        Built with Sphinx using <a href="https://github.com/pytorch/pytorch_sphinx_theme">PyTorch's theme</a> provided originally by <a href="https://readthedocs.org">Read the Docs</a>.
+      </div>
+      <div>
+      </div>
+    
+
+  <div role="contentinfo">
+  </div> 
+
+</footer>
+          </div>
+        </div>
+
+        <div class="pytorch-content-right" id="pytorch-content-right">
+          <div class="pytorch-right-menu" id="pytorch-right-menu">
+            <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
+              <ul>
+<li><a class="reference internal" href="#">torchfunc.performance.technology</a></li>
+</ul>
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  
+
+
+  
+
+     
+       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+         <script type="text/javascript" src="../../_static/jquery.js"></script>
+         <script type="text/javascript" src="../../_static/underscore.js"></script>
+         <script type="text/javascript" src="../../_static/doctools.js"></script>
+         <script type="text/javascript" src="../../_static/language_data.js"></script>
+         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"></script>
+         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js"></script>
+         <script type="text/javascript" src="../../_static/katex_autorenderer.js"></script>
+     
+
+  
+
+  <script type="text/javascript" src="../../_static/js/vendor/popper.min.js"></script>
+  <script type="text/javascript" src="../../_static/js/vendor/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+  <!-- Begin Footer -->
+
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-logo-wrapper">
+        <a href="" class="footer-logo"></a>
+      </div>
+
+      <div class="footer-links-wrapper">
+        <div class="footer-links-col">
+          <ul>
+            <li class="list-title"><a href="https://szymonmaszke.github.io/torchfunc">Home</a></li>
+            <li><a href="https://pytorch.org/docs/stable/index.html">PyTorch</a></li>
+            <li><a href="https://szymonmaszke.github.io/torchfunc/#torchfunc">Documentation</a></li>
+            <li><a href="https://szymonmaszke.github.io/torchfunc/#installation">Installation</a></li>
+            <li><a href="https://github.com/szymonmaszke/torchfunc">GitHub</a></li>
+            <li><a href="https://github.com/szymonmaszke/torchfunc/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc">Github Issues</a></li>
+            <li><a href="https://github.com/szymonmaszke/torchfunc/blob/master/ROADMAP.md">Roadmap</a></li>
+            <li><a href="https://github.com/szymonmaszke" target="_blank">Author</a></li>
+          </ul>
+        </div>
+
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- End Footer -->
+
+  <!-- Begin Mobile Menu -->
+
+  <div class="mobile-main-menu">
+    <div class="container-fluid">
+      <div class="container">
+        <div class="mobile-main-menu-header-container">
+          <a class="header-logo" href="" aria-label="torchutils"></a>
+          <a class="main-menu-close-button" href="#" data-behavior="close-mobile-menu"></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mobile-main-menu-links-container">
+      <div class="main-menu">
+        <ul>
+          <li>
+            <a href="https://szymonmaszke.github.io/torchfunc/#torchfunc">Docs</a>
+          </li>
+
+          <li>
+            <a href="https://szymonmaszke.github.io/torchfunc/related.html">Related Projects</a>
+          </li>
+
+          <li>
+            <a href="https://github.com/szymonmaszke/torchfunc">GitHub</a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- End Mobile Menu -->
+
+  <script type="text/javascript" src="../../_static/js/vendor/anchor.min.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      mobileMenu.bind();
+      mobileTOC.bind();
+      pytorchAnchors.bind();
+      sideMenus.bind();
+      scrollToAnchor.bind();
+      highlightNavigation.bind();
+
+      // Add class to links that have code blocks, since we cannot create links in code blocks
+      $("article.pytorch-article a span.pre").each(function(e) {
+        $(this).closest("a").addClass("has-code");
+      });
+    })
+  </script>
+</body>
+</html>

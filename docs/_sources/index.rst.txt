@@ -1,0 +1,93 @@
+:github_url: https://github.com/szymonmaszke/torchfunc
+
+*********
+torchfunc
+*********
+
+**torchfunc** is PyTorch oriented library with a goal to help you with:
+
+* Improving and analysing performance of your neural network
+* Plotting and visualizing modules
+* Record neuron activity and tailor it to your specific task or target
+* Get information about your host operating system, CUDA devices and others
+* Day-to-day neural network related duties (model size, seeding, performance measurements etc.)
+
+It **is not** directly related with model creation but should be considered more of an environment
+around this process. If you are looking for this functionality check
+`torchnet <https://github.com/szymonmaszke/torchnet>`__ and `related projects <https://szymonmaszke.github.io/torchfunc/related.html>`__.
+
+Modules
+#######
+
+.. toctree::
+   :glob:
+   :maxdepth: 1
+
+   packages/*
+   
+.. toctree::
+   :hidden:
+
+   related
+
+
+Installation
+############
+
+Following installation methods are available:
+
+`pip: <https://pypi.org/project/torchfunc/>`__
+==============================================
+
+.. code-block:: shell
+
+  pip install --user torchfunc
+
+
+`Docker: <https://cloud.docker.com/repository/docker/szymonmaszke/torchfunc>`__
+===============================================================================
+
+Various `torchfunc` images are available both CPU and GPU-enabled.
+You can find them inside Docker Cloud at `szymonmaszke/torchfunc`
+
+CPU
+---
+
+CPU image is based on `ubuntu:18.04 <https://hub.docker.com/_/ubuntu>`__ and
+can be pulled with:
+
+.. code-block:: shell
+  
+  docker pull szymonmaszke/torchfunc:18.04
+
+This image is significantly lighter due to lack of GPU support.
+
+GPU
+---
+
+All images are based on `nvidia/cuda <https://hub.docker.com/r/nvidia/cuda/>`__ Docker image.
+Each has corresponding tag. CUDA 10.1, 10 and 9.2 with and without CUDNN7 support are available.
+
+Following images are available:
+
+- `10.1-cudnn7-runtime-ubuntu18.04`
+- `10.1-runtime-ubuntu18.04`
+- `10.0-cudnn7-runtime-ubuntu18.04`
+- `10.0-runtime-ubuntu18.04`
+- `9.2-cudnn7-runtime-ubuntu18.04`
+- `9.2-runtime-ubuntu18.04`
+
+Example pull:
+
+.. code-block:: shell
+  
+  docker pull szymonmaszke/torchfunc:10.1-cudnn7-runtime-ubuntu18.04
+
+`conda: <https://anaconda.org/conda-forge/torchfunc>`__
+=======================================================
+
+**TO BE ADDED**
+
+.. code-block:: shell
+
+  conda install -c conda-forge torchfunc

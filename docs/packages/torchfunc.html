@@ -1,0 +1,571 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>torchfunc &mdash; torchfunc  documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="https://szymonmaszke.github.io/torchfunc/packages/torchfunc.html"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!-- <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/katex-math.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="torchfunc.cuda" href="torchfunc.cuda.html" />
+    <link rel="prev" title="torchfunc" href="../index.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+  <!-- Preload the theme fonts -->
+
+<link rel="preload" href="../_static/fonts/FreightSans/freight-sans-book.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/FreightSans/freight-sans-medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/IBMPlexMono/IBMPlexMono-Medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/FreightSans/freight-sans-bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/FreightSans/freight-sans-medium-italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../_static/fonts/IBMPlexMono/IBMPlexMono-SemiBold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+<!-- Preload the katex fonts -->
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Math-Italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size1-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size4-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size2-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size3-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Caligraphic-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+</head>
+
+<div class="container-fluid header-holder tutorials-header" id="header-holder">
+  <div class="container">
+    <div class="header-container">
+      <div class="main-menu">
+        <ul>
+          <li>
+            <a href="https://szymonmaszke.github.io/torchfunc/#torchfunc">Documentation</a>
+          </li>
+
+          <li>
+            <a href="https://szymonmaszke.github.io/torchfunc/#installation">Installation</a>
+          </li>
+
+          <li>
+            <a href="https://szymonmaszke.github.io/torchfunc/related.html">Related Projects</a>
+          </li>
+
+          <li>
+            <a href="https://github.com/szymonmaszke/torchfunc">Github</a>
+          </li>
+        </ul>
+      </div>
+
+      <a class="main-menu-open-button" href="#" data-behavior="open-mobile-menu"></a>
+    </div>
+
+  </div>
+</div>
+
+
+<body class="pytorch-body">
+
+   
+
+    
+
+    <div class="table-of-contents-link-wrapper">
+      <span>Table of Contents</span>
+      <a href="#" class="toggle-table-of-contents" data-behavior="toggle-table-of-contents"></a>
+    </div>
+
+    <nav data-toggle="wy-nav-shift" class="pytorch-left-menu" id="pytorch-left-menu">
+      <div class="pytorch-side-scroll">
+        <div class="pytorch-menu pytorch-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          <div class="pytorch-left-menu-search">
+            
+
+            
+              
+              
+                <div class="version">
+                  0.1.0
+                </div>
+              
+            
+
+            
+
+
+  
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search Docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+            
+          </div>
+
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">torchfunc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="torchfunc.cuda.html">torchfunc.cuda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="torchfunc.module.html">torchfunc.module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="torchfunc.performance.html">torchfunc.performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="torchfunc.plot.html">torchfunc.plot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="torchfunc.record.html">torchfunc.record</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../related.html">Related projects</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <div class="pytorch-container">
+      <div class="pytorch-page-level-bar" id="pytorch-page-level-bar">
+        <div class="pytorch-breadcrumbs-wrapper">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="pytorch-breadcrumbs">
+    
+      <li>
+        <a href="../index.html">
+        </a> &gt;
+      </li>
+
+        
+      <li>torchfunc</li>
+    
+    
+      <li class="pytorch-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/packages/torchfunc.rst.txt" rel="nofollow"><img src="../_static/images/view-page-source-icon.svg"></a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+        </div>
+
+        <div class="pytorch-shortcuts-wrapper" id="pytorch-shortcuts-wrapper">
+          Shortcuts
+        </div>
+      </div>
+
+      <section data-toggle="wy-nav-shift" id="pytorch-content-wrap" class="pytorch-content-wrap">
+        <div class="pytorch-content-left">
+          
+          <div class="rst-content">
+          
+            <div role="main" class="main-content" itemscope="itemscope" itemtype="http://schema.org/Article">
+             <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
+              
+  <div class="section" id="module-torchfunc">
+<span id="torchfunc"></span><h1>torchfunc<a class="headerlink" href="#module-torchfunc" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="torchfunc.Seed">
+<em class="property">class </em><code class="sig-prename descclassname">torchfunc.</code><code class="sig-name descname">Seed</code><span class="sig-paren">(</span><em class="sig-param">value: int</em>, <em class="sig-param">cuda: bool = False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchfunc.html#Seed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.Seed" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Seed PyTorch and numpy.</strong></p>
+<p>This code is based on PyTorch’s reproducibility guide: <a class="reference external" href="https://pytorch.org/docs/stable/notes/randomness.html">https://pytorch.org/docs/stable/notes/randomness.html</a>
+Can be used as standard seeding procedure, context manager (seed will be changed only within block) or function decorator.</p>
+<p><strong>Standard seed</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">torchfunc</span><span class="o">.</span><span class="n">Seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># no surprises I guess</span>
+</pre></div>
+</div>
+<p><strong>Used as context manager</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">Seed</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span>
+    <span class="o">...</span> <span class="c1"># your operations</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">initial_seed</span><span class="p">())</span> <span class="c1"># Should be back to seed pre block</span>
+</pre></div>
+</div>
+<p><strong>Important:</strong> It’s impossible to put original <code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy</span></code> seed after execution flow
+leaves context manager block, hence it will be set to original PyTorch’s seed.</p>
+<p><strong>Used as function decorator</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@Seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># Seed only within function</span>
+<span class="k">def</span> <span class="nf">foo</span><span class="p">():</span>
+    <span class="k">return</span> <span class="mi">42</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<em>int</em>) – Seed value used in np.random_seed and torch.manual_seed. Usually int is provided</p></li>
+<li><p><strong>cuda</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to set PyTorch’s cuda backend into deterministic mode (setting cudnn.benchmark to False
+and cudnn.deterministic to True). If False, consecutive runs may be slightly different.
+If True, automatic autotuning for convolutions layers with consistent input shape will be turned off.
+Default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code></p></li>
+</ul>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="torchfunc.Seed.cuda">
+<code class="sig-name descname">cuda</code><em class="property"> = False</em><a class="headerlink" href="#torchfunc.Seed.cuda" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="torchfunc.Timer">
+<em class="property">class </em><code class="sig-prename descclassname">torchfunc.</code><code class="sig-name descname">Timer</code><span class="sig-paren">(</span><em class="sig-param">function: Callable = &lt;built-in function perf_counter&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchfunc.html#Timer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.Timer" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Measure execution time of function.</strong></p>
+<p>Can be used as context manager or function decorator, perform checkpoints
+or display absolute time from measurements beginning.</p>
+<p><strong>Used as context manager</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">Timer</span><span class="p">()</span> <span class="k">as</span> <span class="n">timer</span><span class="p">:</span>
+    <span class="o">...</span> <span class="c1"># your operations</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">timer</span><span class="p">)</span> <span class="c1"># __str__ calls timer.time() internally</span>
+    <span class="n">timer</span><span class="o">.</span><span class="n">checkpoint</span><span class="p">()</span> <span class="c1"># register checkpoint</span>
+    <span class="o">...</span> <span class="c1"># more operations</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">timer</span><span class="o">.</span><span class="n">checkpoint</span><span class="p">())</span> <span class="c1"># time since last timer.checkpoint() call</span>
+
+<span class="o">...</span> <span class="c1"># even more operations</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">timer</span><span class="p">)</span> <span class="c1"># time taken for the block, will not be updated outside of it</span>
+</pre></div>
+</div>
+<p>When execution leaves the block, timer will be blocked. Last checkpoint and time taken
+to execute whole block will be returned by checkpoint() and time() methods respectively.</p>
+<p><strong>Used as function decorator</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@Timer</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">foo</span><span class="p">():</span>
+    <span class="k">return</span> <span class="mi">42</span>
+
+<span class="n">value</span><span class="p">,</span> <span class="n">time</span> <span class="o">=</span> <span class="n">foo</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>function</strong> (<em>Callable</em><em>, </em><em>optional</em>) – No argument function used to measure time. Default: time.perf_counter</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="torchfunc.Timer.checkpoint">
+<code class="sig-name descname">checkpoint</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchfunc.html#Timer.checkpoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.Timer.checkpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Time taken since last checkpoint call.</strong></p>
+<p>If wasn’t called before, it is the same as as Timer creation time (first call returns
+the same thing as time())</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Whatever self.function() - self.function() returns</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>time-like</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="torchfunc.Timer.time">
+<code class="sig-name descname">time</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchfunc.html#Timer.time"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.Timer.time" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Time taken since the object creation (measurements beginning).</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Whatever self.function() - self.function() returns</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>time-like</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="torchfunc.info">
+<code class="sig-prename descclassname">torchfunc.</code><code class="sig-name descname">info</code><span class="sig-paren">(</span><em class="sig-param">general: bool = True</em>, <em class="sig-param">cuda: bool = True</em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="../_modules/torchfunc.html#info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.info" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Return host related info as string.</strong></p>
+<p>This function may help you tailor your module’s architecture to specific environment
+it will be run on.</p>
+<p>For in-depth info regarding possible performance improvements see <a class="reference internal" href="torchfunc.performance.html#module-torchfunc.performance" title="torchfunc.performance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchfunc.performance</span></code></a> submodule.</p>
+<p><strong>Information is divided into two sections:</strong></p>
+<ul class="simple">
+<li><p>general - related to OS, Python version etc.</p></li>
+<li><p>cuda - specific to CUDA hardware</p></li>
+</ul>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">torchfunc</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">general</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>general</strong> (<em>bool</em><em>, </em><em>optional</em>) – Return general informations. Default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></p></li>
+<li><p><strong>cuda</strong> (<em>bool</em><em>, </em><em>optional</em>) – Return CUDA related information. Default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Description of system and/or GPU.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="torchfunc.installed">
+<code class="sig-prename descclassname">torchfunc.</code><code class="sig-name descname">installed</code><span class="sig-paren">(</span><em class="sig-param">module: str</em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/torchfunc.html#installed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.installed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return True if module is installed.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check whether mixed precision library available</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">torchfunc</span><span class="o">.</span><span class="n">installed</span><span class="p">(</span><span class="s2">&quot;apex&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>module</strong> (<em>str</em>) – Name of the module to be checked.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if installed.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="torchfunc.sizeof">
+<code class="sig-prename descclassname">torchfunc.</code><code class="sig-name descname">sizeof</code><span class="sig-paren">(</span><em class="sig-param">obj</em><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="../_modules/torchfunc.html#sizeof"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.sizeof" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Get size in bytes of Tensor, torch.nn.Module or standard object.</strong></p>
+<p>Specific routines are defined for torch.tensor objects and torch.nn.Module
+objects. They will calculate how much memory in bytes those object consume.</p>
+<p>If another object is passed, <code class="xref py py-obj docutils literal notranslate"><span class="pre">sys.getsizeof</span></code> will be called on it.</p>
+<p>This function works similarly to C++’s sizeof operator.</p>
+<p><strong>Example</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">bias</span> <span class="o">=</span> <span class="mi">20</span> <span class="o">*</span> <span class="mi">4</span> <span class="c1"># in bytes</span>
+<span class="n">weights</span> <span class="o">=</span> <span class="mi">20</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">*</span> <span class="mi">4</span> <span class="c1"># in bytes</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">torchfunc</span><span class="o">.</span><span class="n">sizeof</span><span class="p">(</span><span class="n">model</span><span class="p">)</span> <span class="o">==</span> <span class="n">bias</span> <span class="o">+</span> <span class="n">weights</span><span class="p">)</span> <span class="c1"># True</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>obj</strong> – Object whose size will be measured.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Size in bytes of the object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+             </article>
+             
+            </div>
+            <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="torchfunc.cuda.html" class="btn btn-neutral float-right" title="torchfunc.cuda" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral" title="torchfunc" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+      
+    </div>
+  
+
+    <hr>
+
+  <!-- Spacing. -->
+  <div role="contentinfo">
+  </div>
+    
+      <div>
+        Built with Sphinx using <a href="https://github.com/pytorch/pytorch_sphinx_theme">PyTorch's theme</a> provided originally by <a href="https://readthedocs.org">Read the Docs</a>.
+      </div>
+      <div>
+      </div>
+    
+
+  <div role="contentinfo">
+  </div> 
+
+</footer>
+          </div>
+        </div>
+
+        <div class="pytorch-content-right" id="pytorch-content-right">
+          <div class="pytorch-right-menu" id="pytorch-right-menu">
+            <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
+              <ul>
+<li><a class="reference internal" href="#">torchfunc</a></li>
+</ul>
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  
+
+
+  
+
+     
+       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+         <script type="text/javascript" src="../_static/jquery.js"></script>
+         <script type="text/javascript" src="../_static/underscore.js"></script>
+         <script type="text/javascript" src="../_static/doctools.js"></script>
+         <script type="text/javascript" src="../_static/language_data.js"></script>
+         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"></script>
+         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js"></script>
+         <script type="text/javascript" src="../_static/katex_autorenderer.js"></script>
+     
+
+  
+
+  <script type="text/javascript" src="../_static/js/vendor/popper.min.js"></script>
+  <script type="text/javascript" src="../_static/js/vendor/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+  <!-- Begin Footer -->
+
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-logo-wrapper">
+        <a href="" class="footer-logo"></a>
+      </div>
+
+      <div class="footer-links-wrapper">
+        <div class="footer-links-col">
+          <ul>
+            <li class="list-title"><a href="https://szymonmaszke.github.io/torchfunc">Home</a></li>
+            <li><a href="https://pytorch.org/docs/stable/index.html">PyTorch</a></li>
+            <li><a href="https://szymonmaszke.github.io/torchfunc/#torchfunc">Documentation</a></li>
+            <li><a href="https://szymonmaszke.github.io/torchfunc/#installation">Installation</a></li>
+            <li><a href="https://github.com/szymonmaszke/torchfunc">GitHub</a></li>
+            <li><a href="https://github.com/szymonmaszke/torchfunc/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc">Github Issues</a></li>
+            <li><a href="https://github.com/szymonmaszke/torchfunc/blob/master/ROADMAP.md">Roadmap</a></li>
+            <li><a href="https://github.com/szymonmaszke" target="_blank">Author</a></li>
+          </ul>
+        </div>
+
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- End Footer -->
+
+  <!-- Begin Mobile Menu -->
+
+  <div class="mobile-main-menu">
+    <div class="container-fluid">
+      <div class="container">
+        <div class="mobile-main-menu-header-container">
+          <a class="header-logo" href="" aria-label="torchutils"></a>
+          <a class="main-menu-close-button" href="#" data-behavior="close-mobile-menu"></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mobile-main-menu-links-container">
+      <div class="main-menu">
+        <ul>
+          <li>
+            <a href="https://szymonmaszke.github.io/torchfunc/#torchfunc">Docs</a>
+          </li>
+
+          <li>
+            <a href="https://szymonmaszke.github.io/torchfunc/related.html">Related Projects</a>
+          </li>
+
+          <li>
+            <a href="https://github.com/szymonmaszke/torchfunc">GitHub</a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- End Mobile Menu -->
+
+  <script type="text/javascript" src="../_static/js/vendor/anchor.min.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      mobileMenu.bind();
+      mobileTOC.bind();
+      pytorchAnchors.bind();
+      sideMenus.bind();
+      scrollToAnchor.bind();
+      highlightNavigation.bind();
+
+      // Add class to links that have code blocks, since we cannot create links in code blocks
+      $("article.pytorch-article a span.pre").each(function(e) {
+        $(this).closest("a").addClass("has-code");
+      });
+    })
+  </script>
+</body>
+</html>

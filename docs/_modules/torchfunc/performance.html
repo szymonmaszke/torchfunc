@@ -1,0 +1,520 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>torchfunc.performance &mdash; torchfunc  documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="https://szymonmaszke.github.io/torchfunc/_modules/torchfunc/performance.html"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!-- <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" /> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/katex-math.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+  <!-- Preload the theme fonts -->
+
+<link rel="preload" href="../../_static/fonts/FreightSans/freight-sans-book.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../_static/fonts/FreightSans/freight-sans-medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../_static/fonts/IBMPlexMono/IBMPlexMono-Medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../_static/fonts/FreightSans/freight-sans-bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../_static/fonts/FreightSans/freight-sans-medium-italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../_static/fonts/IBMPlexMono/IBMPlexMono-SemiBold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+<!-- Preload the katex fonts -->
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Math-Italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size1-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size4-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size2-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size3-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Caligraphic-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+</head>
+
+<div class="container-fluid header-holder tutorials-header" id="header-holder">
+  <div class="container">
+    <div class="header-container">
+      <div class="main-menu">
+        <ul>
+          <li>
+            <a href="https://szymonmaszke.github.io/torchfunc/#torchfunc">Documentation</a>
+          </li>
+
+          <li>
+            <a href="https://szymonmaszke.github.io/torchfunc/#installation">Installation</a>
+          </li>
+
+          <li>
+            <a href="https://szymonmaszke.github.io/torchfunc/related.html">Related Projects</a>
+          </li>
+
+          <li>
+            <a href="https://github.com/szymonmaszke/torchfunc">Github</a>
+          </li>
+        </ul>
+      </div>
+
+      <a class="main-menu-open-button" href="#" data-behavior="open-mobile-menu"></a>
+    </div>
+
+  </div>
+</div>
+
+
+<body class="pytorch-body">
+
+   
+
+    
+
+    <div class="table-of-contents-link-wrapper">
+      <span>Table of Contents</span>
+      <a href="#" class="toggle-table-of-contents" data-behavior="toggle-table-of-contents"></a>
+    </div>
+
+    <nav data-toggle="wy-nav-shift" class="pytorch-left-menu" id="pytorch-left-menu">
+      <div class="pytorch-side-scroll">
+        <div class="pytorch-menu pytorch-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          <div class="pytorch-left-menu-search">
+            
+
+            
+              
+              
+                <div class="version">
+                  0.1.0
+                </div>
+              
+            
+
+            
+
+
+  
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search Docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+            
+          </div>
+
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../packages/torchfunc.html">torchfunc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packages/torchfunc.cuda.html">torchfunc.cuda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packages/torchfunc.module.html">torchfunc.module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packages/torchfunc.performance.html">torchfunc.performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packages/torchfunc.plot.html">torchfunc.plot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packages/torchfunc.record.html">torchfunc.record</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../related.html">Related projects</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <div class="pytorch-container">
+      <div class="pytorch-page-level-bar" id="pytorch-page-level-bar">
+        <div class="pytorch-breadcrumbs-wrapper">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="pytorch-breadcrumbs">
+    
+      <li>
+        <a href="../../index.html">
+        </a> &gt;
+      </li>
+
+        
+          <li><a href="../index.html">Module code</a> &gt;</li>
+        
+          <li><a href="../torchfunc.html">torchfunc</a> &gt;</li>
+        
+      <li>torchfunc.performance</li>
+    
+    
+      <li class="pytorch-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+        </div>
+
+        <div class="pytorch-shortcuts-wrapper" id="pytorch-shortcuts-wrapper">
+          Shortcuts
+        </div>
+      </div>
+
+      <section data-toggle="wy-nav-shift" id="pytorch-content-wrap" class="pytorch-content-wrap">
+        <div class="pytorch-content-left">
+          
+          <div class="rst-content">
+          
+            <div role="main" class="main-content" itemscope="itemscope" itemtype="http://schema.org/Article">
+             <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
+              
+  <h1>Source code for torchfunc.performance</h1><div class="highlight"><pre>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">**This package allows you to measure and improve performance of your neural networks.**</span>
+
+<span class="sd">Following functions should be considered as general recommendations.</span>
+<span class="sd">For specific info/tips, use specific module.</span>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">typing</span>
+
+<span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="kn">import</span> <span class="nn">torchfunc</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">layers</span><span class="p">,</span> <span class="n">technology</span>
+<span class="kn">from</span> <span class="nn">.layers</span> <span class="k">import</span> <span class="n">Depthwise</span><span class="p">,</span> <span class="n">Inplace</span>
+<span class="kn">from</span> <span class="nn">.technology</span> <span class="k">import</span> <span class="n">TensorCores</span>
+
+
+<div class="viewcode-block" id="report"><a class="viewcode-back" href="../../packages/torchfunc.performance.html#torchfunc.performance.report">[docs]</a><span class="k">def</span> <span class="nf">report</span><span class="p">(</span><span class="n">module</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">]:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Run essential module&#39;s performance analysis with default settings.**</span>
+
+<span class="sd">    Following tests will be performed:</span>
+
+<span class="sd">    - Module being an instance of `torch.nn.ScriptModule`</span>
+<span class="sd">    - Apex (mixed precision training) availability</span>
+<span class="sd">    - Any inplace ops used</span>
+<span class="sd">    - Analysis of compliance with `TensorCores` technology</span>
+<span class="sd">    - Any depthwise convolution used</span>
+
+<span class="sd">    Report returns data in machine-ready type; if you wish to have easy to follow</span>
+<span class="sd">    guidelines use function `tips`.</span>
+
+<span class="sd">    **Example**::</span>
+
+<span class="sd">        model = torch.nn.Sequential(</span>
+<span class="sd">            torch.nn.Linear(784, 100),</span>
+<span class="sd">            torch.nn.ReLU(),</span>
+<span class="sd">            torch.nn.Linear(100, 50),</span>
+<span class="sd">            torch.nn.ReLU(),</span>
+<span class="sd">            torch.nn.Linear(50, 10),</span>
+<span class="sd">        )</span>
+<span class="sd">        report = torchfunc.performance.report(model)</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    module: torch.nn.Module</span>
+<span class="sd">            Module to be tested against test suite.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Dict[str, Any]</span>
+<span class="sd">            Dictionary with keys:</span>
+
+<span class="sd">            - torchscript: True if module is an instance of torch.jit.ScriptModule</span>
+<span class="sd">            - apex: True if apex installed (recommended mixed precision training library from NVidia for PyTorch)</span>
+<span class="sd">            - tensorcores: same as `torchscript.performance.technology.TensorCores`</span>
+<span class="sd">            - inplace: same as `torchscript.performance.layers.Inplace`</span>
+<span class="sd">            - depthwise: same as `torchscript.performance.layers.Depthwise`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;torchscript&quot;</span><span class="p">:</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">jit</span><span class="o">.</span><span class="n">ScriptModule</span><span class="p">),</span>
+        <span class="s2">&quot;apex&quot;</span><span class="p">:</span> <span class="n">torchfunc</span><span class="o">.</span><span class="n">installed</span><span class="p">(</span><span class="s2">&quot;apex&quot;</span><span class="p">),</span>
+        <span class="s2">&quot;tensorcores&quot;</span><span class="p">:</span> <span class="n">TensorCores</span><span class="p">()</span><span class="o">.</span><span class="n">modules</span><span class="p">(</span><span class="n">module</span><span class="p">),</span>
+        <span class="s2">&quot;inplace&quot;</span><span class="p">:</span> <span class="n">Inplace</span><span class="p">()</span><span class="o">.</span><span class="n">modules</span><span class="p">(</span><span class="n">module</span><span class="p">),</span>
+        <span class="s2">&quot;depthwise&quot;</span><span class="p">:</span> <span class="n">Depthwise</span><span class="p">()</span><span class="o">.</span><span class="n">modules</span><span class="p">(</span><span class="n">module</span><span class="p">),</span>
+    <span class="p">}</span></div>
+
+
+<span class="c1"># Parse TensorCores</span>
+<div class="viewcode-block" id="tips"><a class="viewcode-back" href="../../packages/torchfunc.performance.html#torchfunc.performance.tips">[docs]</a><span class="k">def</span> <span class="nf">tips</span><span class="p">(</span><span class="n">module</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span> <span class="n">general</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">specific</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Return string describing possible performance improvements one can undertake.**</span>
+
+<span class="sd">    Internally report will be called and it&#39;s output parsed and described.</span>
+<span class="sd">    It is the easiest way to get information about your module/network</span>
+<span class="sd">    and to quickly check possible performance improvements you could use.</span>
+
+<span class="sd">    **Example**::</span>
+
+<span class="sd">        model = torch.nn.Sequential(</span>
+<span class="sd">            torch.nn.Linear(784, 100),</span>
+<span class="sd">            torch.nn.ReLU(),</span>
+<span class="sd">            torch.nn.Linear(100, 50),</span>
+<span class="sd">            torch.nn.ReLU(),</span>
+<span class="sd">            torch.nn.Linear(50, 10),</span>
+<span class="sd">        )</span>
+<span class="sd">        print(torchfunc.performance.tips(model)) # Display found vulnerabilities</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    module: torch.nn.Module</span>
+<span class="sd">            Module to be tested against test suite.</span>
+<span class="sd">    general: bool, optional</span>
+<span class="sd">            Return general (not specific to your module) tips. Default: True</span>
+<span class="sd">    specific: bool, optional</span>
+<span class="sd">            Return specific tips for your module. Default: True</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">            Human readable version of report, highlighting steps</span>
+<span class="sd">            one can take to improve module&#39;s performance.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">report</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>
+    <span class="n">general_tips</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">===========================GENERAL TIPS===========================</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">- Make sure you are running newest PyTorch version. &quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;See available releases: https://github.com/pytorch/pytorch/tags</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;- Use GPU for larger batches, CPU might be suitable for smaller jobs.</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;- Use mixed-precision training on GPU, preferably automated, e.g. NVIDIA Apex: https://github.com/NVIDIA/apex.</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="p">)</span>
+    <span class="n">specific_tips</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">===========================SPECIFIC TIPS===========================</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;torchscript&quot;</span><span class="p">]:</span>
+        <span class="n">specific_tips</span> <span class="o">+=</span> <span class="p">(</span>
+            <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">- Module is not an instance of torch.jit.ScriptModule.</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="o">+</span> <span class="s2">&quot;See https://pytorch.org/docs/stable/jit.html for more information.&quot;</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;apex&quot;</span><span class="p">]:</span>
+        <span class="n">specific_tips</span> <span class="o">+=</span> <span class="p">(</span>
+            <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">- NVIDIA&#39;s Apex is not installed. It is the easiest way to use mixed precision training.</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="o">+</span> <span class="s2">&quot;See https://github.com/NVIDIA/apex for more information.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">inplace</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;inplace&quot;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">inplace</span><span class="p">:</span>
+        <span class="n">specific_tips</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">- Some operations are in-place. It might harm kernel fusion. Indices of those modules:</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">specific_tips</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">inplace</span><span class="p">))</span>
+        <span class="n">specific_tips</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">You may want to remove inplace flag (as of torch 1.2.0)&quot;</span>
+
+    <span class="n">depthwise</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;depthwise&quot;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">depthwise</span><span class="p">:</span>
+        <span class="n">specific_tips</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">- Some layers are depthwise convolutions. Those ARE NOT using specialized kernel and might be slower.</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">specific_tips</span> <span class="o">+=</span> <span class="s2">&quot;Indices of those modules:</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">specific_tips</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">depthwise</span><span class="p">))</span>
+        <span class="n">specific_tips</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">You may want to decrease number of groups (like it&#39;s done for ResNeXt) for possible speed &amp; accuracy improvements.&quot;</span>
+
+    <span class="n">results</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">general</span><span class="p">:</span>
+        <span class="n">results</span> <span class="o">+=</span> <span class="n">general_tips</span>
+    <span class="k">if</span> <span class="n">specific</span><span class="p">:</span>
+        <span class="n">results</span> <span class="o">+=</span> <span class="n">specific_tips</span>
+
+    <span class="k">return</span> <span class="n">results</span></div>
+
+
+<span class="c1"># Add automatic model&#39;s improvements (fix data type)</span>
+<span class="c1"># def improve(module: torch.nn.Module):</span>
+<span class="c1">#     pass</span>
+</pre></div>
+
+             </article>
+             
+            </div>
+            <footer>
+  
+
+    <hr>
+
+  <!-- Spacing. -->
+  <div role="contentinfo">
+  </div>
+    
+      <div>
+        Built with Sphinx using <a href="https://github.com/pytorch/pytorch_sphinx_theme">PyTorch's theme</a> provided originally by <a href="https://readthedocs.org">Read the Docs</a>.
+      </div>
+      <div>
+      </div>
+    
+
+  <div role="contentinfo">
+  </div> 
+
+</footer>
+          </div>
+        </div>
+
+        <div class="pytorch-content-right" id="pytorch-content-right">
+          <div class="pytorch-right-menu" id="pytorch-right-menu">
+            <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
+              
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  
+
+
+  
+
+     
+       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+         <script type="text/javascript" src="../../_static/jquery.js"></script>
+         <script type="text/javascript" src="../../_static/underscore.js"></script>
+         <script type="text/javascript" src="../../_static/doctools.js"></script>
+         <script type="text/javascript" src="../../_static/language_data.js"></script>
+         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"></script>
+         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js"></script>
+         <script type="text/javascript" src="../../_static/katex_autorenderer.js"></script>
+     
+
+  
+
+  <script type="text/javascript" src="../../_static/js/vendor/popper.min.js"></script>
+  <script type="text/javascript" src="../../_static/js/vendor/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+  <!-- Begin Footer -->
+
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-logo-wrapper">
+        <a href="" class="footer-logo"></a>
+      </div>
+
+      <div class="footer-links-wrapper">
+        <div class="footer-links-col">
+          <ul>
+            <li class="list-title"><a href="https://szymonmaszke.github.io/torchfunc">Home</a></li>
+            <li><a href="https://pytorch.org/docs/stable/index.html">PyTorch</a></li>
+            <li><a href="https://szymonmaszke.github.io/torchfunc/#torchfunc">Documentation</a></li>
+            <li><a href="https://szymonmaszke.github.io/torchfunc/#installation">Installation</a></li>
+            <li><a href="https://github.com/szymonmaszke/torchfunc">GitHub</a></li>
+            <li><a href="https://github.com/szymonmaszke/torchfunc/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc">Github Issues</a></li>
+            <li><a href="https://github.com/szymonmaszke/torchfunc/blob/master/ROADMAP.md">Roadmap</a></li>
+            <li><a href="https://github.com/szymonmaszke" target="_blank">Author</a></li>
+          </ul>
+        </div>
+
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- End Footer -->
+
+  <!-- Begin Mobile Menu -->
+
+  <div class="mobile-main-menu">
+    <div class="container-fluid">
+      <div class="container">
+        <div class="mobile-main-menu-header-container">
+          <a class="header-logo" href="" aria-label="torchutils"></a>
+          <a class="main-menu-close-button" href="#" data-behavior="close-mobile-menu"></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mobile-main-menu-links-container">
+      <div class="main-menu">
+        <ul>
+          <li>
+            <a href="https://szymonmaszke.github.io/torchfunc/#torchfunc">Docs</a>
+          </li>
+
+          <li>
+            <a href="https://szymonmaszke.github.io/torchfunc/related.html">Related Projects</a>
+          </li>
+
+          <li>
+            <a href="https://github.com/szymonmaszke/torchfunc">GitHub</a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- End Mobile Menu -->
+
+  <script type="text/javascript" src="../../_static/js/vendor/anchor.min.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      mobileMenu.bind();
+      mobileTOC.bind();
+      pytorchAnchors.bind();
+      sideMenus.bind();
+      scrollToAnchor.bind();
+      highlightNavigation.bind();
+
+      // Add class to links that have code blocks, since we cannot create links in code blocks
+      $("article.pytorch-article a span.pre").each(function(e) {
+        $(this).closest("a").addClass("has-code");
+      });
+    })
+  </script>
+</body>
+</html>
