@@ -10,7 +10,7 @@ from importlib.util import find_spec
 import numpy as np
 import torch
 
-from . import cuda, module, performance, plot, record
+from . import cuda, module, performance, hooks
 from ._base import Base
 from ._dev_utils._general import _cuda_info, _general_info
 
