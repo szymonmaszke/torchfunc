@@ -10,7 +10,7 @@ from importlib.util import find_spec
 import numpy as np
 import torch
 
-from . import cuda, module, performance, hooks
+from . import cuda, hooks, module, performance
 from ._base import Base
 from ._dev_utils._general import _cuda_info, _general_info
 
@@ -107,7 +107,7 @@ class Timer(Base, contextlib.AbstractContextManager):
 
 
 @dataclasses.dataclass
-class Seed(Base):
+class seed(Base):
     r"""**Seed PyTorch and numpy.**
 
     This code is based on PyTorch's reproducibility guide: https://pytorch.org/docs/stable/notes/randomness.html

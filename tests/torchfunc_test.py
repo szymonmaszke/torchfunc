@@ -31,13 +31,13 @@ def test_timer_decorator():
 
 
 def test_seed():
-    torchfunc.Seed(0)
+    torchfunc.seed(0)
     assert 0 == torch.initial_seed()
 
 
 def test_seed_context_manager():
     first_seed = torch.initial_seed()
-    with torchfunc.Seed(0):
+    with torchfunc.seed(0):
         assert 0 == torch.initial_seed()
     assert torch.initial_seed() == first_seed
 
@@ -45,7 +45,7 @@ def test_seed_context_manager():
 def test_seed_decorator():
     first_seed = torch.initial_seed()
 
-    @torchfunc.Seed(0)
+    @torchfunc.seed(0)
     def wrapped():
         assert 0 == torch.initial_seed()
 
