@@ -35,6 +35,14 @@ def test_seed():
     assert 0 == torch.initial_seed()
 
 
+def test_seed_str():
+    assert str(torchfunc.seed(0)) == "torchfunc.seed"
+
+
+def test_seed_representation():
+    assert repr(torchfunc.seed(0)) == "torchfunc.seed(value=0, cuda=False)"
+
+
 def test_seed_context_manager():
     first_seed = torch.initial_seed()
     with torchfunc.seed(0):
