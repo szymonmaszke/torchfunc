@@ -25,11 +25,9 @@ def _test_network(model: bool, bias: bool, weights: bool):
     for name, parameter in torchfunc.module.freeze(
         module, weights, bias
     ).named_parameters():
-        print(name)
         assert _test_value(bias if "bias" in name else weights, parameter)
 
 
 def test_freezing():
     for model, bias, weights in itertools.product([True, False], repeat=3):
-        print(model, bias, weights)
         _test_network(model, bias, weights)
