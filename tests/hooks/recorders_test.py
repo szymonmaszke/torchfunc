@@ -6,11 +6,10 @@ import torch
 
 import pytest
 import torchfunc
-import torchvision
 
 
 @pytest.fixture
-def recorded():
+def recorder():
     model = torch.nn.Sequential(
         torch.nn.Linear(784, 100),
         torch.nn.ReLU(),
@@ -19,53 +18,38 @@ def recorded():
         torch.nn.Linear(50, 10),
     )
 
-    recorder = torchfunc.hooks.recorders.ForwardPre(reduction=lambda x, y: x + y)
-    recorder.children(model, indices=(2, 3))
+    _recorder = torchfunc.hooks.recorders.ForwardPre(reduction=lambda x, y: x + y)
+    _recorder.children(model, indices=(2, 3))
 
-    batch_size = 64
-    # Create tempdir for data storage in torchfunc?
-    for data, _ in torch.utils.data.DataLoader(
-        torchvision.datasets.MNIST(
-            tempfile.gettempdir(),
-            train=False,
-            download=True,
-            transform=torchvision.transforms.Compose(
-                [
-                    torchvision.transforms.ToTensor(),
-                    torchvision.transforms.Lambda(lambda data: data.flatten()),
-                ]
-            ),
-        ),
-        batch_size=batch_size,
-        drop_last=True,
-    ):
-        model(data)
+    for _ in range(1000):
+        model(torch.randn(1, 784))
 
-    return batch_size, recorder
+    return _recorder
 
 
-def test_len(recorded):
-    batch_size, recorder = recorded
+def test_len(recorder):
     assert len(recorder) == 2
 
 
-def test_shapes(recorded):
-    batch_size, recorder = recorded
-    assert recorder[0].shape == (batch_size, 100)
-    assert recorder[1].shape == (batch_size, 50)
+def test_shapes(recorder):
+    assert recorder[0].shape == (1, 100)
+    assert recorder[1].shape == (1, 50)
 
 
-def test_samples(recorded):
-    batch_size, recorder = recorded
-    assert recorder.samples(0) == 10000 // batch_size
+def test_samples(recorder):
+    assert recorder.samples(0) == 1000
     for sample in recorder.iter_samples():
-        assert sample == 10000 // batch_size
+        assert sample == 1000
 
 
-def test_save(recorded):
-    batch_size, recorder = recorded
-    folder = "TORCHFUNC_SAVED_DATA"
+def test_save(recorder):
+    folder = "TORCHFUNC_RECORDER"
     temp_dir = pathlib.Path(tempfile.gettempdir()) / folder
     recorder.save(temp_dir, mkdir=True)
     assert len([file for file in temp_dir.iterdir()]) == 2
     shutil.rmtree(temp_dir)
+
+
+def test_remove(recorder):
+    recorder.remove(0)
+    assert len(recorder) == 1
