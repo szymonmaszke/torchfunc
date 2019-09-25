@@ -106,7 +106,7 @@ class Timer(Base, contextlib.AbstractContextManager):
         return str(self.time())
 
 
-@dataclasses.dataclass
+@dataclasses.dataclass(repr=False)
 class seed(Base):
     r"""**Seed PyTorch and numpy.**
 
