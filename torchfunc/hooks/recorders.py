@@ -301,6 +301,7 @@ class ForwardPre(_Recorder):
         super().__init__("register_forward_pre_hook", ForwardPreHook)
 
 
+@dataclasses.dataclass(repr=False)
 class ForwardInput(_Recorder):
     __doc__ = _Recorder.__doc__.format(
         "Record input values after forward of specified layer(s)."
@@ -317,6 +318,7 @@ class ForwardInput(_Recorder):
         super().__init__("register_forward_hook", ForwardInputHook)
 
 
+@dataclasses.dataclass(repr=False)
 class ForwardOutput(_Recorder):
     __doc__ = _Recorder.__doc__.format(
         "Record output values after forward of specified layer(s)."
@@ -333,6 +335,7 @@ class ForwardOutput(_Recorder):
         super().__init__("register_forward_hook", ForwardOutputHook)
 
 
+@dataclasses.dataclass(repr=False)
 class BackwardInput(_Recorder):
     __doc__ = _Recorder.__doc__.format(
         "Record input gradients after those are calculated w.r.t. specified module."
@@ -349,6 +352,7 @@ class BackwardInput(_Recorder):
         super().__init__("register_backward_hook", BackwardInputHook)
 
 
+@dataclasses.dataclass(repr=False)
 class BackwardOutput(_Recorder):
     __doc__ = _Recorder.__doc__.format(
         "Record output gradients after those are calculated w.r.t. specified module."
