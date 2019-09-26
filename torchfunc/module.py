@@ -94,16 +94,20 @@ def unfreeze(
 class Snapshot(Base):
     r"""**Save module snapshots in memory and/or disk.**
 
-    Next models can be added with `+` or `+=` and their state or whole model saved
+    Next modules can be added with `+` or `+=` and their state or whole model saved
     to disk with appropriate methods.
 
     All added modules are saved unless removed with `pop()` method.
+
+    Additionally, self-explainable methods like `len`, `__iter__` or item access
+    are provided (although there is no `__setitem__` as it's discouraged
+    to mutate contained modules).
 
     Example::
 
         snapshot = torchfunc.module.Snapshot()
         snapshot += torch.nn.Sequential(torch.nn.Linear(784, 10), torch.nn.Sigmoid())
-        snapshot.save() # Saved last model to disk with default settings
+        snapshot.save("models") # Save all modules to models folder
 
     Parameters
     ----------
@@ -115,8 +119,18 @@ class Snapshot(Base):
     def __init__(self, *modules: torch.nn.Module):
         if modules:
             self.modules = list(modules)
-        self.modules = []
+        else:
+            self.modules = []
         self.timestamps = []
+
+    def __len__(self):
+        return len(self.modules)
+
+    def __iter__(self):
+        return iter(self.modules)
+
+    def __getitem__(self, index):
+        return self.modules[index]
 
     def __iadd__(self, other):
         self.modules.append(other)
@@ -132,8 +146,7 @@ class Snapshot(Base):
         return new
 
     def pop(self, index: int = -1):
-        r"""**Remove module at `index` from memory.**
-
+        r"""**Remove module at** `index` **from memory.**
 
         Parameters
         ----------
@@ -148,72 +161,81 @@ class Snapshot(Base):
         """
         return self.modules.pop(index)
 
-    def _save(
-        self, index, folder: pathlib.Path, name: pathlib.Path, remove: bool, state: bool
-    ) -> None:
-        module = self.modules[index]
-        if state:
-            module = module.state_dict()
+    def _save(self, folder: pathlib.Path, remove: bool, state: bool, *indices) -> None:
         if folder is None:
             folder = pathlib.Path(".")
-        if name is None:
+
+        def _single_save(index):
+            module = self.modules[index]
+            if state:
+                module = module.state_dict()
             name = pathlib.Path(
                 f"module_" + "state_"
                 if state
                 else "" + f"{len(self.modules)}_{self.timestamps[index]}.pt"
             )
-        if remove:
-            self.pop(index)
-        torch.save(module, folder / name)
+            if remove:
+                self.pop(index)
+            torch.save(module, folder / name)
+
+        if not indices:
+            indices = range(len(self))
+
+        for index in indices:
+            _single_save(index)
 
     def save(
-        self,
-        folder: pathlib.Path = None,
-        name: pathlib.Path = None,
-        index: int = -1,
-        remove: bool = False,
+        self, folder: pathlib.Path = None, remove: bool = False, *indices: int
     ) -> None:
         r"""**Save module to disk.**
 
-        See PyTorch's docs for more information: https://pytorch.org/tutorials/beginner/saving_loading_models.html#save-load-entire-model
+        Snapshot(s) will be saved using the following naming convention::
+
+            module_{index}_{timestamp}.pt
+
+        See `PyTorch's docs <https://pytorch.org/tutorials/beginner/saving_loading_models.html#save-load-entire-model>`__
+        for more information.
 
         Parameters
         ----------
         folder : pathlib.Path, optional
-            Name of the folder where model will be saved. Defaults to current working directory.
-        name : pathlib.Path, optional
-            Name of the file. Default: module_{index}_{timestamp}.pt
-        index : int, optional
-            Index of the module to be saved. Default: Last module
+            Name of the folder where model will be saved. It has to exist.
+            Defaults to current working directory.
         remove : bool, optional
             Whether module should be removed from memory after saving. Useful
-            for keeping only best/last model in memory. Default: False
+            for keeping only best/last model in memory. Default: `False`
+        *indices: int, optional
+            Possibly empty varargs containing indices of modules to be saved.
+            Negative indexing is supported.
+            If empty, save all models.
 
         """
-        self._save(index, folder, name, remove, state=False)
+        self._save(folder, remove, state=False, *indices)
 
     def save_state(
-        self,
-        folder: pathlib.Path = None,
-        name: pathlib.Path = None,
-        index: int = -1,
-        remove: bool = False,
+        self, folder: pathlib.Path = None, remove: bool = False, *indices: int
     ) -> None:
         r"""**Save module's state to disk.**
 
-        See PyTorch's docs on `state_dict` for more information: https://pytorch.org/tutorials/beginner/saving_loading_models.html#save-load-state-dict-recommended
+        Snapshot(s) will be saved with using the following naming convention::
+
+            module_{index}_{timestamp}.pt
+
+        See PyTorch's docs about `state_dict <https://pytorch.org/tutorials/beginner/saving_loading_models.html#save-load-state-dict-recommended>`__ for more
+        information.
 
         Parameters
         ----------
         folder : pathlib.Path, optional
-            Name of the folder where model will be saved. Defaults to current working directory.
-        name : pathlib.Path, optional
-            Name of the file. Default: module_{index}_{timestamp}.pt
-        index : int, optional
-            Index of the module to be saved. Default: Last module
+            Name of the folder where model will be saved. It has to exist.
+            Defaults to current working directory.
         remove : bool, optional
             Whether module should be removed from memory after saving. Useful
             for keeping only best/last model in memory. Default: False
+        *indices: int, optional
+            Possibly empty varargs containing indices of modules to be saved.
+            Negative indexing is supported.
+            If empty, save all models.
 
         """
-        self._save(index, folder, name, remove, state=True)
+        self._save(folder, remove, state=True, *indices)

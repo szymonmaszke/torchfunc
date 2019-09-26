@@ -109,7 +109,7 @@
               
               
                 <div class="version">
-                  0.1.0
+                  0.1.1
                 </div>
               
             
@@ -140,10 +140,9 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../packages/torchfunc.html">torchfunc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../packages/torchfunc.cuda.html">torchfunc.cuda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packages/torchfunc.hooks.html">torchfunc.hooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../packages/torchfunc.module.html">torchfunc.module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../packages/torchfunc.performance.html">torchfunc.performance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../packages/torchfunc.plot.html">torchfunc.plot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../packages/torchfunc.record.html">torchfunc.record</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../related.html">Related projects</a></li>
@@ -311,16 +310,20 @@
 <div class="viewcode-block" id="Snapshot"><a class="viewcode-back" href="../../packages/torchfunc.module.html#torchfunc.module.Snapshot">[docs]</a><span class="k">class</span> <span class="nc">Snapshot</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Save module snapshots in memory and/or disk.**</span>
 
-<span class="sd">    Next models can be added with `+` or `+=` and their state or whole model saved</span>
+<span class="sd">    Next modules can be added with `+` or `+=` and their state or whole model saved</span>
 <span class="sd">    to disk with appropriate methods.</span>
 
 <span class="sd">    All added modules are saved unless removed with `pop()` method.</span>
+
+<span class="sd">    Additionally, self-explainable methods like `len`, `__iter__` or item access</span>
+<span class="sd">    are provided (although there is no `__setitem__` as it&#39;s discouraged</span>
+<span class="sd">    to mutate contained modules).</span>
 
 <span class="sd">    Example::</span>
 
 <span class="sd">        snapshot = torchfunc.module.Snapshot()</span>
 <span class="sd">        snapshot += torch.nn.Sequential(torch.nn.Linear(784, 10), torch.nn.Sigmoid())</span>
-<span class="sd">        snapshot.save() # Saved last model to disk with default settings</span>
+<span class="sd">        snapshot.save(&quot;models&quot;) # Save all modules to models folder</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -332,8 +335,18 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">modules</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">modules</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">modules</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">modules</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">modules</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">modules</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">timestamps</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modules</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modules</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">__iadd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
@@ -349,8 +362,7 @@
         <span class="k">return</span> <span class="n">new</span>
 
 <div class="viewcode-block" id="Snapshot.pop"><a class="viewcode-back" href="../../packages/torchfunc.module.html#torchfunc.module.Snapshot.pop">[docs]</a>    <span class="k">def</span> <span class="nf">pop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Remove module at `index` from memory.**</span>
-
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Remove module at** `index` **from memory.**</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -365,75 +377,84 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">index</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">_save</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">folder</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="n">remove</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="nb">bool</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">module</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">state</span><span class="p">:</span>
-            <span class="n">module</span> <span class="o">=</span> <span class="n">module</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">_save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">folder</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="n">remove</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="o">*</span><span class="n">indices</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">folder</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">folder</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="k">def</span> <span class="nf">_single_save</span><span class="p">(</span><span class="n">index</span><span class="p">):</span>
+            <span class="n">module</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">state</span><span class="p">:</span>
+                <span class="n">module</span> <span class="o">=</span> <span class="n">module</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()</span>
             <span class="n">name</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span>
                 <span class="n">f</span><span class="s2">&quot;module_&quot;</span> <span class="o">+</span> <span class="s2">&quot;state_&quot;</span>
                 <span class="k">if</span> <span class="n">state</span>
                 <span class="k">else</span> <span class="s2">&quot;&quot;</span> <span class="o">+</span> <span class="n">f</span><span class="s2">&quot;{len(self.modules)}_</span><span class="si">{self.timestamps[index]}</span><span class="s2">.pt&quot;</span>
             <span class="p">)</span>
-        <span class="k">if</span> <span class="n">remove</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
-        <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">folder</span> <span class="o">/</span> <span class="n">name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">remove</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">folder</span> <span class="o">/</span> <span class="n">name</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">indices</span><span class="p">:</span>
+            <span class="n">indices</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">:</span>
+            <span class="n">_single_save</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Snapshot.save"><a class="viewcode-back" href="../../packages/torchfunc.module.html#torchfunc.module.Snapshot.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">folder</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">name</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
-        <span class="n">remove</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">folder</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">remove</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="o">*</span><span class="n">indices</span><span class="p">:</span> <span class="nb">int</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Save module to disk.**</span>
 
-<span class="sd">        See PyTorch&#39;s docs for more information: https://pytorch.org/tutorials/beginner/saving_loading_models.html#save-load-entire-model</span>
+<span class="sd">        Snapshot(s) will be saved using the following naming convention::</span>
+
+<span class="sd">            module_{index}_{timestamp}.pt</span>
+
+<span class="sd">        See `PyTorch&#39;s docs &lt;https://pytorch.org/tutorials/beginner/saving_loading_models.html#save-load-entire-model&gt;`__</span>
+<span class="sd">        for more information.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        folder : pathlib.Path, optional</span>
-<span class="sd">            Name of the folder where model will be saved. Defaults to current working directory.</span>
-<span class="sd">        name : pathlib.Path, optional</span>
-<span class="sd">            Name of the file. Default: module_{index}_{timestamp}.pt</span>
-<span class="sd">        index : int, optional</span>
-<span class="sd">            Index of the module to be saved. Default: Last module</span>
+<span class="sd">            Name of the folder where model will be saved. It has to exist.</span>
+<span class="sd">            Defaults to current working directory.</span>
 <span class="sd">        remove : bool, optional</span>
 <span class="sd">            Whether module should be removed from memory after saving. Useful</span>
-<span class="sd">            for keeping only best/last model in memory. Default: False</span>
+<span class="sd">            for keeping only best/last model in memory. Default: `False`</span>
+<span class="sd">        *indices: int, optional</span>
+<span class="sd">            Possibly empty varargs containing indices of modules to be saved.</span>
+<span class="sd">            Negative indexing is supported.</span>
+<span class="sd">            If empty, save all models.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_save</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">folder</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">remove</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_save</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="n">remove</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">*</span><span class="n">indices</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Snapshot.save_state"><a class="viewcode-back" href="../../packages/torchfunc.module.html#torchfunc.module.Snapshot.save_state">[docs]</a>    <span class="k">def</span> <span class="nf">save_state</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">folder</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">name</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
-        <span class="n">remove</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">folder</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">remove</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="o">*</span><span class="n">indices</span><span class="p">:</span> <span class="nb">int</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Save module&#39;s state to disk.**</span>
 
-<span class="sd">        See PyTorch&#39;s docs on `state_dict` for more information: https://pytorch.org/tutorials/beginner/saving_loading_models.html#save-load-state-dict-recommended</span>
+<span class="sd">        Snapshot(s) will be saved with using the following naming convention::</span>
+
+<span class="sd">            module_{index}_{timestamp}.pt</span>
+
+<span class="sd">        See PyTorch&#39;s docs about `state_dict &lt;https://pytorch.org/tutorials/beginner/saving_loading_models.html#save-load-state-dict-recommended&gt;`__ for more</span>
+<span class="sd">        information.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        folder : pathlib.Path, optional</span>
-<span class="sd">            Name of the folder where model will be saved. Defaults to current working directory.</span>
-<span class="sd">        name : pathlib.Path, optional</span>
-<span class="sd">            Name of the file. Default: module_{index}_{timestamp}.pt</span>
-<span class="sd">        index : int, optional</span>
-<span class="sd">            Index of the module to be saved. Default: Last module</span>
+<span class="sd">            Name of the folder where model will be saved. It has to exist.</span>
+<span class="sd">            Defaults to current working directory.</span>
 <span class="sd">        remove : bool, optional</span>
 <span class="sd">            Whether module should be removed from memory after saving. Useful</span>
 <span class="sd">            for keeping only best/last model in memory. Default: False</span>
+<span class="sd">        *indices: int, optional</span>
+<span class="sd">            Possibly empty varargs containing indices of modules to be saved.</span>
+<span class="sd">            Negative indexing is supported.</span>
+<span class="sd">            If empty, save all models.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_save</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">folder</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">remove</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_save</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="n">remove</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">*</span><span class="n">indices</span><span class="p">)</span></div></div>
 </pre></div>
 
              </article>
@@ -545,17 +566,24 @@
       <div class="main-menu">
         <ul>
           <li>
-            <a href="https://szymonmaszke.github.io/torchfunc/#torchfunc">Docs</a>
+            <a href="#">Docs</a>
           </li>
 
           <li>
-            <a href="https://szymonmaszke.github.io/torchfunc/related.html">Related Projects</a>
+            <a href="#">Related Projects</a>
           </li>
 
           <li>
-            <a href="https://github.com/szymonmaszke/torchfunc">GitHub</a>
+            <a href="#">GitHub</a>
           </li>
 
+          <li>
+            <a href="">Docs</a>
+          </li>
+
+          <li>
+            <a href="">Github</a>
+          </li>
         </ul>
       </div>
     </div>

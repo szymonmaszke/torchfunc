@@ -111,7 +111,7 @@
               
               
                 <div class="version">
-                  0.1.0
+                  0.1.1
                 </div>
               
             
@@ -142,10 +142,9 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../torchfunc.html">torchfunc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../torchfunc.cuda.html">torchfunc.cuda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../torchfunc.hooks.html">torchfunc.hooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../torchfunc.module.html">torchfunc.module</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../torchfunc.performance.html">torchfunc.performance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../torchfunc.plot.html">torchfunc.plot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../torchfunc.record.html">torchfunc.record</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../related.html">Related projects</a></li>
@@ -229,10 +228,11 @@ current good practices related to performance of <code class="xref py py-obj doc
 <dd><p><strong>Check whether any convolution layer is a so-called depthwise convolution.</strong></p>
 <p>Depthwise convolution is faster for images with input data in format
 (batch, height, width, channel) as specialized kernels are available.</p>
-<p>Currently PyTorch has not support for this functionality, so using those may actually
+<p>Currently PyTorch does not support this functionality, so using those may actually
 slow down your neural network.</p>
 <p>Depthwise convolution might still be useful in order to save memory, not so
 performance-wise.</p>
+<p>For easy to follow guidelines, use <a class="reference internal" href="#torchfunc.performance.layers.Depthwise.tips" title="torchfunc.performance.layers.Depthwise.tips"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tips</span></code></a> method of this class.</p>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
     <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv1d</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="mi">64</span><span class="p">),</span>
@@ -307,14 +307,33 @@ module that is passed to this function.</p>
 </dl>
 </dd></dl>
 
+<dl class="method">
+<dt id="torchfunc.performance.layers.Depthwise.tips">
+<code class="sig-name descname">tips</code><span class="sig-paren">(</span><em class="sig-param">module: torch.nn.modules.module.Module</em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="../../_modules/torchfunc/performance/layers.html#Depthwise.tips"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.performance.layers.Depthwise.tips" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Return</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code> <strong>representation of</strong> <a class="reference internal" href="#torchfunc.performance.layers.Depthwise.modules" title="torchfunc.performance.layers.Depthwise.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules()</span></code></a> <strong>method.</strong></p>
+<p>It is advised to use this function to get tips in order to easily fix
+performance issues related to depthwise convolution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>module</strong> (<em>torch.nn.Module</em>) – Module to be scanned</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>String representing tips related to depthwise convolution.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
 <dt id="torchfunc.performance.layers.Inplace">
 <em class="property">class </em><code class="sig-prename descclassname">torchfunc.performance.layers.</code><code class="sig-name descname">Inplace</code><span class="sig-paren">(</span><em class="sig-param">inplace: Tuple[str] = ('inplace'</em>, <em class="sig-param">)</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/performance/layers.html#Inplace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.performance.layers.Inplace" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Check whether any submodule/child of module is set to inplace mode.</strong></p>
-<p>Inplace operations may interfere with traced module (kernel fusion) and cause slowdowns
-(source: <a class="reference external" href="https://github.com/pytorch/pytorch/issues/23655">https://github.com/pytorch/pytorch/issues/23655</a>) (as of PyTorch 1.2.0).</p>
+<p>Inplace operations may interfere with traced module (kernel fusion) and cause slowdowns.
+See <a class="reference external" href="https://github.com/pytorch/pytorch/issues/23655">this issue</a> for more information.</p>
 <p><strong>Example</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
     <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="mi">64</span><span class="p">),</span>
@@ -328,6 +347,7 @@ module that is passed to this function.</p>
     <span class="nb">print</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="c1"># Should print 1 and 3</span>
 </pre></div>
 </div>
+<p>For easy to follow guidelines, use <a class="reference internal" href="#torchfunc.performance.layers.Inplace.tips" title="torchfunc.performance.layers.Inplace.tips"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tips</span></code></a> method of this class.</p>
 <dl class="attribute">
 <dt id="torchfunc.performance.layers.Inplace.attribute">
 <code class="sig-name descname">attribute</code><a class="headerlink" href="#torchfunc.performance.layers.Inplace.attribute" title="Permalink to this definition">¶</a></dt>
@@ -365,6 +385,25 @@ and is <code class="xref py py-obj docutils literal notranslate"><span class="pr
 <dl class="field-list simple">
 <dt class="field-odd">Yields</dt>
 <dd class="field-odd"><p><em>int</em> – Indices where module is probably <a class="reference internal" href="#torchfunc.performance.layers.Inplace.inplace" title="torchfunc.performance.layers.Inplace.inplace"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inplace</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="torchfunc.performance.layers.Inplace.tips">
+<code class="sig-name descname">tips</code><span class="sig-paren">(</span><em class="sig-param">module: torch.nn.modules.module.Module</em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="../../_modules/torchfunc/performance/layers.html#Inplace.tips"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.performance.layers.Inplace.tips" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Return</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code> <strong>representation of</strong> <a class="reference internal" href="#torchfunc.performance.layers.Inplace.modules" title="torchfunc.performance.layers.Inplace.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules()</span></code></a> <strong>method.</strong></p>
+<p>It is advised to use this function to get tips in order to easily fix
+performance issues related to inplace operations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>module</strong> (<em>torch.nn.Module</em>) – Module to be scanned</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>String representing tips related to inplace operations.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
@@ -495,17 +534,24 @@ and is <code class="xref py py-obj docutils literal notranslate"><span class="pr
       <div class="main-menu">
         <ul>
           <li>
-            <a href="https://szymonmaszke.github.io/torchfunc/#torchfunc">Docs</a>
+            <a href="#">Docs</a>
           </li>
 
           <li>
-            <a href="https://szymonmaszke.github.io/torchfunc/related.html">Related Projects</a>
+            <a href="#">Related Projects</a>
           </li>
 
           <li>
-            <a href="https://github.com/szymonmaszke/torchfunc">GitHub</a>
+            <a href="#">GitHub</a>
           </li>
 
+          <li>
+            <a href="">Docs</a>
+          </li>
+
+          <li>
+            <a href="">Github</a>
+          </li>
         </ul>
       </div>
     </div>

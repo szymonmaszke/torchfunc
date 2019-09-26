@@ -23,11 +23,13 @@ class Depthwise(Base):
     Depthwise convolution is faster for images with input data in format
     (batch, height, width, channel) as specialized kernels are available.
 
-    Currently PyTorch has not support for this functionality, so using those may actually
+    Currently PyTorch does not support this functionality, so using those may actually
     slow down your neural network.
 
     Depthwise convolution might still be useful in order to save memory, not so
     performance-wise.
+
+    For easy to follow guidelines, use `tips` method of this class.
 
     Example::
 
@@ -80,7 +82,7 @@ class Depthwise(Base):
                 Submodule's indices where depthwise convolution was located.
         """
         if hasattr(module, "groups") and hasattr(module, "in_channels"):
-            return module.groups == module.in_channels
+            return module.groups == module.in_channels and module.in_channels != 1
         return False
 
     def _analyse(self, module, function):
@@ -120,13 +122,40 @@ class Depthwise(Base):
         """
         yield from self._analyse(module, "children")
 
+    def tips(self, module: torch.nn.Module) -> str:
+        r"""**Return** `str` **representation of** `modules()` **method.**
+
+        It is advised to use this function to get tips in order to easily fix
+        performance issues related to depthwise convolution.
+
+        Parameters
+        ----------
+        module : torch.nn.Module
+                Module to be scanned
+
+        Returns
+        -------
+        str
+                String representing tips related to depthwise convolution.
+        """
+        depthwise = self.modules(module)
+        if depthwise:
+            return (
+                "Depthwise convolutions are not currently using specialized kernel and might be slower.\n"
+                + "See this issue: https://github.com/pytorch/pytorch/issues/18631 for more information.\n"
+                + "Indices of those modules:\n"
+                + str(list(depthwise))
+                + "\nYou may want to decrease number of groups (like it's done for ResNeXt) for possible speed & accuracy improvements."
+            )
+        return ""
+
 
 @dataclasses.dataclass
 class Inplace(Base):
     r"""**Check whether any submodule/child of module is set to inplace mode.**
 
-    Inplace operations may interfere with traced module (kernel fusion) and cause slowdowns
-    (source: https://github.com/pytorch/pytorch/issues/23655) (as of PyTorch 1.2.0).
+    Inplace operations may interfere with traced module (kernel fusion) and cause slowdowns.
+    See `this issue <https://github.com/pytorch/pytorch/issues/23655>`__ for more information.
 
     **Example**::
 
@@ -140,6 +169,8 @@ class Inplace(Base):
 
         for index in torchfunc.performance.layers.Inplace().children(model):
             print(index) # Should print 1 and 3
+
+    For easy to follow guidelines, use `tips` method of this class.
 
     Attributes
     ----------
@@ -179,3 +210,28 @@ class Inplace(Base):
                 Indices where module is probably `inplace`.
         """
         yield from self._analyse(module, "children")
+
+    def tips(self, module: torch.nn.Module) -> str:
+        r"""**Return** `str` **representation of** `modules()` **method.**
+
+        It is advised to use this function to get tips in order to easily fix
+        performance issues related to inplace operations.
+
+        Parameters
+        ----------
+        module : torch.nn.Module
+                Module to be scanned
+
+        Returns
+        -------
+        str
+                String representing tips related to inplace operations.
+        """
+        inplace = self.modules(module)
+        if inplace:
+            return (
+                "In-place operations might harm kernel fusion. Indices of those modules:\n"
+                + str(list(inplace))
+                + "\nYou may want to remove inplace flag (see this issue: https://github.com/pytorch/pytorch/issues/23655)"
+            )
+        return ""

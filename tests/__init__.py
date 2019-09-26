@@ -1,1 +1,1 @@
-from . import performance
+from . import performance, hooks

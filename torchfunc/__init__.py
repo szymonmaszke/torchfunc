@@ -10,7 +10,7 @@ from importlib.util import find_spec
 import numpy as np
 import torch
 
-from . import cuda, module, performance, plot, record
+from . import cuda, hooks, module, performance
 from ._base import Base
 from ._dev_utils._general import _cuda_info, _general_info
 
@@ -34,7 +34,7 @@ class Timer(Base, contextlib.AbstractContextManager):
         print(timer) # time taken for the block, will not be updated outside of it
 
     When execution leaves the block, timer will be blocked. Last checkpoint and time taken
-    to execute whole block will be returned by checkpoint() and time() methods respectively.
+    to execute whole block will be returned by `checkpoint()` and `time()` methods respectively.
 
     **Used as function decorator**::
 
@@ -66,7 +66,8 @@ class Timer(Base, contextlib.AbstractContextManager):
         Returns
         -------
         time-like
-                Whatever self.function() - self.function() returns
+                Whatever `self.function() - self.function()` returns,
+                usually fraction of seconds
         """
         if not self.ended:
             return self.function() - self.start
@@ -76,12 +77,13 @@ class Timer(Base, contextlib.AbstractContextManager):
         """**Time taken since last checkpoint call.**
 
         If wasn't called before, it is the same as as Timer creation time (first call returns
-        the same thing as time())
+        the same thing as `time()`)
 
         Returns
         -------
         time-like
-                Whatever self.function() - self.function() returns
+                Whatever `self.function() - self.function()` returns,
+                usually fraction of seconds
         """
         if not self.ended:
             self.last_checkpoint = self.last
@@ -106,8 +108,8 @@ class Timer(Base, contextlib.AbstractContextManager):
         return str(self.time())
 
 
-@dataclasses.dataclass
-class Seed(Base):
+@dataclasses.dataclass(repr=False)
+class seed(Base):
     r"""**Seed PyTorch and numpy.**
 
     This code is based on PyTorch's reproducibility guide: https://pytorch.org/docs/stable/notes/randomness.html
@@ -124,23 +126,24 @@ class Seed(Base):
 
         print(torch.initial_seed()) # Should be back to seed pre block
 
-    **Important:** It's impossible to put original `numpy` seed after execution flow
-    leaves context manager block, hence it will be set to original PyTorch's seed.
-
     **Used as function decorator**::
 
         @Seed(1) # Seed only within function
         def foo():
             return 42
 
+    **Important:** It's impossible to put original `numpy` seed after context manager
+    or decorator, hence it will be set to original PyTorch's seed.
+
     Parameters
     ----------
     value: int
             Seed value used in np.random_seed and torch.manual_seed. Usually int is provided
     cuda: bool, optional
-            Whether to set PyTorch's cuda backend into deterministic mode (setting cudnn.benchmark to False
-            and cudnn.deterministic to True). If False, consecutive runs may be slightly different.
-            If True, automatic autotuning for convolutions layers with consistent input shape will be turned off.
+            Whether to set PyTorch's cuda backend into deterministic mode (setting cudnn.benchmark to `False`
+            and cudnn.deterministic to `True`). If `False`, consecutive runs may be slightly different.
+            If `True`, automatic autotuning for convolutions layers with consistent input shape will be turned off.
+
             Default: `False`
 
     """
@@ -257,7 +260,7 @@ def sizeof(obj) -> int:
 def installed(module: str) -> bool:
     """Return True if module is installed.
 
-    Example::
+    **Example**::
 
         # Check whether mixed precision library available
         print(torchfunc.installed("apex"))

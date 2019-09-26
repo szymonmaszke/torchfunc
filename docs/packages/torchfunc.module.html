@@ -34,7 +34,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="torchfunc.performance" href="torchfunc.performance.html" />
-    <link rel="prev" title="torchfunc.cuda" href="torchfunc.cuda.html" /> 
+    <link rel="prev" title="torchfunc.hooks.registrators" href="torchfunc.hooks/torchfunc.hooks.registrators.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -111,7 +111,7 @@
               
               
                 <div class="version">
-                  0.1.0
+                  0.1.1
                 </div>
               
             
@@ -142,10 +142,9 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="torchfunc.html">torchfunc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="torchfunc.cuda.html">torchfunc.cuda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="torchfunc.hooks.html">torchfunc.hooks</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">torchfunc.module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="torchfunc.performance.html">torchfunc.performance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="torchfunc.plot.html">torchfunc.plot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="torchfunc.record.html">torchfunc.record</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../related.html">Related projects</a></li>
@@ -224,13 +223,16 @@
 <dt id="torchfunc.module.Snapshot">
 <em class="property">class </em><code class="sig-prename descclassname">torchfunc.module.</code><code class="sig-name descname">Snapshot</code><span class="sig-paren">(</span><em class="sig-param">*modules: torch.nn.modules.module.Module</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchfunc/module.html#Snapshot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.module.Snapshot" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Save module snapshots in memory and/or disk.</strong></p>
-<p>Next models can be added with <code class="xref py py-obj docutils literal notranslate"><span class="pre">+</span></code> or <code class="xref py py-obj docutils literal notranslate"><span class="pre">+=</span></code> and their state or whole model saved
+<p>Next modules can be added with <code class="xref py py-obj docutils literal notranslate"><span class="pre">+</span></code> or <code class="xref py py-obj docutils literal notranslate"><span class="pre">+=</span></code> and their state or whole model saved
 to disk with appropriate methods.</p>
 <p>All added modules are saved unless removed with <a class="reference internal" href="#torchfunc.module.Snapshot.pop" title="torchfunc.module.Snapshot.pop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pop()</span></code></a> method.</p>
+<p>Additionally, self-explainable methods like <code class="xref py py-obj docutils literal notranslate"><span class="pre">len</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">__iter__</span></code> or item access
+are provided (although there is no <code class="xref py py-obj docutils literal notranslate"><span class="pre">__setitem__</span></code> as it’s discouraged
+to mutate contained modules).</p>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">snapshot</span> <span class="o">=</span> <span class="n">torchfunc</span><span class="o">.</span><span class="n">module</span><span class="o">.</span><span class="n">Snapshot</span><span class="p">()</span>
 <span class="n">snapshot</span> <span class="o">+=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">784</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Sigmoid</span><span class="p">())</span>
-<span class="n">snapshot</span><span class="o">.</span><span class="n">save</span><span class="p">()</span> <span class="c1"># Saved last model to disk with default settings</span>
+<span class="n">snapshot</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">&quot;models&quot;</span><span class="p">)</span> <span class="c1"># Save all modules to models folder</span>
 </pre></div>
 </div>
 <dl class="field-list simple">
@@ -241,7 +243,7 @@ to disk with appropriate methods.</p>
 <dl class="method">
 <dt id="torchfunc.module.Snapshot.pop">
 <code class="sig-name descname">pop</code><span class="sig-paren">(</span><em class="sig-param">index: int = -1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchfunc/module.html#Snapshot.pop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.module.Snapshot.pop" title="Permalink to this definition">¶</a></dt>
-<dd><p><strong>Remove module at `index` from memory.</strong></p>
+<dd><p><strong>Remove module at</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">index</span></code> <strong>from memory.</strong></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>index</strong> (<em>int</em><em>, </em><em>optional</em>) – Index of module to be removed. Default: -1 (last module)</p>
@@ -257,17 +259,24 @@ to disk with appropriate methods.</p>
 
 <dl class="method">
 <dt id="torchfunc.module.Snapshot.save">
-<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param">folder: pathlib.Path = None</em>, <em class="sig-param">name: pathlib.Path = None</em>, <em class="sig-param">index: int = -1</em>, <em class="sig-param">remove: bool = False</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="../_modules/torchfunc/module.html#Snapshot.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.module.Snapshot.save" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param">folder: pathlib.Path = None</em>, <em class="sig-param">remove: bool = False</em>, <em class="sig-param">*indices: int</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="../_modules/torchfunc/module.html#Snapshot.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.module.Snapshot.save" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Save module to disk.</strong></p>
-<p>See PyTorch’s docs for more information: <a class="reference external" href="https://pytorch.org/tutorials/beginner/saving_loading_models.html#save-load-entire-model">https://pytorch.org/tutorials/beginner/saving_loading_models.html#save-load-entire-model</a></p>
+<p>Snapshot(s) will be saved using the following naming convention:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module_</span><span class="p">{</span><span class="n">index</span><span class="p">}</span><span class="n">_</span><span class="p">{</span><span class="n">timestamp</span><span class="p">}</span><span class="o">.</span><span class="n">pt</span>
+</pre></div>
+</div>
+<p>See <a class="reference external" href="https://pytorch.org/tutorials/beginner/saving_loading_models.html#save-load-entire-model">PyTorch’s docs</a>
+for more information.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>folder</strong> (<em>pathlib.Path</em><em>, </em><em>optional</em>) – Name of the folder where model will be saved. Defaults to current working directory.</p></li>
-<li><p><strong>name</strong> (<em>pathlib.Path</em><em>, </em><em>optional</em>) – Name of the file. Default: module_{index}_{timestamp}.pt</p></li>
-<li><p><strong>index</strong> (<em>int</em><em>, </em><em>optional</em>) – Index of the module to be saved. Default: Last module</p></li>
+<li><p><strong>folder</strong> (<em>pathlib.Path</em><em>, </em><em>optional</em>) – Name of the folder where model will be saved. It has to exist.
+Defaults to current working directory.</p></li>
 <li><p><strong>remove</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether module should be removed from memory after saving. Useful
-for keeping only best/last model in memory. Default: False</p></li>
+for keeping only best/last model in memory. Default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code></p></li>
+<li><p><strong>*indices</strong> (<em>int</em><em>, </em><em>optional</em>) – Possibly empty varargs containing indices of modules to be saved.
+Negative indexing is supported.
+If empty, save all models.</p></li>
 </ul>
 </dd>
 </dl>
@@ -275,17 +284,24 @@ for keeping only best/last model in memory. Default: False</p></li>
 
 <dl class="method">
 <dt id="torchfunc.module.Snapshot.save_state">
-<code class="sig-name descname">save_state</code><span class="sig-paren">(</span><em class="sig-param">folder: pathlib.Path = None</em>, <em class="sig-param">name: pathlib.Path = None</em>, <em class="sig-param">index: int = -1</em>, <em class="sig-param">remove: bool = False</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="../_modules/torchfunc/module.html#Snapshot.save_state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.module.Snapshot.save_state" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">save_state</code><span class="sig-paren">(</span><em class="sig-param">folder: pathlib.Path = None</em>, <em class="sig-param">remove: bool = False</em>, <em class="sig-param">*indices: int</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="../_modules/torchfunc/module.html#Snapshot.save_state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.module.Snapshot.save_state" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Save module’s state to disk.</strong></p>
-<p>See PyTorch’s docs on <code class="xref py py-obj docutils literal notranslate"><span class="pre">state_dict</span></code> for more information: <a class="reference external" href="https://pytorch.org/tutorials/beginner/saving_loading_models.html#save-load-state-dict-recommended">https://pytorch.org/tutorials/beginner/saving_loading_models.html#save-load-state-dict-recommended</a></p>
+<p>Snapshot(s) will be saved with using the following naming convention:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module_</span><span class="p">{</span><span class="n">index</span><span class="p">}</span><span class="n">_</span><span class="p">{</span><span class="n">timestamp</span><span class="p">}</span><span class="o">.</span><span class="n">pt</span>
+</pre></div>
+</div>
+<p>See PyTorch’s docs about <a class="reference external" href="https://pytorch.org/tutorials/beginner/saving_loading_models.html#save-load-state-dict-recommended">state_dict</a> for more
+information.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>folder</strong> (<em>pathlib.Path</em><em>, </em><em>optional</em>) – Name of the folder where model will be saved. Defaults to current working directory.</p></li>
-<li><p><strong>name</strong> (<em>pathlib.Path</em><em>, </em><em>optional</em>) – Name of the file. Default: module_{index}_{timestamp}.pt</p></li>
-<li><p><strong>index</strong> (<em>int</em><em>, </em><em>optional</em>) – Index of the module to be saved. Default: Last module</p></li>
+<li><p><strong>folder</strong> (<em>pathlib.Path</em><em>, </em><em>optional</em>) – Name of the folder where model will be saved. It has to exist.
+Defaults to current working directory.</p></li>
 <li><p><strong>remove</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether module should be removed from memory after saving. Useful
 for keeping only best/last model in memory. Default: False</p></li>
+<li><p><strong>*indices</strong> (<em>int</em><em>, </em><em>optional</em>) – Possibly empty varargs containing indices of modules to be saved.
+Negative indexing is supported.
+If empty, save all models.</p></li>
 </ul>
 </dd>
 </dl>
@@ -365,7 +381,7 @@ Works as complementary function to freeze, see it’s documentation.</p>
         <a href="torchfunc.performance.html" class="btn btn-neutral float-right" title="torchfunc.performance" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
-        <a href="torchfunc.cuda.html" class="btn btn-neutral" title="torchfunc.cuda" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+        <a href="torchfunc.hooks/torchfunc.hooks.registrators.html" class="btn btn-neutral" title="torchfunc.hooks.registrators" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
       
     </div>
   
@@ -476,17 +492,24 @@ Works as complementary function to freeze, see it’s documentation.</p>
       <div class="main-menu">
         <ul>
           <li>
-            <a href="https://szymonmaszke.github.io/torchfunc/#torchfunc">Docs</a>
+            <a href="#">Docs</a>
           </li>
 
           <li>
-            <a href="https://szymonmaszke.github.io/torchfunc/related.html">Related Projects</a>
+            <a href="#">Related Projects</a>
           </li>
 
           <li>
-            <a href="https://github.com/szymonmaszke/torchfunc">GitHub</a>
+            <a href="#">GitHub</a>
           </li>
 
+          <li>
+            <a href="">Docs</a>
+          </li>
+
+          <li>
+            <a href="">Github</a>
+          </li>
         </ul>
       </div>
     </div>

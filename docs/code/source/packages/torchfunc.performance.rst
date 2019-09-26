@@ -8,6 +8,8 @@ torchfunc.performance
 
    torchfunc.performance/*
 
+|
+
 .. automodule:: torchfunc.performance
    :members:
    :undoc-members:

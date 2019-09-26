@@ -111,7 +111,7 @@
               
               
                 <div class="version">
-                  0.1.0
+                  0.1.1
                 </div>
               
             
@@ -142,10 +142,9 @@
               <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">torchfunc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="torchfunc.cuda.html">torchfunc.cuda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="torchfunc.hooks.html">torchfunc.hooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="torchfunc.module.html">torchfunc.module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="torchfunc.performance.html">torchfunc.performance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="torchfunc.plot.html">torchfunc.plot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="torchfunc.record.html">torchfunc.record</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../related.html">Related projects</a></li>
@@ -219,49 +218,6 @@
   <div class="section" id="module-torchfunc">
 <span id="torchfunc"></span><h1>torchfunc<a class="headerlink" href="#module-torchfunc" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
-<dt id="torchfunc.Seed">
-<em class="property">class </em><code class="sig-prename descclassname">torchfunc.</code><code class="sig-name descname">Seed</code><span class="sig-paren">(</span><em class="sig-param">value: int</em>, <em class="sig-param">cuda: bool = False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchfunc.html#Seed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.Seed" title="Permalink to this definition">¶</a></dt>
-<dd><p><strong>Seed PyTorch and numpy.</strong></p>
-<p>This code is based on PyTorch’s reproducibility guide: <a class="reference external" href="https://pytorch.org/docs/stable/notes/randomness.html">https://pytorch.org/docs/stable/notes/randomness.html</a>
-Can be used as standard seeding procedure, context manager (seed will be changed only within block) or function decorator.</p>
-<p><strong>Standard seed</strong>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">torchfunc</span><span class="o">.</span><span class="n">Seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># no surprises I guess</span>
-</pre></div>
-</div>
-<p><strong>Used as context manager</strong>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">Seed</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span>
-    <span class="o">...</span> <span class="c1"># your operations</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">initial_seed</span><span class="p">())</span> <span class="c1"># Should be back to seed pre block</span>
-</pre></div>
-</div>
-<p><strong>Important:</strong> It’s impossible to put original <code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy</span></code> seed after execution flow
-leaves context manager block, hence it will be set to original PyTorch’s seed.</p>
-<p><strong>Used as function decorator</strong>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@Seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># Seed only within function</span>
-<span class="k">def</span> <span class="nf">foo</span><span class="p">():</span>
-    <span class="k">return</span> <span class="mi">42</span>
-</pre></div>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>value</strong> (<em>int</em>) – Seed value used in np.random_seed and torch.manual_seed. Usually int is provided</p></li>
-<li><p><strong>cuda</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to set PyTorch’s cuda backend into deterministic mode (setting cudnn.benchmark to False
-and cudnn.deterministic to True). If False, consecutive runs may be slightly different.
-If True, automatic autotuning for convolutions layers with consistent input shape will be turned off.
-Default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code></p></li>
-</ul>
-</dd>
-</dl>
-<dl class="attribute">
-<dt id="torchfunc.Seed.cuda">
-<code class="sig-name descname">cuda</code><em class="property"> = False</em><a class="headerlink" href="#torchfunc.Seed.cuda" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
 <dt id="torchfunc.Timer">
 <em class="property">class </em><code class="sig-prename descclassname">torchfunc.</code><code class="sig-name descname">Timer</code><span class="sig-paren">(</span><em class="sig-param">function: Callable = &lt;built-in function perf_counter&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchfunc.html#Timer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.Timer" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Measure execution time of function.</strong></p>
@@ -280,7 +236,7 @@ or display absolute time from measurements beginning.</p>
 </pre></div>
 </div>
 <p>When execution leaves the block, timer will be blocked. Last checkpoint and time taken
-to execute whole block will be returned by checkpoint() and time() methods respectively.</p>
+to execute whole block will be returned by <a class="reference internal" href="#torchfunc.Timer.checkpoint" title="torchfunc.Timer.checkpoint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">checkpoint()</span></code></a> and <a class="reference internal" href="#torchfunc.Timer.time" title="torchfunc.Timer.time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">time()</span></code></a> methods respectively.</p>
 <p><strong>Used as function decorator</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@Timer</span><span class="p">()</span>
 <span class="k">def</span> <span class="nf">foo</span><span class="p">():</span>
@@ -299,10 +255,11 @@ to execute whole block will be returned by checkpoint() and time() methods respe
 <code class="sig-name descname">checkpoint</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchfunc.html#Timer.checkpoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.Timer.checkpoint" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Time taken since last checkpoint call.</strong></p>
 <p>If wasn’t called before, it is the same as as Timer creation time (first call returns
-the same thing as time())</p>
+the same thing as <a class="reference internal" href="#torchfunc.Timer.time" title="torchfunc.Timer.time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">time()</span></code></a>)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Whatever self.function() - self.function() returns</p>
+<dd class="field-odd"><p>Whatever <code class="xref py py-obj docutils literal notranslate"><span class="pre">self.function()</span> <span class="pre">-</span> <span class="pre">self.function()</span></code> returns,
+usually fraction of seconds</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p>time-like</p>
@@ -316,7 +273,8 @@ the same thing as time())</p>
 <dd><p><strong>Time taken since the object creation (measurements beginning).</strong></p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Whatever self.function() - self.function() returns</p>
+<dd class="field-odd"><p>Whatever <code class="xref py py-obj docutils literal notranslate"><span class="pre">self.function()</span> <span class="pre">-</span> <span class="pre">self.function()</span></code> returns,
+usually fraction of seconds</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p>time-like</p>
@@ -362,7 +320,7 @@ it will be run on.</p>
 <dt id="torchfunc.installed">
 <code class="sig-prename descclassname">torchfunc.</code><code class="sig-name descname">installed</code><span class="sig-paren">(</span><em class="sig-param">module: str</em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/torchfunc.html#installed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.installed" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return True if module is installed.</p>
-<p>Example:</p>
+<p><strong>Example</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check whether mixed precision library available</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">torchfunc</span><span class="o">.</span><span class="n">installed</span><span class="p">(</span><span class="s2">&quot;apex&quot;</span><span class="p">))</span>
 </pre></div>
@@ -378,6 +336,50 @@ it will be run on.</p>
 <dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="torchfunc.seed">
+<em class="property">class </em><code class="sig-prename descclassname">torchfunc.</code><code class="sig-name descname">seed</code><span class="sig-paren">(</span><em class="sig-param">value: int</em>, <em class="sig-param">cuda: bool = False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchfunc.html#seed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.seed" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Seed PyTorch and numpy.</strong></p>
+<p>This code is based on PyTorch’s reproducibility guide: <a class="reference external" href="https://pytorch.org/docs/stable/notes/randomness.html">https://pytorch.org/docs/stable/notes/randomness.html</a>
+Can be used as standard seeding procedure, context manager (seed will be changed only within block) or function decorator.</p>
+<p><strong>Standard seed</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">torchfunc</span><span class="o">.</span><span class="n">Seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># no surprises I guess</span>
+</pre></div>
+</div>
+<p><strong>Used as context manager</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">Seed</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span>
+    <span class="o">...</span> <span class="c1"># your operations</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">initial_seed</span><span class="p">())</span> <span class="c1"># Should be back to seed pre block</span>
+</pre></div>
+</div>
+<p><strong>Used as function decorator</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@Seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># Seed only within function</span>
+<span class="k">def</span> <span class="nf">foo</span><span class="p">():</span>
+    <span class="k">return</span> <span class="mi">42</span>
+</pre></div>
+</div>
+<p><strong>Important:</strong> It’s impossible to put original <code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy</span></code> seed after context manager
+or decorator, hence it will be set to original PyTorch’s seed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> (<em>int</em>) – Seed value used in np.random_seed and torch.manual_seed. Usually int is provided</p></li>
+<li><p><strong>cuda</strong> (<em>bool</em><em>, </em><em>optional</em>) – <p>Whether to set PyTorch’s cuda backend into deterministic mode (setting cudnn.benchmark to <code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code>
+and cudnn.deterministic to <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>). If <code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code>, consecutive runs may be slightly different.
+If <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>, automatic autotuning for convolutions layers with consistent input shape will be turned off.</p>
+<p>Default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code></p>
+</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="attribute">
+<dt id="torchfunc.seed.cuda">
+<code class="sig-name descname">cuda</code><em class="property"> = False</em><a class="headerlink" href="#torchfunc.seed.cuda" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="function">
@@ -532,17 +534,24 @@ objects. They will calculate how much memory in bytes those object consume.</p>
       <div class="main-menu">
         <ul>
           <li>
-            <a href="https://szymonmaszke.github.io/torchfunc/#torchfunc">Docs</a>
+            <a href="#">Docs</a>
           </li>
 
           <li>
-            <a href="https://szymonmaszke.github.io/torchfunc/related.html">Related Projects</a>
+            <a href="#">Related Projects</a>
           </li>
 
           <li>
-            <a href="https://github.com/szymonmaszke/torchfunc">GitHub</a>
+            <a href="#">GitHub</a>
           </li>
 
+          <li>
+            <a href="">Docs</a>
+          </li>
+
+          <li>
+            <a href="">Github</a>
+          </li>
         </ul>
       </div>
     </div>

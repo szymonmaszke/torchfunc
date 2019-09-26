@@ -1,10 +1,8 @@
 r"""
-
-**This package allows you to measure and improve performance of your neural networks.**
+**This package allows you to get info and tips about performance of your neural networks.**
 
 Following functions should be considered as general recommendations.
-For specific info/tips, use specific module.
-
+For specific/customized tips, use specific submodules.
 
 """
 
@@ -71,7 +69,7 @@ def report(module: torch.nn.Module) -> typing.Dict[str, typing.Any]:
     }
 
 
-# Parse TensorCores
+# Text parsing is not the prettiest thing ever :(
 def tips(module: torch.nn.Module, general: bool = True, specific: bool = True):
     r"""**Return string describing possible performance improvements one can undertake.**
 
@@ -106,50 +104,61 @@ def tips(module: torch.nn.Module, general: bool = True, specific: bool = True):
             one can take to improve module's performance.
 
     """
-    data = report(module)
-    general_tips = (
-        "\n===========================GENERAL TIPS===========================\n"
-        + "\n- Make sure you are running newest PyTorch version. "
-        + "See available releases: https://github.com/pytorch/pytorch/tags\n"
-        + "- Use GPU for larger batches, CPU might be suitable for smaller jobs.\n"
-        + "- Use mixed-precision training on GPU, preferably automated, e.g. NVIDIA Apex: https://github.com/NVIDIA/apex.\n"
-    )
-    specific_tips = (
-        "\n===========================SPECIFIC TIPS===========================\n"
-    )
-    if not data["torchscript"]:
-        specific_tips += (
-            "\n- Module is not an instance of torch.jit.ScriptModule.\n"
-            + "See https://pytorch.org/docs/stable/jit.html for more information."
-        )
-    if not data["apex"]:
-        specific_tips += (
-            "\n- NVIDIA's Apex is not installed. It is the easiest way to use mixed precision training.\n"
-            + "See https://github.com/NVIDIA/apex for more information."
+
+    def general_tips():
+        return (
+            "\n===========================GENERAL TIPS===========================\n"
+            + "\n- Make sure you are running newest PyTorch version. "
+            + "See available releases: https://github.com/pytorch/pytorch/tags\n"
+            + "- Use GPU for larger batches, CPU might be suitable for smaller jobs.\n"
+            + "- Use mixed-precision training on GPU, preferably automated, e.g. NVIDIA Apex: https://github.com/NVIDIA/apex.\n"
         )
 
-    inplace = tuple(data["inplace"])
-    if inplace:
-        specific_tips += "\n- Some operations are in-place. It might harm kernel fusion. Indices of those modules:\n"
-        specific_tips += str(list(inplace))
-        specific_tips += "\nYou may want to remove inplace flag (as of torch 1.2.0)"
+    def specific_tips():
+        def parse_string(text: str) -> str:
+            if text != "":
+                return "\n=======> " + text
+            return text
 
-    depthwise = tuple(data["depthwise"])
-    if depthwise:
-        specific_tips += "\n- Some layers are depthwise convolutions. Those ARE NOT using specialized kernel and might be slower.\n"
-        specific_tips += "Indices of those modules:\n"
-        specific_tips += str(list(depthwise))
-        specific_tips += "\nYou may want to decrease number of groups (like it's done for ResNeXt) for possible speed & accuracy improvements."
+        def torchscript():
+            if not isinstance(module, torch.jit.ScriptModule):
+                return (
+                    "Module should be an instance of torch.jit.ScriptModule.\n"
+                    + "See https://pytorch.org/docs/stable/jit.html for more information."
+                )
+            return ""
+
+        def apex():
+            if not torchfunc.installed("apex"):
+                return (
+                    "NVIDIA's Apex is not installed. It is the easiest way to use mixed precision training.\n"
+                    + "See https://github.com/NVIDIA/apex for more information and installation."
+                )
+            return ""
+
+        specific_tips = ""
+        specific_tips += parse_string(torchscript())
+        specific_tips += parse_string(apex())
+        specific_tips += parse_string(Inplace().tips(module))
+        specific_tips += parse_string(Depthwise().tips(module))
+        specific_tips += parse_string(TensorCores().tips(module))
+        if specific_tips != "":
+            specific_tips = (
+                "\n===========================SPECIFIC TIPS===========================\n"
+                + specific_tips
+            )
+        return specific_tips
+
+    ###########################################################################
+    #
+    #                               MAIN LOGIC
+    #
+    ###########################################################################
 
     results = ""
     if general:
-        results += general_tips
+        results += general_tips()
     if specific:
-        results += specific_tips
+        results += specific_tips()
 
     return results
-
-
-# Add automatic model's improvements (fix data type)
-# def improve(module: torch.nn.Module):
-#     pass

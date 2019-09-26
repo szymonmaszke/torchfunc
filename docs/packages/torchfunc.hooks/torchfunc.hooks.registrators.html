@@ -1,0 +1,665 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>torchfunc.hooks.registrators &mdash; torchfunc  documentation</title>
+  
+
+  
+  
+  
+  
+    <link rel="canonical" href="https://szymonmaszke.github.io/torchfunc/packages/torchfunc.hooks/torchfunc.hooks.registrators.html"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!-- <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" /> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/katex-math.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="torchfunc.module" href="../torchfunc.module.html" />
+    <link rel="prev" title="torchfunc.hooks.recorders" href="torchfunc.hooks.recorders.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+  <!-- Preload the theme fonts -->
+
+<link rel="preload" href="../../_static/fonts/FreightSans/freight-sans-book.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../_static/fonts/FreightSans/freight-sans-medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../_static/fonts/IBMPlexMono/IBMPlexMono-Medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../_static/fonts/FreightSans/freight-sans-bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../_static/fonts/FreightSans/freight-sans-medium-italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="../../_static/fonts/IBMPlexMono/IBMPlexMono-SemiBold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+<!-- Preload the katex fonts -->
+
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Math-Italic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Main-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size1-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size4-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size2-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Size3-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/fonts/KaTeX_Caligraphic-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+</head>
+
+<div class="container-fluid header-holder tutorials-header" id="header-holder">
+  <div class="container">
+    <div class="header-container">
+      <div class="main-menu">
+        <ul>
+          <li>
+            <a href="https://szymonmaszke.github.io/torchfunc/#torchfunc">Documentation</a>
+          </li>
+
+          <li>
+            <a href="https://szymonmaszke.github.io/torchfunc/#installation">Installation</a>
+          </li>
+
+          <li>
+            <a href="https://szymonmaszke.github.io/torchfunc/related.html">Related Projects</a>
+          </li>
+
+          <li>
+            <a href="https://github.com/szymonmaszke/torchfunc">Github</a>
+          </li>
+        </ul>
+      </div>
+
+      <a class="main-menu-open-button" href="#" data-behavior="open-mobile-menu"></a>
+    </div>
+
+  </div>
+</div>
+
+
+<body class="pytorch-body">
+
+   
+
+    
+
+    <div class="table-of-contents-link-wrapper">
+      <span>Table of Contents</span>
+      <a href="#" class="toggle-table-of-contents" data-behavior="toggle-table-of-contents"></a>
+    </div>
+
+    <nav data-toggle="wy-nav-shift" class="pytorch-left-menu" id="pytorch-left-menu">
+      <div class="pytorch-side-scroll">
+        <div class="pytorch-menu pytorch-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          <div class="pytorch-left-menu-search">
+            
+
+            
+              
+              
+                <div class="version">
+                  0.1.1
+                </div>
+              
+            
+
+            
+
+
+  
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search Docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+            
+          </div>
+
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../torchfunc.html">torchfunc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../torchfunc.cuda.html">torchfunc.cuda</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../torchfunc.hooks.html">torchfunc.hooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../torchfunc.module.html">torchfunc.module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../torchfunc.performance.html">torchfunc.performance</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../related.html">Related projects</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <div class="pytorch-container">
+      <div class="pytorch-page-level-bar" id="pytorch-page-level-bar">
+        <div class="pytorch-breadcrumbs-wrapper">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="pytorch-breadcrumbs">
+    
+      <li>
+        <a href="../../index.html">
+        </a> &gt;
+      </li>
+
+        
+          <li><a href="../torchfunc.hooks.html">torchfunc.hooks</a> &gt;</li>
+        
+      <li>torchfunc.hooks.registrators</li>
+    
+    
+      <li class="pytorch-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/packages/torchfunc.hooks/torchfunc.hooks.registrators.rst.txt" rel="nofollow"><img src="../../_static/images/view-page-source-icon.svg"></a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+</div>
+        </div>
+
+        <div class="pytorch-shortcuts-wrapper" id="pytorch-shortcuts-wrapper">
+          Shortcuts
+        </div>
+      </div>
+
+      <section data-toggle="wy-nav-shift" id="pytorch-content-wrap" class="pytorch-content-wrap">
+        <div class="pytorch-content-left">
+          
+          <div class="rst-content">
+          
+            <div role="main" class="main-content" itemscope="itemscope" itemtype="http://schema.org/Article">
+             <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
+              
+  <div class="section" id="module-torchfunc.hooks.registrators">
+<span id="torchfunc-hooks-registrators"></span><h1>torchfunc.hooks.registrators<a class="headerlink" href="#module-torchfunc.hooks.registrators" title="Permalink to this headline">¶</a></h1>
+<p><strong>This module allows you for easier hook registration (e.g. based on</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code> <strong>or</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">index</span></code> <strong>within network).</strong></p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example forward pre hook</span>
+<span class="k">def</span> <span class="nf">example_forward_pre</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">inputs</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">inputs</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="c1"># MNIST classifier</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">784</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="n">registrator</span> <span class="o">=</span> <span class="n">torchfunc</span><span class="o">.</span><span class="n">hooks</span><span class="o">.</span><span class="n">registrators</span><span class="o">.</span><span class="n">ForwardPre</span><span class="p">()</span>
+<span class="c1"># Register forwardPreHook for all torch.nn.Linear submodules</span>
+<span class="n">registrator</span><span class="o">.</span><span class="n">modules</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">example_forward_pre</span><span class="p">,</span> <span class="n">types</span><span class="o">=</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>You could specify indices instead of types (for example all inputs to <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Linear</span></code> will be registered),
+and iterate over <code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code> instead of <code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code>.</p>
+<dl class="class">
+<dt id="torchfunc.hooks.registrators.Backward">
+<em class="property">class </em><code class="sig-prename descclassname">torchfunc.hooks.registrators.</code><code class="sig-name descname">Backward</code><span class="sig-paren">(</span><em class="sig-param">hook: Callable</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/hooks/registrators.html#Backward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.hooks.registrators.Backward" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Register backward hook based on module’s type or indices.</strong></p>
+<dl class="attribute">
+<dt id="torchfunc.hooks.registrators.Backward.handles">
+<code class="sig-name descname">handles</code><a class="headerlink" href="#torchfunc.hooks.registrators.Backward.handles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles for registered hooks, each corresponds to specific submodule.
+Can be used to unregister certain hooks (though discouraged).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[torch.utils.hooks.RemovableHandle]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="torchfunc.hooks.registrators.Backward.children">
+<code class="sig-name descname">children</code><span class="sig-paren">(</span><em class="sig-param">network</em>, <em class="sig-param">types: Tuple[Any] = None</em>, <em class="sig-param">indices: List[int] = None</em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.registrators.Backward.children" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Register</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorders</span></code> <strong>using types and/or indices via</strong> <a class="reference internal" href="#torchfunc.hooks.registrators.Backward.children" title="torchfunc.hooks.registrators.Backward.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code></a> <strong>hook</strong>.</p>
+<p>This function will use <a class="reference internal" href="#torchfunc.hooks.registrators.Backward.children" title="torchfunc.hooks.registrators.Backward.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code></a> method of <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Module</span></code> to iterate over available submodules. If you wish to iterate recursively, use <a class="reference internal" href="#torchfunc.hooks.registrators.Backward.modules" title="torchfunc.hooks.registrators.Backward.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code></a>.</p>
+<p><strong>Important:</strong></p>
+<p>If <code class="xref py py-obj docutils literal notranslate"><span class="pre">types</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">indices</span></code> are left with their default values, all modules
+will have <code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorders</span></code> registered.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>module</strong> (<em>torch.nn.Module</em>) – Module (usually neural network) for which inputs will be collected.</p></li>
+<li><p><strong>types</strong> (<em>Tuple</em><em>[</em><em>typing.Any</em><em>]</em><em>, </em><em>optional</em>) – Module types for which data will be recorded. E.g. <code class="xref py py-obj docutils literal notranslate"><span class="pre">(torch.nn.Conv2d,</span> <span class="pre">torch.nn.Linear)</span></code>
+will register <code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorders</span></code> on every module being instance of either <code class="xref py py-obj docutils literal notranslate"><span class="pre">Conv2d</span></code> or <code class="xref py py-obj docutils literal notranslate"><span class="pre">Linear</span></code>.
+Default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p></li>
+<li><p><strong>indices</strong> (<em>Iterable</em><em>[</em><em>int</em><em>]</em><em>, </em><em>optional</em>) – Indices of modules whose inputs will be registered.
+Default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>self</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="torchfunc.hooks.registrators.Backward.modules">
+<code class="sig-name descname">modules</code><span class="sig-paren">(</span><em class="sig-param">module: torch.nn.modules.module.Module</em>, <em class="sig-param">types: Tuple[Any] = None</em>, <em class="sig-param">indices: List[int] = None</em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.registrators.Backward.modules" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Register</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">hook</span></code> <strong>using types and/or indices via</strong> <a class="reference internal" href="#torchfunc.hooks.registrators.Backward.modules" title="torchfunc.hooks.registrators.Backward.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code></a> <strong>hook</strong>.</p>
+<p>This function will use <a class="reference internal" href="#torchfunc.hooks.registrators.Backward.modules" title="torchfunc.hooks.registrators.Backward.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code></a> method of <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Module</span></code> to iterate over available submodules. If you wish to iterate non-recursively, use <a class="reference internal" href="#torchfunc.hooks.registrators.Backward.children" title="torchfunc.hooks.registrators.Backward.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code></a>.</p>
+<p><strong>Important:</strong></p>
+<p>If <code class="xref py py-obj docutils literal notranslate"><span class="pre">types</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">indices</span></code> are left with their default values, all modules
+will have <code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorders</span></code> registered.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>module</strong> (<em>torch.nn.Module</em>) – Module (usually neural network) for which inputs will be collected.</p></li>
+<li><p><strong>types</strong> (<em>Tuple</em><em>[</em><em>typing.Any</em><em>]</em><em>, </em><em>optional</em>) – Module types for which data will be recorded. E.g. <code class="xref py py-obj docutils literal notranslate"><span class="pre">(torch.nn.Conv2d,</span> <span class="pre">torch.nn.Linear)</span></code>
+will register <code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorders</span></code> on every module being instance of either <code class="xref py py-obj docutils literal notranslate"><span class="pre">Conv2d</span></code> or <code class="xref py py-obj docutils literal notranslate"><span class="pre">Linear</span></code>.
+Default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p></li>
+<li><p><strong>indices</strong> (<em>Iterable</em><em>[</em><em>int</em><em>]</em><em>, </em><em>optional</em>) – Indices of modules whose inputs will be registered.
+Default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>self</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="torchfunc.hooks.registrators.Backward.remove">
+<code class="sig-name descname">remove</code><span class="sig-paren">(</span><em class="sig-param">index</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#torchfunc.hooks.registrators.Backward.remove" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Remove hook specified by</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">index</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>index</strong> (<em>int</em>) – Index of subhook (usually registered for layer)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="torchfunc.hooks.registrators.Forward">
+<em class="property">class </em><code class="sig-prename descclassname">torchfunc.hooks.registrators.</code><code class="sig-name descname">Forward</code><span class="sig-paren">(</span><em class="sig-param">hook: Callable</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/hooks/registrators.html#Forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.hooks.registrators.Forward" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Register forward hook based on module’s type or indices.</strong></p>
+<dl class="attribute">
+<dt id="torchfunc.hooks.registrators.Forward.handles">
+<code class="sig-name descname">handles</code><a class="headerlink" href="#torchfunc.hooks.registrators.Forward.handles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles for registered hooks, each corresponds to specific submodule.
+Can be used to unregister certain hooks (though discouraged).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[torch.utils.hooks.RemovableHandle]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="torchfunc.hooks.registrators.Forward.children">
+<code class="sig-name descname">children</code><span class="sig-paren">(</span><em class="sig-param">network</em>, <em class="sig-param">types: Tuple[Any] = None</em>, <em class="sig-param">indices: List[int] = None</em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.registrators.Forward.children" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Register</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorders</span></code> <strong>using types and/or indices via</strong> <a class="reference internal" href="#torchfunc.hooks.registrators.Forward.children" title="torchfunc.hooks.registrators.Forward.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code></a> <strong>hook</strong>.</p>
+<p>This function will use <a class="reference internal" href="#torchfunc.hooks.registrators.Forward.children" title="torchfunc.hooks.registrators.Forward.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code></a> method of <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Module</span></code> to iterate over available submodules. If you wish to iterate recursively, use <a class="reference internal" href="#torchfunc.hooks.registrators.Forward.modules" title="torchfunc.hooks.registrators.Forward.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code></a>.</p>
+<p><strong>Important:</strong></p>
+<p>If <code class="xref py py-obj docutils literal notranslate"><span class="pre">types</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">indices</span></code> are left with their default values, all modules
+will have <code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorders</span></code> registered.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>module</strong> (<em>torch.nn.Module</em>) – Module (usually neural network) for which inputs will be collected.</p></li>
+<li><p><strong>types</strong> (<em>Tuple</em><em>[</em><em>typing.Any</em><em>]</em><em>, </em><em>optional</em>) – Module types for which data will be recorded. E.g. <code class="xref py py-obj docutils literal notranslate"><span class="pre">(torch.nn.Conv2d,</span> <span class="pre">torch.nn.Linear)</span></code>
+will register <code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorders</span></code> on every module being instance of either <code class="xref py py-obj docutils literal notranslate"><span class="pre">Conv2d</span></code> or <code class="xref py py-obj docutils literal notranslate"><span class="pre">Linear</span></code>.
+Default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p></li>
+<li><p><strong>indices</strong> (<em>Iterable</em><em>[</em><em>int</em><em>]</em><em>, </em><em>optional</em>) – Indices of modules whose inputs will be registered.
+Default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>self</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="torchfunc.hooks.registrators.Forward.modules">
+<code class="sig-name descname">modules</code><span class="sig-paren">(</span><em class="sig-param">module: torch.nn.modules.module.Module</em>, <em class="sig-param">types: Tuple[Any] = None</em>, <em class="sig-param">indices: List[int] = None</em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.registrators.Forward.modules" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Register</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">hook</span></code> <strong>using types and/or indices via</strong> <a class="reference internal" href="#torchfunc.hooks.registrators.Forward.modules" title="torchfunc.hooks.registrators.Forward.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code></a> <strong>hook</strong>.</p>
+<p>This function will use <a class="reference internal" href="#torchfunc.hooks.registrators.Forward.modules" title="torchfunc.hooks.registrators.Forward.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code></a> method of <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Module</span></code> to iterate over available submodules. If you wish to iterate non-recursively, use <a class="reference internal" href="#torchfunc.hooks.registrators.Forward.children" title="torchfunc.hooks.registrators.Forward.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code></a>.</p>
+<p><strong>Important:</strong></p>
+<p>If <code class="xref py py-obj docutils literal notranslate"><span class="pre">types</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">indices</span></code> are left with their default values, all modules
+will have <code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorders</span></code> registered.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>module</strong> (<em>torch.nn.Module</em>) – Module (usually neural network) for which inputs will be collected.</p></li>
+<li><p><strong>types</strong> (<em>Tuple</em><em>[</em><em>typing.Any</em><em>]</em><em>, </em><em>optional</em>) – Module types for which data will be recorded. E.g. <code class="xref py py-obj docutils literal notranslate"><span class="pre">(torch.nn.Conv2d,</span> <span class="pre">torch.nn.Linear)</span></code>
+will register <code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorders</span></code> on every module being instance of either <code class="xref py py-obj docutils literal notranslate"><span class="pre">Conv2d</span></code> or <code class="xref py py-obj docutils literal notranslate"><span class="pre">Linear</span></code>.
+Default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p></li>
+<li><p><strong>indices</strong> (<em>Iterable</em><em>[</em><em>int</em><em>]</em><em>, </em><em>optional</em>) – Indices of modules whose inputs will be registered.
+Default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>self</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="torchfunc.hooks.registrators.Forward.remove">
+<code class="sig-name descname">remove</code><span class="sig-paren">(</span><em class="sig-param">index</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#torchfunc.hooks.registrators.Forward.remove" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Remove hook specified by</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">index</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>index</strong> (<em>int</em>) – Index of subhook (usually registered for layer)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="torchfunc.hooks.registrators.ForwardPre">
+<em class="property">class </em><code class="sig-prename descclassname">torchfunc.hooks.registrators.</code><code class="sig-name descname">ForwardPre</code><span class="sig-paren">(</span><em class="sig-param">hook: Callable</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/hooks/registrators.html#ForwardPre"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.hooks.registrators.ForwardPre" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Register forward pre hook based on module’s type or indices.</strong></p>
+<dl class="attribute">
+<dt id="torchfunc.hooks.registrators.ForwardPre.handles">
+<code class="sig-name descname">handles</code><a class="headerlink" href="#torchfunc.hooks.registrators.ForwardPre.handles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles for registered hooks, each corresponds to specific submodule.
+Can be used to unregister certain hooks (though discouraged).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List[torch.utils.hooks.RemovableHandle]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="torchfunc.hooks.registrators.ForwardPre.children">
+<code class="sig-name descname">children</code><span class="sig-paren">(</span><em class="sig-param">network</em>, <em class="sig-param">types: Tuple[Any] = None</em>, <em class="sig-param">indices: List[int] = None</em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.registrators.ForwardPre.children" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Register</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorders</span></code> <strong>using types and/or indices via</strong> <a class="reference internal" href="#torchfunc.hooks.registrators.ForwardPre.children" title="torchfunc.hooks.registrators.ForwardPre.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code></a> <strong>hook</strong>.</p>
+<p>This function will use <a class="reference internal" href="#torchfunc.hooks.registrators.ForwardPre.children" title="torchfunc.hooks.registrators.ForwardPre.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code></a> method of <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Module</span></code> to iterate over available submodules. If you wish to iterate recursively, use <a class="reference internal" href="#torchfunc.hooks.registrators.ForwardPre.modules" title="torchfunc.hooks.registrators.ForwardPre.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code></a>.</p>
+<p><strong>Important:</strong></p>
+<p>If <code class="xref py py-obj docutils literal notranslate"><span class="pre">types</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">indices</span></code> are left with their default values, all modules
+will have <code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorders</span></code> registered.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>module</strong> (<em>torch.nn.Module</em>) – Module (usually neural network) for which inputs will be collected.</p></li>
+<li><p><strong>types</strong> (<em>Tuple</em><em>[</em><em>typing.Any</em><em>]</em><em>, </em><em>optional</em>) – Module types for which data will be recorded. E.g. <code class="xref py py-obj docutils literal notranslate"><span class="pre">(torch.nn.Conv2d,</span> <span class="pre">torch.nn.Linear)</span></code>
+will register <code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorders</span></code> on every module being instance of either <code class="xref py py-obj docutils literal notranslate"><span class="pre">Conv2d</span></code> or <code class="xref py py-obj docutils literal notranslate"><span class="pre">Linear</span></code>.
+Default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p></li>
+<li><p><strong>indices</strong> (<em>Iterable</em><em>[</em><em>int</em><em>]</em><em>, </em><em>optional</em>) – Indices of modules whose inputs will be registered.
+Default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>self</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="torchfunc.hooks.registrators.ForwardPre.modules">
+<code class="sig-name descname">modules</code><span class="sig-paren">(</span><em class="sig-param">module: torch.nn.modules.module.Module</em>, <em class="sig-param">types: Tuple[Any] = None</em>, <em class="sig-param">indices: List[int] = None</em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.registrators.ForwardPre.modules" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Register</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">hook</span></code> <strong>using types and/or indices via</strong> <a class="reference internal" href="#torchfunc.hooks.registrators.ForwardPre.modules" title="torchfunc.hooks.registrators.ForwardPre.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code></a> <strong>hook</strong>.</p>
+<p>This function will use <a class="reference internal" href="#torchfunc.hooks.registrators.ForwardPre.modules" title="torchfunc.hooks.registrators.ForwardPre.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code></a> method of <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Module</span></code> to iterate over available submodules. If you wish to iterate non-recursively, use <a class="reference internal" href="#torchfunc.hooks.registrators.ForwardPre.children" title="torchfunc.hooks.registrators.ForwardPre.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code></a>.</p>
+<p><strong>Important:</strong></p>
+<p>If <code class="xref py py-obj docutils literal notranslate"><span class="pre">types</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">indices</span></code> are left with their default values, all modules
+will have <code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorders</span></code> registered.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>module</strong> (<em>torch.nn.Module</em>) – Module (usually neural network) for which inputs will be collected.</p></li>
+<li><p><strong>types</strong> (<em>Tuple</em><em>[</em><em>typing.Any</em><em>]</em><em>, </em><em>optional</em>) – Module types for which data will be recorded. E.g. <code class="xref py py-obj docutils literal notranslate"><span class="pre">(torch.nn.Conv2d,</span> <span class="pre">torch.nn.Linear)</span></code>
+will register <code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorders</span></code> on every module being instance of either <code class="xref py py-obj docutils literal notranslate"><span class="pre">Conv2d</span></code> or <code class="xref py py-obj docutils literal notranslate"><span class="pre">Linear</span></code>.
+Default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p></li>
+<li><p><strong>indices</strong> (<em>Iterable</em><em>[</em><em>int</em><em>]</em><em>, </em><em>optional</em>) – Indices of modules whose inputs will be registered.
+Default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>self</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="torchfunc.hooks.registrators.ForwardPre.remove">
+<code class="sig-name descname">remove</code><span class="sig-paren">(</span><em class="sig-param">index</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#torchfunc.hooks.registrators.ForwardPre.remove" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Remove hook specified by</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">index</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>index</strong> (<em>int</em>) – Index of subhook (usually registered for layer)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+             </article>
+             
+            </div>
+            <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../torchfunc.module.html" class="btn btn-neutral float-right" title="torchfunc.module" accesskey="n" rel="next">Next <img src="../../_static/images/chevron-right-orange.svg" class="next-page"></a>
+      
+      
+        <a href="torchfunc.hooks.recorders.html" class="btn btn-neutral" title="torchfunc.hooks.recorders" accesskey="p" rel="prev"><img src="../../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+      
+    </div>
+  
+
+    <hr>
+
+  <!-- Spacing. -->
+  <div role="contentinfo">
+  </div>
+    
+      <div>
+        Built with Sphinx using <a href="https://github.com/pytorch/pytorch_sphinx_theme">PyTorch's theme</a> provided originally by <a href="https://readthedocs.org">Read the Docs</a>.
+      </div>
+      <div>
+      </div>
+    
+
+  <div role="contentinfo">
+  </div> 
+
+</footer>
+          </div>
+        </div>
+
+        <div class="pytorch-content-right" id="pytorch-content-right">
+          <div class="pytorch-right-menu" id="pytorch-right-menu">
+            <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
+              <ul>
+<li><a class="reference internal" href="#">torchfunc.hooks.registrators</a></li>
+</ul>
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  
+
+
+  
+
+     
+       <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+         <script type="text/javascript" src="../../_static/jquery.js"></script>
+         <script type="text/javascript" src="../../_static/underscore.js"></script>
+         <script type="text/javascript" src="../../_static/doctools.js"></script>
+         <script type="text/javascript" src="../../_static/language_data.js"></script>
+         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"></script>
+         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js"></script>
+         <script type="text/javascript" src="../../_static/katex_autorenderer.js"></script>
+     
+
+  
+
+  <script type="text/javascript" src="../../_static/js/vendor/popper.min.js"></script>
+  <script type="text/javascript" src="../../_static/js/vendor/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+  <!-- Begin Footer -->
+
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-logo-wrapper">
+        <a href="" class="footer-logo"></a>
+      </div>
+
+      <div class="footer-links-wrapper">
+        <div class="footer-links-col">
+          <ul>
+            <li class="list-title"><a href="https://szymonmaszke.github.io/torchfunc">Home</a></li>
+            <li><a href="https://pytorch.org/docs/stable/index.html">PyTorch</a></li>
+            <li><a href="https://szymonmaszke.github.io/torchfunc/#torchfunc">Documentation</a></li>
+            <li><a href="https://szymonmaszke.github.io/torchfunc/#installation">Installation</a></li>
+            <li><a href="https://github.com/szymonmaszke/torchfunc">GitHub</a></li>
+            <li><a href="https://github.com/szymonmaszke/torchfunc/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc">Github Issues</a></li>
+            <li><a href="https://github.com/szymonmaszke/torchfunc/blob/master/ROADMAP.md">Roadmap</a></li>
+            <li><a href="https://github.com/szymonmaszke" target="_blank">Author</a></li>
+          </ul>
+        </div>
+
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- End Footer -->
+
+  <!-- Begin Mobile Menu -->
+
+  <div class="mobile-main-menu">
+    <div class="container-fluid">
+      <div class="container">
+        <div class="mobile-main-menu-header-container">
+          <a class="header-logo" href="" aria-label="torchutils"></a>
+          <a class="main-menu-close-button" href="#" data-behavior="close-mobile-menu"></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mobile-main-menu-links-container">
+      <div class="main-menu">
+        <ul>
+          <li>
+            <a href="#">Docs</a>
+          </li>
+
+          <li>
+            <a href="#">Related Projects</a>
+          </li>
+
+          <li>
+            <a href="#">GitHub</a>
+          </li>
+
+          <li>
+            <a href="">Docs</a>
+          </li>
+
+          <li>
+            <a href="">Github</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- End Mobile Menu -->
+
+  <script type="text/javascript" src="../../_static/js/vendor/anchor.min.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      mobileMenu.bind();
+      mobileTOC.bind();
+      pytorchAnchors.bind();
+      sideMenus.bind();
+      scrollToAnchor.bind();
+      highlightNavigation.bind();
+
+      // Add class to links that have code blocks, since we cannot create links in code blocks
+      $("article.pytorch-article a span.pre").each(function(e) {
+        $(this).closest("a").addClass("has-code");
+      });
+    })
+  </script>
+</body>
+</html>

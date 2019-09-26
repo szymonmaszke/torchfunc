@@ -7,20 +7,20 @@ torchfunc
 **torchfunc** is PyTorch oriented library with a goal to help you with:
 
 * Improving and analysing performance of your neural network
-* Plotting and visualizing modules
-* Record neuron activity and tailor it to your specific task or target
-* Get information about your host operating system, CUDA devices and others
+* Record/analyse internal state of `torch.nn.Module` as data passes through it
+* Do the above based on external conditions (using single `Callable` to specify it)
 * Day-to-day neural network related duties (model size, seeding, performance measurements etc.)
+* Get information about your host operating system, CUDA devices and others
 
-See `related projects <https://szymonmaszke.github.io/torchfunc/related.html>`__ for `td.data`-like
-datasets in PyTorch and soon others as well!
+See `related projects <https://szymonmaszke.github.io/torchfunc/related.html>`__ for 
+other helpful libraries revolving around PyTorch.
 
 Modules
 #######
 
 .. toctree::
    :glob:
-   :maxdepth: 1
+   :maxdepth: 2
 
    packages/*
    
