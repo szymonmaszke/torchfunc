@@ -109,7 +109,7 @@
               
               
                 <div class="version">
-                  0.1.0
+                  0.1.1
                 </div>
               
             
@@ -140,10 +140,9 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../packages/torchfunc.html">torchfunc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../packages/torchfunc.cuda.html">torchfunc.cuda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages/torchfunc.hooks.html">torchfunc.hooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../packages/torchfunc.module.html">torchfunc.module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../packages/torchfunc.performance.html">torchfunc.performance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../packages/torchfunc.plot.html">torchfunc.plot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../packages/torchfunc.record.html">torchfunc.record</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../related.html">Related projects</a></li>
@@ -225,7 +224,7 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">torch</span>
 
-<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">cuda</span><span class="p">,</span> <span class="n">module</span><span class="p">,</span> <span class="n">performance</span><span class="p">,</span> <span class="n">plot</span><span class="p">,</span> <span class="n">record</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">cuda</span><span class="p">,</span> <span class="n">hooks</span><span class="p">,</span> <span class="n">module</span><span class="p">,</span> <span class="n">performance</span>
 <span class="kn">from</span> <span class="nn">._base</span> <span class="k">import</span> <span class="n">Base</span>
 <span class="kn">from</span> <span class="nn">._dev_utils._general</span> <span class="k">import</span> <span class="n">_cuda_info</span><span class="p">,</span> <span class="n">_general_info</span>
 
@@ -249,7 +248,7 @@
 <span class="sd">        print(timer) # time taken for the block, will not be updated outside of it</span>
 
 <span class="sd">    When execution leaves the block, timer will be blocked. Last checkpoint and time taken</span>
-<span class="sd">    to execute whole block will be returned by checkpoint() and time() methods respectively.</span>
+<span class="sd">    to execute whole block will be returned by `checkpoint()` and `time()` methods respectively.</span>
 
 <span class="sd">    **Used as function decorator**::</span>
 
@@ -281,7 +280,8 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        time-like</span>
-<span class="sd">                Whatever self.function() - self.function() returns</span>
+<span class="sd">                Whatever `self.function() - self.function()` returns,</span>
+<span class="sd">                usually fraction of seconds</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">ended</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span>
@@ -291,12 +291,13 @@
         <span class="sd">&quot;&quot;&quot;**Time taken since last checkpoint call.**</span>
 
 <span class="sd">        If wasn&#39;t called before, it is the same as as Timer creation time (first call returns</span>
-<span class="sd">        the same thing as time())</span>
+<span class="sd">        the same thing as `time()`)</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        time-like</span>
-<span class="sd">                Whatever self.function() - self.function() returns</span>
+<span class="sd">                Whatever `self.function() - self.function()` returns,</span>
+<span class="sd">                usually fraction of seconds</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">ended</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">last_checkpoint</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">last</span>
@@ -321,8 +322,8 @@
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">time</span><span class="p">())</span></div>
 
 
-<div class="viewcode-block" id="Seed"><a class="viewcode-back" href="../packages/torchfunc.html#torchfunc.Seed">[docs]</a><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
-<span class="k">class</span> <span class="nc">Seed</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+<div class="viewcode-block" id="seed"><a class="viewcode-back" href="../packages/torchfunc.html#torchfunc.seed">[docs]</a><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span><span class="p">(</span><span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">seed</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Seed PyTorch and numpy.**</span>
 
 <span class="sd">    This code is based on PyTorch&#39;s reproducibility guide: https://pytorch.org/docs/stable/notes/randomness.html</span>
@@ -339,23 +340,24 @@
 
 <span class="sd">        print(torch.initial_seed()) # Should be back to seed pre block</span>
 
-<span class="sd">    **Important:** It&#39;s impossible to put original `numpy` seed after execution flow</span>
-<span class="sd">    leaves context manager block, hence it will be set to original PyTorch&#39;s seed.</span>
-
 <span class="sd">    **Used as function decorator**::</span>
 
 <span class="sd">        @Seed(1) # Seed only within function</span>
 <span class="sd">        def foo():</span>
 <span class="sd">            return 42</span>
 
+<span class="sd">    **Important:** It&#39;s impossible to put original `numpy` seed after context manager</span>
+<span class="sd">    or decorator, hence it will be set to original PyTorch&#39;s seed.</span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    value: int</span>
 <span class="sd">            Seed value used in np.random_seed and torch.manual_seed. Usually int is provided</span>
 <span class="sd">    cuda: bool, optional</span>
-<span class="sd">            Whether to set PyTorch&#39;s cuda backend into deterministic mode (setting cudnn.benchmark to False</span>
-<span class="sd">            and cudnn.deterministic to True). If False, consecutive runs may be slightly different.</span>
-<span class="sd">            If True, automatic autotuning for convolutions layers with consistent input shape will be turned off.</span>
+<span class="sd">            Whether to set PyTorch&#39;s cuda backend into deterministic mode (setting cudnn.benchmark to `False`</span>
+<span class="sd">            and cudnn.deterministic to `True`). If `False`, consecutive runs may be slightly different.</span>
+<span class="sd">            If `True`, automatic autotuning for convolutions layers with consistent input shape will be turned off.</span>
+
 <span class="sd">            Default: `False`</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -472,7 +474,7 @@
 <div class="viewcode-block" id="installed"><a class="viewcode-back" href="../packages/torchfunc.html#torchfunc.installed">[docs]</a><span class="k">def</span> <span class="nf">installed</span><span class="p">(</span><span class="n">module</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Return True if module is installed.</span>
 
-<span class="sd">    Example::</span>
+<span class="sd">    **Example**::</span>
 
 <span class="sd">        # Check whether mixed precision library available</span>
 <span class="sd">        print(torchfunc.installed(&quot;apex&quot;))</span>
@@ -600,17 +602,24 @@
       <div class="main-menu">
         <ul>
           <li>
-            <a href="https://szymonmaszke.github.io/torchfunc/#torchfunc">Docs</a>
+            <a href="#">Docs</a>
           </li>
 
           <li>
-            <a href="https://szymonmaszke.github.io/torchfunc/related.html">Related Projects</a>
+            <a href="#">Related Projects</a>
           </li>
 
           <li>
-            <a href="https://github.com/szymonmaszke/torchfunc">GitHub</a>
+            <a href="#">GitHub</a>
           </li>
 
+          <li>
+            <a href="">Docs</a>
+          </li>
+
+          <li>
+            <a href="">Github</a>
+          </li>
         </ul>
       </div>
     </div>

@@ -29,6 +29,8 @@ class Depthwise(Base):
     Depthwise convolution might still be useful in order to save memory, not so
     performance-wise.
 
+    For easy to follow guidelines, use `tips` method of this class.
+
     Example::
 
         model = torch.nn.Sequential(
@@ -167,6 +169,8 @@ class Inplace(Base):
 
         for index in torchfunc.performance.layers.Inplace().children(model):
             print(index) # Should print 1 and 3
+
+    For easy to follow guidelines, use `tips` method of this class.
 
     Attributes
     ----------

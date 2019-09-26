@@ -109,7 +109,7 @@
               
               
                 <div class="version">
-                  0.1.0
+                  0.1.1
                 </div>
               
             
@@ -140,10 +140,9 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../packages/torchfunc.html">torchfunc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../packages/torchfunc.cuda.html">torchfunc.cuda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../packages/torchfunc.hooks.html">torchfunc.hooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../packages/torchfunc.module.html">torchfunc.module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../packages/torchfunc.performance.html">torchfunc.performance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../packages/torchfunc.plot.html">torchfunc.plot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../packages/torchfunc.record.html">torchfunc.record</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../related.html">Related projects</a></li>
@@ -223,9 +222,6 @@
 <span class="sd">Using functionalities below you can check whether your architecture can use</span>
 <span class="sd">technology dependent speed improvements.</span>
 
-<span class="sd">If you want to contribute to this module, please see `ROADMAP.md` in `torchfunc` github</span>
-<span class="sd">repository.</span>
-
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">collections</span>
 <span class="kn">import</span> <span class="nn">dataclasses</span>
@@ -247,8 +243,8 @@
 <span class="sd">    Interpretation of data returned from this function may pose some problems to users</span>
 <span class="sd">    unfamiliar with ideas standing behind Tensor Cores.</span>
 
-<span class="sd">    You can use `torchscripts.performance.tips` to get user friendly information</span>
-<span class="sd">    about your `torch.nn.Module`.</span>
+<span class="sd">    Is is advised to use method `tips` to get user friendly information your</span>
+<span class="sd">    `torch.nn.Module`&#39;s compatitilibty with Tensor Cores.</span>
 
 <span class="sd">    Example::</span>
 
@@ -487,7 +483,67 @@
 <span class="sd">                As it&#39;s hard to parse, it is suggested to use tips for readable output.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_analyse</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="s2">&quot;children&quot;</span><span class="p">)</span></div></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_analyse</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="s2">&quot;children&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TensorCores.tips"><a class="viewcode-back" href="../../../packages/torchfunc.performance/torchfunc.performance.technology.html#torchfunc.performance.technology.TensorCores.tips">[docs]</a>    <span class="k">def</span> <span class="nf">tips</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">module</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Return** `str` **representation of** `modules()` **method.**</span>
+
+<span class="sd">        It is advised to use this function to get tips in order to easily fix</span>
+<span class="sd">        possible performance issues related to Tensor Cores.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        module : torch.nn.Module</span>
+<span class="sd">                Module to be scanned</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">                String representing tips related to Tensor Cores.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">modules</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">types</span><span class="p">():</span>
+            <span class="n">_types</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span>
+
+            <span class="k">def</span> <span class="nf">parse_type</span><span class="p">(</span><span class="n">is_float</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">goal</span><span class="p">):</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;float&quot;</span> <span class="k">if</span> <span class="n">is_float</span> <span class="k">else</span> <span class="s2">&quot;integer&quot;</span>
+                <span class="k">if</span> <span class="n">_types</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
+                    <span class="k">return</span> <span class="n">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Modules where </span><span class="si">{key}</span><span class="s2"> type is not </span><span class="si">{goal}</span><span class="s2">:</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span>
+                        <span class="n">_types</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+                    <span class="p">)</span>
+                <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+
+            <span class="k">return</span> <span class="n">parse_type</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;torch.half&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">parse_type</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;torch.short&quot;</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">shape</span><span class="p">():</span>
+            <span class="k">def</span> <span class="nf">parse_shape</span><span class="p">(</span><span class="n">dictionary</span><span class="p">,</span> <span class="n">is_input</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">goal</span><span class="p">):</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;inputs&quot;</span> <span class="k">if</span> <span class="n">is_input</span> <span class="k">else</span> <span class="s2">&quot;outputs&quot;</span>
+                <span class="k">if</span> <span class="n">dictionary</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
+                    <span class="k">return</span> <span class="p">(</span>
+                        <span class="n">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Modules where </span><span class="si">{key}</span><span class="s2"> shape should be divisable by </span><span class="si">{goal}</span><span class="s2">:</span><span class="se">\n</span><span class="s2">&quot;</span>
+                        <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+                    <span class="p">)</span>
+                <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+
+            <span class="n">_shapes</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;shape&quot;</span><span class="p">]</span>
+
+            <span class="k">def</span> <span class="nf">floating</span><span class="p">():</span>
+                <span class="n">_floats</span> <span class="o">=</span> <span class="n">_shapes</span><span class="p">[</span><span class="s2">&quot;float&quot;</span><span class="p">]</span>
+                <span class="k">return</span> <span class="n">parse_shape</span><span class="p">(</span><span class="n">_floats</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span> <span class="o">+</span> <span class="n">parse_shape</span><span class="p">(</span><span class="n">_floats</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+
+            <span class="k">def</span> <span class="nf">integer</span><span class="p">():</span>
+                <span class="n">_integers</span> <span class="o">=</span> <span class="n">_shapes</span><span class="p">[</span><span class="s2">&quot;integer&quot;</span><span class="p">]</span>
+                <span class="k">return</span> <span class="n">parse_shape</span><span class="p">(</span><span class="n">_integers</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span> <span class="o">+</span> <span class="n">parse_shape</span><span class="p">(</span>
+                    <span class="n">_integers</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="mi">16</span>
+                <span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">floating</span><span class="p">()</span> <span class="o">+</span> <span class="n">integer</span><span class="p">()</span>
+
+        <span class="n">output</span> <span class="o">=</span> <span class="n">types</span><span class="p">()</span> <span class="o">+</span> <span class="n">shape</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">output</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="s2">&quot;TensorCores incompatible modules:&quot;</span> <span class="o">+</span> <span class="n">output</span>
+        <span class="k">return</span> <span class="n">output</span></div></div>
 </pre></div>
 
              </article>
@@ -599,17 +655,24 @@
       <div class="main-menu">
         <ul>
           <li>
-            <a href="https://szymonmaszke.github.io/torchfunc/#torchfunc">Docs</a>
+            <a href="#">Docs</a>
           </li>
 
           <li>
-            <a href="https://szymonmaszke.github.io/torchfunc/related.html">Related Projects</a>
+            <a href="#">Related Projects</a>
           </li>
 
           <li>
-            <a href="https://github.com/szymonmaszke/torchfunc">GitHub</a>
+            <a href="#">GitHub</a>
           </li>
 
+          <li>
+            <a href="">Docs</a>
+          </li>
+
+          <li>
+            <a href="">Github</a>
+          </li>
         </ul>
       </div>
     </div>

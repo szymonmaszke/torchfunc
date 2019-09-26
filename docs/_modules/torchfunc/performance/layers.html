@@ -109,7 +109,7 @@
               
               
                 <div class="version">
-                  0.1.0
+                  0.1.1
                 </div>
               
             
@@ -140,10 +140,9 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../packages/torchfunc.html">torchfunc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../packages/torchfunc.cuda.html">torchfunc.cuda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../packages/torchfunc.hooks.html">torchfunc.hooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../packages/torchfunc.module.html">torchfunc.module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../packages/torchfunc.performance.html">torchfunc.performance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../packages/torchfunc.plot.html">torchfunc.plot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../packages/torchfunc.record.html">torchfunc.record</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../related.html">Related projects</a></li>
@@ -242,11 +241,13 @@
 <span class="sd">    Depthwise convolution is faster for images with input data in format</span>
 <span class="sd">    (batch, height, width, channel) as specialized kernels are available.</span>
 
-<span class="sd">    Currently PyTorch has not support for this functionality, so using those may actually</span>
+<span class="sd">    Currently PyTorch does not support this functionality, so using those may actually</span>
 <span class="sd">    slow down your neural network.</span>
 
 <span class="sd">    Depthwise convolution might still be useful in order to save memory, not so</span>
 <span class="sd">    performance-wise.</span>
+
+<span class="sd">    For easy to follow guidelines, use `tips` method of this class.</span>
 
 <span class="sd">    Example::</span>
 
@@ -299,7 +300,7 @@
 <span class="sd">                Submodule&#39;s indices where depthwise convolution was located.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="s2">&quot;groups&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="s2">&quot;in_channels&quot;</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">module</span><span class="o">.</span><span class="n">groups</span> <span class="o">==</span> <span class="n">module</span><span class="o">.</span><span class="n">in_channels</span>
+            <span class="k">return</span> <span class="n">module</span><span class="o">.</span><span class="n">groups</span> <span class="o">==</span> <span class="n">module</span><span class="o">.</span><span class="n">in_channels</span> <span class="ow">and</span> <span class="n">module</span><span class="o">.</span><span class="n">in_channels</span> <span class="o">!=</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="kc">False</span></div>
 
     <span class="k">def</span> <span class="nf">_analyse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">module</span><span class="p">,</span> <span class="n">function</span><span class="p">):</span>
@@ -337,15 +338,42 @@
 <span class="sd">        int</span>
 <span class="sd">                Indices where module is considered depthwise convolution.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">_analyse</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="s2">&quot;children&quot;</span><span class="p">)</span></div></div>
+        <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">_analyse</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="s2">&quot;children&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Depthwise.tips"><a class="viewcode-back" href="../../../packages/torchfunc.performance/torchfunc.performance.layers.html#torchfunc.performance.layers.Depthwise.tips">[docs]</a>    <span class="k">def</span> <span class="nf">tips</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">module</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Return** `str` **representation of** `modules()` **method.**</span>
+
+<span class="sd">        It is advised to use this function to get tips in order to easily fix</span>
+<span class="sd">        performance issues related to depthwise convolution.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        module : torch.nn.Module</span>
+<span class="sd">                Module to be scanned</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">                String representing tips related to depthwise convolution.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">depthwise</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">modules</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">depthwise</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span>
+                <span class="s2">&quot;Depthwise convolutions are not currently using specialized kernel and might be slower.</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="o">+</span> <span class="s2">&quot;See this issue: https://github.com/pytorch/pytorch/issues/18631 for more information.</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="o">+</span> <span class="s2">&quot;Indices of those modules:</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">depthwise</span><span class="p">))</span>
+                <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">You may want to decrease number of groups (like it&#39;s done for ResNeXt) for possible speed &amp; accuracy improvements.&quot;</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div></div>
 
 
 <div class="viewcode-block" id="Inplace"><a class="viewcode-back" href="../../../packages/torchfunc.performance/torchfunc.performance.layers.html#torchfunc.performance.layers.Inplace">[docs]</a><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span>
 <span class="k">class</span> <span class="nc">Inplace</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Check whether any submodule/child of module is set to inplace mode.**</span>
 
-<span class="sd">    Inplace operations may interfere with traced module (kernel fusion) and cause slowdowns</span>
-<span class="sd">    (source: https://github.com/pytorch/pytorch/issues/23655) (as of PyTorch 1.2.0).</span>
+<span class="sd">    Inplace operations may interfere with traced module (kernel fusion) and cause slowdowns.</span>
+<span class="sd">    See `this issue &lt;https://github.com/pytorch/pytorch/issues/23655&gt;`__ for more information.</span>
 
 <span class="sd">    **Example**::</span>
 
@@ -359,6 +387,8 @@
 
 <span class="sd">        for index in torchfunc.performance.layers.Inplace().children(model):</span>
 <span class="sd">            print(index) # Should print 1 and 3</span>
+
+<span class="sd">    For easy to follow guidelines, use `tips` method of this class.</span>
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
@@ -397,7 +427,32 @@
 <span class="sd">        int</span>
 <span class="sd">                Indices where module is probably `inplace`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">_analyse</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="s2">&quot;children&quot;</span><span class="p">)</span></div></div>
+        <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">_analyse</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="s2">&quot;children&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Inplace.tips"><a class="viewcode-back" href="../../../packages/torchfunc.performance/torchfunc.performance.layers.html#torchfunc.performance.layers.Inplace.tips">[docs]</a>    <span class="k">def</span> <span class="nf">tips</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">module</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Return** `str` **representation of** `modules()` **method.**</span>
+
+<span class="sd">        It is advised to use this function to get tips in order to easily fix</span>
+<span class="sd">        performance issues related to inplace operations.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        module : torch.nn.Module</span>
+<span class="sd">                Module to be scanned</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">                String representing tips related to inplace operations.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">inplace</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">modules</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">inplace</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span>
+                <span class="s2">&quot;In-place operations might harm kernel fusion. Indices of those modules:</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">inplace</span><span class="p">))</span>
+                <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">You may want to remove inplace flag (see this issue: https://github.com/pytorch/pytorch/issues/23655)&quot;</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div></div>
 </pre></div>
 
              </article>
@@ -509,17 +564,24 @@
       <div class="main-menu">
         <ul>
           <li>
-            <a href="https://szymonmaszke.github.io/torchfunc/#torchfunc">Docs</a>
+            <a href="#">Docs</a>
           </li>
 
           <li>
-            <a href="https://szymonmaszke.github.io/torchfunc/related.html">Related Projects</a>
+            <a href="#">Related Projects</a>
           </li>
 
           <li>
-            <a href="https://github.com/szymonmaszke/torchfunc">GitHub</a>
+            <a href="#">GitHub</a>
           </li>
 
+          <li>
+            <a href="">Docs</a>
+          </li>
+
+          <li>
+            <a href="">Github</a>
+          </li>
         </ul>
       </div>
     </div>

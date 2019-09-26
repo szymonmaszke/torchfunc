@@ -110,7 +110,7 @@
               
               
                 <div class="version">
-                  0.1.0
+                  0.1.1
                 </div>
               
             
@@ -141,10 +141,9 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="packages/torchfunc.html">torchfunc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="packages/torchfunc.cuda.html">torchfunc.cuda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packages/torchfunc.hooks.html">torchfunc.hooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="packages/torchfunc.module.html">torchfunc.module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="packages/torchfunc.performance.html">torchfunc.performance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="packages/torchfunc.plot.html">torchfunc.plot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="packages/torchfunc.record.html">torchfunc.record</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="related.html">Related projects</a></li>
@@ -221,32 +220,48 @@
  | <a href="#B"><strong>B</strong></a>
  | <a href="#C"><strong>C</strong></a>
  | <a href="#D"><strong>D</strong></a>
- | <a href="#E"><strong>E</strong></a>
  | <a href="#F"><strong>F</strong></a>
  | <a href="#H"><strong>H</strong></a>
  | <a href="#I"><strong>I</strong></a>
  | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
- | <a href="#N"><strong>N</strong></a>
- | <a href="#O"><strong>O</strong></a>
  | <a href="#P"><strong>P</strong></a>
  | <a href="#R"><strong>R</strong></a>
  | <a href="#S"><strong>S</strong></a>
  | <a href="#T"><strong>T</strong></a>
  | <a href="#U"><strong>U</strong></a>
- | <a href="#V"><strong>V</strong></a>
  
 </div>
 <h2 id="A">A</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="packages/torchfunc.plot.html#torchfunc.plot.Activations1d">Activations1d (class in torchfunc.plot)</a>
+      <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.BackwardInput.apply">apply() (torchfunc.hooks.recorders.BackwardInput method)</a>
+
+      <ul>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.BackwardOutput.apply">(torchfunc.hooks.recorders.BackwardOutput method)</a>
 </li>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.ForwardInput.apply">(torchfunc.hooks.recorders.ForwardInput method)</a>
+</li>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.ForwardOutput.apply">(torchfunc.hooks.recorders.ForwardOutput method)</a>
+</li>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.ForwardPre.apply">(torchfunc.hooks.recorders.ForwardPre method)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="packages/torchfunc.performance/torchfunc.performance.layers.html#torchfunc.performance.layers.Inplace.attribute">attribute (torchfunc.performance.layers.Inplace attribute)</a>
+      <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.BackwardInput.apply_sample">apply_sample() (torchfunc.hooks.recorders.BackwardInput method)</a>
+
+      <ul>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.BackwardOutput.apply_sample">(torchfunc.hooks.recorders.BackwardOutput method)</a>
 </li>
-      <li><a href="packages/torchfunc.plot.html#torchfunc.plot.Activations1d.ax">ax (torchfunc.plot.Activations1d attribute)</a>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.ForwardInput.apply_sample">(torchfunc.hooks.recorders.ForwardInput method)</a>
+</li>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.ForwardOutput.apply_sample">(torchfunc.hooks.recorders.ForwardOutput method)</a>
+</li>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.ForwardPre.apply_sample">(torchfunc.hooks.recorders.ForwardPre method)</a>
+</li>
+      </ul></li>
+      <li><a href="packages/torchfunc.performance/torchfunc.performance.layers.html#torchfunc.performance.layers.Inplace.attribute">attribute (torchfunc.performance.layers.Inplace attribute)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -254,11 +269,13 @@
 <h2 id="B">B</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="packages/torchfunc.record.html#torchfunc.record.BackwardInputRecorder">BackwardInputRecorder (class in torchfunc.record)</a>
+      <li><a href="packages/torchfunc.hooks/torchfunc.hooks.registrators.html#torchfunc.hooks.registrators.Backward">Backward (class in torchfunc.hooks.registrators)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="packages/torchfunc.record.html#torchfunc.record.BackwardOutputRecorder">BackwardOutputRecorder (class in torchfunc.record)</a>
+      <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.BackwardInput">BackwardInput (class in torchfunc.hooks.recorders)</a>
+</li>
+      <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.BackwardOutput">BackwardOutput (class in torchfunc.hooks.recorders)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -270,26 +287,28 @@
 </li>
       <li><a href="packages/torchfunc.html#torchfunc.Timer.checkpoint">checkpoint() (torchfunc.Timer method)</a>
 </li>
-      <li><a href="packages/torchfunc.performance/torchfunc.performance.layers.html#torchfunc.performance.layers.Depthwise.children">children() (torchfunc.performance.layers.Depthwise method)</a>
+      <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.BackwardInput.children">children() (torchfunc.hooks.recorders.BackwardInput method)</a>
 
       <ul>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.BackwardOutput.children">(torchfunc.hooks.recorders.BackwardOutput method)</a>
+</li>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.ForwardInput.children">(torchfunc.hooks.recorders.ForwardInput method)</a>
+</li>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.ForwardOutput.children">(torchfunc.hooks.recorders.ForwardOutput method)</a>
+</li>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.ForwardPre.children">(torchfunc.hooks.recorders.ForwardPre method)</a>
+</li>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.registrators.html#torchfunc.hooks.registrators.Backward.children">(torchfunc.hooks.registrators.Backward method)</a>
+</li>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.registrators.html#torchfunc.hooks.registrators.Forward.children">(torchfunc.hooks.registrators.Forward method)</a>
+</li>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.registrators.html#torchfunc.hooks.registrators.ForwardPre.children">(torchfunc.hooks.registrators.ForwardPre method)</a>
+</li>
+        <li><a href="packages/torchfunc.performance/torchfunc.performance.layers.html#torchfunc.performance.layers.Depthwise.children">(torchfunc.performance.layers.Depthwise method)</a>
+</li>
         <li><a href="packages/torchfunc.performance/torchfunc.performance.layers.html#torchfunc.performance.layers.Inplace.children">(torchfunc.performance.layers.Inplace method)</a>
 </li>
         <li><a href="packages/torchfunc.performance/torchfunc.performance.technology.html#torchfunc.performance.technology.TensorCores.children">(torchfunc.performance.technology.TensorCores method)</a>
-</li>
-      </ul></li>
-      <li><a href="packages/torchfunc.plot.html#torchfunc.plot.Activations1d.colormap">colormap (torchfunc.plot.Activations1d attribute)</a>, <a href="packages/torchfunc.plot.html#torchfunc.plot.Activations1d.colormap">[1]</a>
-</li>
-      <li><a href="packages/torchfunc.record.html#torchfunc.record.BackwardInputRecorder.condition">condition (torchfunc.record.BackwardInputRecorder attribute)</a>
-
-      <ul>
-        <li><a href="packages/torchfunc.record.html#torchfunc.record.BackwardOutputRecorder.condition">(torchfunc.record.BackwardOutputRecorder attribute)</a>
-</li>
-        <li><a href="packages/torchfunc.record.html#torchfunc.record.ForwardInputRecorder.condition">(torchfunc.record.ForwardInputRecorder attribute)</a>
-</li>
-        <li><a href="packages/torchfunc.record.html#torchfunc.record.ForwardOutputRecorder.condition">(torchfunc.record.ForwardOutputRecorder attribute)</a>
-</li>
-        <li><a href="packages/torchfunc.record.html#torchfunc.record.ForwardPreRecorder.condition">(torchfunc.record.ForwardPreRecorder attribute)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -300,7 +319,7 @@
 </li>
       <li><a href="packages/torchfunc.performance/torchfunc.performance.technology.html#torchfunc.performance.technology.TensorCores.convolution_types">convolution_types (torchfunc.performance.technology.TensorCores attribute)</a>, <a href="packages/torchfunc.performance/torchfunc.performance.technology.html#torchfunc.performance.technology.TensorCores.convolution_types">[1]</a>
 </li>
-      <li><a href="packages/torchfunc.html#torchfunc.Seed.cuda">cuda (torchfunc.Seed attribute)</a>
+      <li><a href="packages/torchfunc.html#torchfunc.seed.cuda">cuda (torchfunc.seed attribute)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -308,16 +327,16 @@
 <h2 id="D">D</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="packages/torchfunc.record.html#torchfunc.record.BackwardInputRecorder.data">data (torchfunc.record.BackwardInputRecorder attribute)</a>
+      <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.BackwardInput.data">data (torchfunc.hooks.recorders.BackwardInput attribute)</a>
 
       <ul>
-        <li><a href="packages/torchfunc.record.html#torchfunc.record.BackwardOutputRecorder.data">(torchfunc.record.BackwardOutputRecorder attribute)</a>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.BackwardOutput.data">(torchfunc.hooks.recorders.BackwardOutput attribute)</a>
 </li>
-        <li><a href="packages/torchfunc.record.html#torchfunc.record.ForwardInputRecorder.data">(torchfunc.record.ForwardInputRecorder attribute)</a>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.ForwardInput.data">(torchfunc.hooks.recorders.ForwardInput attribute)</a>
 </li>
-        <li><a href="packages/torchfunc.record.html#torchfunc.record.ForwardOutputRecorder.data">(torchfunc.record.ForwardOutputRecorder attribute)</a>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.ForwardOutput.data">(torchfunc.hooks.recorders.ForwardOutput attribute)</a>
 </li>
-        <li><a href="packages/torchfunc.record.html#torchfunc.record.ForwardPreRecorder.data">(torchfunc.record.ForwardPreRecorder attribute)</a>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.ForwardPre.data">(torchfunc.hooks.recorders.ForwardPre attribute)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -329,27 +348,25 @@
   </ul></td>
 </tr></table>
 
-<h2 id="E">E</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="packages/torchfunc.plot.html#torchfunc.plot.Activations1d.edge_colors">edge_colors (torchfunc.plot.Activations1d attribute)</a>, <a href="packages/torchfunc.plot.html#torchfunc.plot.Activations1d.edge_colors">[1]</a>
-</li>
-  </ul></td>
-</tr></table>
-
 <h2 id="F">F</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="packages/torchfunc.performance/torchfunc.performance.technology.html#torchfunc.performance.technology.TensorCores.float_types">float_types (torchfunc.performance.technology.TensorCores attribute)</a>, <a href="packages/torchfunc.performance/torchfunc.performance.technology.html#torchfunc.performance.technology.TensorCores.float_types">[1]</a>
 </li>
-      <li><a href="packages/torchfunc.record.html#torchfunc.record.ForwardInputRecorder">ForwardInputRecorder (class in torchfunc.record)</a>
+      <li><a href="packages/torchfunc.hooks/torchfunc.hooks.registrators.html#torchfunc.hooks.registrators.Forward">Forward (class in torchfunc.hooks.registrators)</a>
+</li>
+      <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.ForwardInput">ForwardInput (class in torchfunc.hooks.recorders)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="packages/torchfunc.record.html#torchfunc.record.ForwardOutputRecorder">ForwardOutputRecorder (class in torchfunc.record)</a>
+      <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.ForwardOutput">ForwardOutput (class in torchfunc.hooks.recorders)</a>
 </li>
-      <li><a href="packages/torchfunc.record.html#torchfunc.record.ForwardPreRecorder">ForwardPreRecorder (class in torchfunc.record)</a>
+      <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.ForwardPre">ForwardPre (class in torchfunc.hooks.recorders)</a>
+
+      <ul>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.registrators.html#torchfunc.hooks.registrators.ForwardPre">(class in torchfunc.hooks.registrators)</a>
 </li>
+      </ul></li>
       <li><a href="packages/torchfunc.module.html#torchfunc.module.freeze">freeze() (in module torchfunc.module)</a>
 </li>
   </ul></td>
@@ -358,22 +375,24 @@
 <h2 id="H">H</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="packages/torchfunc.record.html#torchfunc.record.BackwardInputRecorder.handles">handles (torchfunc.record.BackwardInputRecorder attribute)</a>
+      <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.BackwardInput.handles">handles (torchfunc.hooks.recorders.BackwardInput attribute)</a>
 
       <ul>
-        <li><a href="packages/torchfunc.record.html#torchfunc.record.BackwardOutputRecorder.handles">(torchfunc.record.BackwardOutputRecorder attribute)</a>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.BackwardOutput.handles">(torchfunc.hooks.recorders.BackwardOutput attribute)</a>
 </li>
-        <li><a href="packages/torchfunc.record.html#torchfunc.record.ForwardInputRecorder.handles">(torchfunc.record.ForwardInputRecorder attribute)</a>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.ForwardInput.handles">(torchfunc.hooks.recorders.ForwardInput attribute)</a>
 </li>
-        <li><a href="packages/torchfunc.record.html#torchfunc.record.ForwardOutputRecorder.handles">(torchfunc.record.ForwardOutputRecorder attribute)</a>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.ForwardOutput.handles">(torchfunc.hooks.recorders.ForwardOutput attribute)</a>
 </li>
-        <li><a href="packages/torchfunc.record.html#torchfunc.record.ForwardPreRecorder.handles">(torchfunc.record.ForwardPreRecorder attribute)</a>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.ForwardPre.handles">(torchfunc.hooks.recorders.ForwardPre attribute)</a>
+</li>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.registrators.html#torchfunc.hooks.registrators.Backward.handles">(torchfunc.hooks.registrators.Backward attribute)</a>
+</li>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.registrators.html#torchfunc.hooks.registrators.Forward.handles">(torchfunc.hooks.registrators.Forward attribute)</a>
+</li>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.registrators.html#torchfunc.hooks.registrators.ForwardPre.handles">(torchfunc.hooks.registrators.ForwardPre attribute)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="packages/torchfunc.plot.html#torchfunc.plot.Activations1d.horizontal">horizontal (torchfunc.plot.Activations1d attribute)</a>, <a href="packages/torchfunc.plot.html#torchfunc.plot.Activations1d.horizontal">[1]</a>
-</li>
   </ul></td>
 </tr></table>
 
@@ -384,14 +403,26 @@
 </li>
       <li><a href="packages/torchfunc.performance/torchfunc.performance.layers.html#torchfunc.performance.layers.Inplace">Inplace (class in torchfunc.performance.layers)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="packages/torchfunc.performance/torchfunc.performance.layers.html#torchfunc.performance.layers.Inplace.inplace">inplace (torchfunc.performance.layers.Inplace attribute)</a>
 </li>
       <li><a href="packages/torchfunc.html#torchfunc.installed">installed() (in module torchfunc)</a>
 </li>
       <li><a href="packages/torchfunc.performance/torchfunc.performance.technology.html#torchfunc.performance.technology.TensorCores.integer_types">integer_types (torchfunc.performance.technology.TensorCores attribute)</a>, <a href="packages/torchfunc.performance/torchfunc.performance.technology.html#torchfunc.performance.technology.TensorCores.integer_types">[1]</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.BackwardInput.iter_samples">iter_samples() (torchfunc.hooks.recorders.BackwardInput method)</a>
+
+      <ul>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.BackwardOutput.iter_samples">(torchfunc.hooks.recorders.BackwardOutput method)</a>
+</li>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.ForwardInput.iter_samples">(torchfunc.hooks.recorders.ForwardInput method)</a>
+</li>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.ForwardOutput.iter_samples">(torchfunc.hooks.recorders.ForwardOutput method)</a>
+</li>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.ForwardPre.iter_samples">(torchfunc.hooks.recorders.ForwardPre method)</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -412,30 +443,30 @@
 <h2 id="M">M</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="packages/torchfunc.performance/torchfunc.performance.layers.html#torchfunc.performance.layers.Depthwise.modules">modules() (torchfunc.performance.layers.Depthwise method)</a>
+      <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.BackwardInput.modules">modules() (torchfunc.hooks.recorders.BackwardInput method)</a>
 
       <ul>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.BackwardOutput.modules">(torchfunc.hooks.recorders.BackwardOutput method)</a>
+</li>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.ForwardInput.modules">(torchfunc.hooks.recorders.ForwardInput method)</a>
+</li>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.ForwardOutput.modules">(torchfunc.hooks.recorders.ForwardOutput method)</a>
+</li>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.ForwardPre.modules">(torchfunc.hooks.recorders.ForwardPre method)</a>
+</li>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.registrators.html#torchfunc.hooks.registrators.Backward.modules">(torchfunc.hooks.registrators.Backward method)</a>
+</li>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.registrators.html#torchfunc.hooks.registrators.Forward.modules">(torchfunc.hooks.registrators.Forward method)</a>
+</li>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.registrators.html#torchfunc.hooks.registrators.ForwardPre.modules">(torchfunc.hooks.registrators.ForwardPre method)</a>
+</li>
+        <li><a href="packages/torchfunc.performance/torchfunc.performance.layers.html#torchfunc.performance.layers.Depthwise.modules">(torchfunc.performance.layers.Depthwise method)</a>
+</li>
         <li><a href="packages/torchfunc.performance/torchfunc.performance.layers.html#torchfunc.performance.layers.Inplace.modules">(torchfunc.performance.layers.Inplace method)</a>
 </li>
         <li><a href="packages/torchfunc.performance/torchfunc.performance.technology.html#torchfunc.performance.technology.TensorCores.modules">(torchfunc.performance.technology.TensorCores method)</a>
 </li>
       </ul></li>
-  </ul></td>
-</tr></table>
-
-<h2 id="N">N</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="packages/torchfunc.plot.html#torchfunc.plot.Activations1d.neuron_size">neuron_size (torchfunc.plot.Activations1d attribute)</a>, <a href="packages/torchfunc.plot.html#torchfunc.plot.Activations1d.neuron_size">[1]</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="O">O</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="packages/torchfunc.plot.html#torchfunc.plot.Activations1d.orientation">orientation (torchfunc.plot.Activations1d attribute)</a>, <a href="packages/torchfunc.plot.html#torchfunc.plot.Activations1d.orientation">[1]</a>
-</li>
   </ul></td>
 </tr></table>
 
@@ -450,16 +481,22 @@
 <h2 id="R">R</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="packages/torchfunc.record.html#torchfunc.record.BackwardInputRecorder.reduction">reduction (torchfunc.record.BackwardInputRecorder attribute)</a>
+      <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.BackwardInput.remove">remove() (torchfunc.hooks.recorders.BackwardInput method)</a>
 
       <ul>
-        <li><a href="packages/torchfunc.record.html#torchfunc.record.BackwardOutputRecorder.reduction">(torchfunc.record.BackwardOutputRecorder attribute)</a>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.BackwardOutput.remove">(torchfunc.hooks.recorders.BackwardOutput method)</a>
 </li>
-        <li><a href="packages/torchfunc.record.html#torchfunc.record.ForwardInputRecorder.reduction">(torchfunc.record.ForwardInputRecorder attribute)</a>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.ForwardInput.remove">(torchfunc.hooks.recorders.ForwardInput method)</a>
 </li>
-        <li><a href="packages/torchfunc.record.html#torchfunc.record.ForwardOutputRecorder.reduction">(torchfunc.record.ForwardOutputRecorder attribute)</a>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.ForwardOutput.remove">(torchfunc.hooks.recorders.ForwardOutput method)</a>
 </li>
-        <li><a href="packages/torchfunc.record.html#torchfunc.record.ForwardPreRecorder.reduction">(torchfunc.record.ForwardPreRecorder attribute)</a>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.ForwardPre.remove">(torchfunc.hooks.recorders.ForwardPre method)</a>
+</li>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.registrators.html#torchfunc.hooks.registrators.Backward.remove">(torchfunc.hooks.registrators.Backward method)</a>
+</li>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.registrators.html#torchfunc.hooks.registrators.Forward.remove">(torchfunc.hooks.registrators.Forward method)</a>
+</li>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.registrators.html#torchfunc.hooks.registrators.ForwardPre.remove">(torchfunc.hooks.registrators.ForwardPre method)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -474,30 +511,54 @@
 <h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="packages/torchfunc.record.html#torchfunc.record.BackwardInputRecorder.samples">samples (torchfunc.record.BackwardInputRecorder attribute)</a>
+      <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.BackwardInput.samples">samples() (torchfunc.hooks.recorders.BackwardInput method)</a>
 
       <ul>
-        <li><a href="packages/torchfunc.record.html#torchfunc.record.BackwardOutputRecorder.samples">(torchfunc.record.BackwardOutputRecorder attribute)</a>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.BackwardOutput.samples">(torchfunc.hooks.recorders.BackwardOutput method)</a>
 </li>
-        <li><a href="packages/torchfunc.record.html#torchfunc.record.ForwardInputRecorder.samples">(torchfunc.record.ForwardInputRecorder attribute)</a>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.ForwardInput.samples">(torchfunc.hooks.recorders.ForwardInput method)</a>
 </li>
-        <li><a href="packages/torchfunc.record.html#torchfunc.record.ForwardOutputRecorder.samples">(torchfunc.record.ForwardOutputRecorder attribute)</a>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.ForwardOutput.samples">(torchfunc.hooks.recorders.ForwardOutput method)</a>
 </li>
-        <li><a href="packages/torchfunc.record.html#torchfunc.record.ForwardPreRecorder.samples">(torchfunc.record.ForwardPreRecorder attribute)</a>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.ForwardPre.samples">(torchfunc.hooks.recorders.ForwardPre method)</a>
+</li>
+      </ul></li>
+      <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.BackwardInput.save">save() (torchfunc.hooks.recorders.BackwardInput method)</a>
+
+      <ul>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.BackwardOutput.save">(torchfunc.hooks.recorders.BackwardOutput method)</a>
+</li>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.ForwardInput.save">(torchfunc.hooks.recorders.ForwardInput method)</a>
+</li>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.ForwardOutput.save">(torchfunc.hooks.recorders.ForwardOutput method)</a>
+</li>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.ForwardPre.save">(torchfunc.hooks.recorders.ForwardPre method)</a>
+</li>
+        <li><a href="packages/torchfunc.module.html#torchfunc.module.Snapshot.save">(torchfunc.module.Snapshot method)</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="packages/torchfunc.module.html#torchfunc.module.Snapshot.save">save() (torchfunc.module.Snapshot method)</a>
-</li>
       <li><a href="packages/torchfunc.module.html#torchfunc.module.Snapshot.save_state">save_state() (torchfunc.module.Snapshot method)</a>
 </li>
-      <li><a href="packages/torchfunc.html#torchfunc.Seed">Seed (class in torchfunc)</a>
+      <li><a href="packages/torchfunc.html#torchfunc.seed">seed (class in torchfunc)</a>
 </li>
       <li><a href="packages/torchfunc.html#torchfunc.sizeof">sizeof() (in module torchfunc)</a>
 </li>
       <li><a href="packages/torchfunc.module.html#torchfunc.module.Snapshot">Snapshot (class in torchfunc.module)</a>
 </li>
+      <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.BackwardInput.subrecorders">subrecorders (torchfunc.hooks.recorders.BackwardInput attribute)</a>
+
+      <ul>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.BackwardOutput.subrecorders">(torchfunc.hooks.recorders.BackwardOutput attribute)</a>
+</li>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.ForwardInput.subrecorders">(torchfunc.hooks.recorders.ForwardInput attribute)</a>
+</li>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.ForwardOutput.subrecorders">(torchfunc.hooks.recorders.ForwardOutput attribute)</a>
+</li>
+        <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#torchfunc.hooks.recorders.ForwardPre.subrecorders">(torchfunc.hooks.recorders.ForwardPre attribute)</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -511,13 +572,27 @@
       <li><a href="packages/torchfunc.html#torchfunc.Timer">Timer (class in torchfunc)</a>
 </li>
       <li><a href="packages/torchfunc.performance.html#torchfunc.performance.tips">tips() (in module torchfunc.performance)</a>
+
+      <ul>
+        <li><a href="packages/torchfunc.performance/torchfunc.performance.layers.html#torchfunc.performance.layers.Depthwise.tips">(torchfunc.performance.layers.Depthwise method)</a>
 </li>
+        <li><a href="packages/torchfunc.performance/torchfunc.performance.layers.html#torchfunc.performance.layers.Inplace.tips">(torchfunc.performance.layers.Inplace method)</a>
+</li>
+        <li><a href="packages/torchfunc.performance/torchfunc.performance.technology.html#torchfunc.performance.technology.TensorCores.tips">(torchfunc.performance.technology.TensorCores method)</a>
+</li>
+      </ul></li>
       <li><a href="packages/torchfunc.html#module-torchfunc">torchfunc (module)</a>
-</li>
-      <li><a href="packages/torchfunc.cuda.html#module-torchfunc.cuda">torchfunc.cuda (module)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="packages/torchfunc.cuda.html#module-torchfunc.cuda">torchfunc.cuda (module)</a>
+</li>
+      <li><a href="packages/torchfunc.hooks.html#module-torchfunc.hooks">torchfunc.hooks (module)</a>
+</li>
+      <li><a href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html#module-torchfunc.hooks.recorders">torchfunc.hooks.recorders (module)</a>
+</li>
+      <li><a href="packages/torchfunc.hooks/torchfunc.hooks.registrators.html#module-torchfunc.hooks.registrators">torchfunc.hooks.registrators (module)</a>
+</li>
       <li><a href="packages/torchfunc.module.html#module-torchfunc.module">torchfunc.module (module)</a>
 </li>
       <li><a href="packages/torchfunc.performance.html#module-torchfunc.performance">torchfunc.performance (module)</a>
@@ -526,10 +601,6 @@
 </li>
       <li><a href="packages/torchfunc.performance/torchfunc.performance.technology.html#module-torchfunc.performance.technology">torchfunc.performance.technology (module)</a>
 </li>
-      <li><a href="packages/torchfunc.plot.html#module-torchfunc.plot">torchfunc.plot (module)</a>
-</li>
-      <li><a href="packages/torchfunc.record.html#module-torchfunc.record">torchfunc.record (module)</a>
-</li>
   </ul></td>
 </tr></table>
 
@@ -537,18 +608,6 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="packages/torchfunc.module.html#torchfunc.module.unfreeze">unfreeze() (in module torchfunc.module)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="V">V</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="packages/torchfunc.plot.html#torchfunc.plot.Activations1d.value_max">value_max (torchfunc.plot.Activations1d attribute)</a>, <a href="packages/torchfunc.plot.html#torchfunc.plot.Activations1d.value_max">[1]</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="packages/torchfunc.plot.html#torchfunc.plot.Activations1d.value_min">value_min (torchfunc.plot.Activations1d attribute)</a>, <a href="packages/torchfunc.plot.html#torchfunc.plot.Activations1d.value_min">[1]</a>
 </li>
   </ul></td>
 </tr></table>
@@ -664,17 +723,24 @@
       <div class="main-menu">
         <ul>
           <li>
-            <a href="https://szymonmaszke.github.io/torchfunc/#torchfunc">Docs</a>
+            <a href="#">Docs</a>
           </li>
 
           <li>
-            <a href="https://szymonmaszke.github.io/torchfunc/related.html">Related Projects</a>
+            <a href="#">Related Projects</a>
           </li>
 
           <li>
-            <a href="https://github.com/szymonmaszke/torchfunc">GitHub</a>
+            <a href="#">GitHub</a>
           </li>
 
+          <li>
+            <a href="">Docs</a>
+          </li>
+
+          <li>
+            <a href="">Github</a>
+          </li>
         </ul>
       </div>
     </div>

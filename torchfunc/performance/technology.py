@@ -4,9 +4,6 @@ r"""
 Using functionalities below you can check whether your architecture can use
 technology dependent speed improvements.
 
-If you want to contribute to this module, please see `ROADMAP.md` in `torchfunc` github
-repository.
-
 """
 import collections
 import dataclasses
@@ -28,8 +25,8 @@ class TensorCores(Base):
     Interpretation of data returned from this function may pose some problems to users
     unfamiliar with ideas standing behind Tensor Cores.
 
-    You can use `torchscripts.performance.tips` to get user friendly information
-    about your `torch.nn.Module`.
+    Is is advised to use method `tips` to get user friendly information your
+    `torch.nn.Module`'s compatitilibty with Tensor Cores.
 
     Example::
 

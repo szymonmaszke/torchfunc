@@ -47,8 +47,7 @@ import typing
 import torch
 
 from .._base import Base
-from ._dev_utils import (children_documentation, modules_documentation,
-                         params_documentation, register_condition)
+from ._dev_utils import register_condition
 
 
 class _Recorder(Base):
@@ -179,13 +178,32 @@ class _Recorder(Base):
         types: typing.Tuple[typing.Any] = None,
         indices: typing.List[int] = None,
     ):
-        rf"""**Register** `subrecorders` **using types and/or indices via** `modules` **method**.
+        r"""**Register** `subrecorders` **using types and/or indices via** `modules` **method**.
 
-        {modules_documentation()}
+        This function will use `modules` method of `torch.nn.Module` to iterate over available submodules. If you wish to iterate non-recursively, use `children`.
 
-        {params_documentation()}
+        **Important:**
 
+        If `types` and `indices` are left with their default values, all modules
+        will have `subrecorders` registered.
+
+        Parameters
+        ----------
+        module : torch.nn.Module
+            Module (usually neural network) for which inputs will be collected.
+        types : Tuple[typing.Any], optional
+            Module types for which data will be recorded. E.g. `(torch.nn.Conv2d, torch.nn.Linear)`
+            will register `subrecorders` on every module being instance of either `Conv2d` or `Linear`.
+            Default: `None`
+        indices : Iterable[int], optional
+            Indices of modules whose inputs will be registered.
+            Default: `None`
+
+        Returns
+        -------
+        self
         """
+
         self._register_hook(module, "modules", types, indices)
         return self
 
@@ -195,13 +213,32 @@ class _Recorder(Base):
         types: typing.Tuple[typing.Any] = None,
         indices: typing.List[int] = None,
     ):
-        rf"""**Register** `subrecorders` **using types and/or indices via** `children` **method**.
+        r"""**Register** `subrecorders` **using types and/or indices via** `children` **method**.
 
-        {children_documentation()}
+        This function will use `children` method of `torch.nn.Module` to iterate over available submodules. If you wish to iterate recursively, use `modules`.
 
-        {params_documentation()}
+        **Important:**
 
+        If `types` and `indices` are left with their default values, all modules
+        will have `subrecorders` registered.
+
+        Parameters
+        ----------
+        module : torch.nn.Module
+            Module (usually neural network) for which inputs will be collected.
+        types : Tuple[typing.Any], optional
+            Module types for which data will be recorded. E.g. `(torch.nn.Conv2d, torch.nn.Linear)`
+            will register `subrecorders` on every module being instance of either `Conv2d` or `Linear`.
+            Default: `None`
+        indices : Iterable[int], optional
+            Indices of modules whose inputs will be registered.
+            Default: `None`
+
+        Returns
+        -------
+        self
         """
+
         self._register_hook(network, "children", types, indices)
         return self
 
@@ -254,8 +291,8 @@ class _Recorder(Base):
         Parameters
         ----------
         function: Callable
-                Two argument (`torch.Tensor` data from `subrecorder` and number of `sample`s which passed through it)
-                callable returning anything.
+                Two argument (`torch.Tensor` data from `subrecorder` and number of `samples` which passed through it)
+                `Callable` returning anything.
 
         """
         for subrecorder, sample in zip(self, self.iter_samples()):

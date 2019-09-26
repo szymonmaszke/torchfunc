@@ -109,7 +109,7 @@
               
               
                 <div class="version">
-                  0.1.0
+                  0.1.1
                 </div>
               
             
@@ -140,10 +140,9 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../packages/torchfunc.html">torchfunc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../packages/torchfunc.cuda.html">torchfunc.cuda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../packages/torchfunc.hooks.html">torchfunc.hooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../packages/torchfunc.module.html">torchfunc.module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../packages/torchfunc.performance.html">torchfunc.performance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../packages/torchfunc.plot.html">torchfunc.plot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../packages/torchfunc.record.html">torchfunc.record</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../related.html">Related projects</a></li>
@@ -216,12 +215,10 @@
               
   <h1>Source code for torchfunc.performance</h1><div class="highlight"><pre>
 <span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-
-<span class="sd">**This package allows you to measure and improve performance of your neural networks.**</span>
+<span class="sd">**This package allows you to get info and tips about performance of your neural networks.**</span>
 
 <span class="sd">Following functions should be considered as general recommendations.</span>
-<span class="sd">For specific info/tips, use specific module.</span>
-
+<span class="sd">For specific/customized tips, use specific submodules.</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 
@@ -288,7 +285,7 @@
     <span class="p">}</span></div>
 
 
-<span class="c1"># Parse TensorCores</span>
+<span class="c1"># Text parsing is not the prettiest thing ever :(</span>
 <div class="viewcode-block" id="tips"><a class="viewcode-back" href="../../packages/torchfunc.performance.html#torchfunc.performance.tips">[docs]</a><span class="k">def</span> <span class="nf">tips</span><span class="p">(</span><span class="n">module</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span> <span class="n">general</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">specific</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Return string describing possible performance improvements one can undertake.**</span>
 
@@ -323,53 +320,64 @@
 <span class="sd">            one can take to improve module&#39;s performance.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">report</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>
-    <span class="n">general_tips</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">===========================GENERAL TIPS===========================</span><span class="se">\n</span><span class="s2">&quot;</span>
-        <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">- Make sure you are running newest PyTorch version. &quot;</span>
-        <span class="o">+</span> <span class="s2">&quot;See available releases: https://github.com/pytorch/pytorch/tags</span><span class="se">\n</span><span class="s2">&quot;</span>
-        <span class="o">+</span> <span class="s2">&quot;- Use GPU for larger batches, CPU might be suitable for smaller jobs.</span><span class="se">\n</span><span class="s2">&quot;</span>
-        <span class="o">+</span> <span class="s2">&quot;- Use mixed-precision training on GPU, preferably automated, e.g. NVIDIA Apex: https://github.com/NVIDIA/apex.</span><span class="se">\n</span><span class="s2">&quot;</span>
-    <span class="p">)</span>
-    <span class="n">specific_tips</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">===========================SPECIFIC TIPS===========================</span><span class="se">\n</span><span class="s2">&quot;</span>
-    <span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;torchscript&quot;</span><span class="p">]:</span>
-        <span class="n">specific_tips</span> <span class="o">+=</span> <span class="p">(</span>
-            <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">- Module is not an instance of torch.jit.ScriptModule.</span><span class="se">\n</span><span class="s2">&quot;</span>
-            <span class="o">+</span> <span class="s2">&quot;See https://pytorch.org/docs/stable/jit.html for more information.&quot;</span>
-        <span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;apex&quot;</span><span class="p">]:</span>
-        <span class="n">specific_tips</span> <span class="o">+=</span> <span class="p">(</span>
-            <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">- NVIDIA&#39;s Apex is not installed. It is the easiest way to use mixed precision training.</span><span class="se">\n</span><span class="s2">&quot;</span>
-            <span class="o">+</span> <span class="s2">&quot;See https://github.com/NVIDIA/apex for more information.&quot;</span>
+
+    <span class="k">def</span> <span class="nf">general_tips</span><span class="p">():</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">===========================GENERAL TIPS===========================</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">- Make sure you are running newest PyTorch version. &quot;</span>
+            <span class="o">+</span> <span class="s2">&quot;See available releases: https://github.com/pytorch/pytorch/tags</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="o">+</span> <span class="s2">&quot;- Use GPU for larger batches, CPU might be suitable for smaller jobs.</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="o">+</span> <span class="s2">&quot;- Use mixed-precision training on GPU, preferably automated, e.g. NVIDIA Apex: https://github.com/NVIDIA/apex.</span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="p">)</span>
 
-    <span class="n">inplace</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;inplace&quot;</span><span class="p">])</span>
-    <span class="k">if</span> <span class="n">inplace</span><span class="p">:</span>
-        <span class="n">specific_tips</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">- Some operations are in-place. It might harm kernel fusion. Indices of those modules:</span><span class="se">\n</span><span class="s2">&quot;</span>
-        <span class="n">specific_tips</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">inplace</span><span class="p">))</span>
-        <span class="n">specific_tips</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">You may want to remove inplace flag (as of torch 1.2.0)&quot;</span>
+    <span class="k">def</span> <span class="nf">specific_tips</span><span class="p">():</span>
+        <span class="k">def</span> <span class="nf">parse_string</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">text</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=======&gt; &quot;</span> <span class="o">+</span> <span class="n">text</span>
+            <span class="k">return</span> <span class="n">text</span>
 
-    <span class="n">depthwise</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;depthwise&quot;</span><span class="p">])</span>
-    <span class="k">if</span> <span class="n">depthwise</span><span class="p">:</span>
-        <span class="n">specific_tips</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">- Some layers are depthwise convolutions. Those ARE NOT using specialized kernel and might be slower.</span><span class="se">\n</span><span class="s2">&quot;</span>
-        <span class="n">specific_tips</span> <span class="o">+=</span> <span class="s2">&quot;Indices of those modules:</span><span class="se">\n</span><span class="s2">&quot;</span>
-        <span class="n">specific_tips</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">depthwise</span><span class="p">))</span>
-        <span class="n">specific_tips</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">You may want to decrease number of groups (like it&#39;s done for ResNeXt) for possible speed &amp; accuracy improvements.&quot;</span>
+        <span class="k">def</span> <span class="nf">torchscript</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">jit</span><span class="o">.</span><span class="n">ScriptModule</span><span class="p">):</span>
+                <span class="k">return</span> <span class="p">(</span>
+                    <span class="s2">&quot;Module should be an instance of torch.jit.ScriptModule.</span><span class="se">\n</span><span class="s2">&quot;</span>
+                    <span class="o">+</span> <span class="s2">&quot;See https://pytorch.org/docs/stable/jit.html for more information.&quot;</span>
+                <span class="p">)</span>
+            <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="nf">apex</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">torchfunc</span><span class="o">.</span><span class="n">installed</span><span class="p">(</span><span class="s2">&quot;apex&quot;</span><span class="p">):</span>
+                <span class="k">return</span> <span class="p">(</span>
+                    <span class="s2">&quot;NVIDIA&#39;s Apex is not installed. It is the easiest way to use mixed precision training.</span><span class="se">\n</span><span class="s2">&quot;</span>
+                    <span class="o">+</span> <span class="s2">&quot;See https://github.com/NVIDIA/apex for more information and installation.&quot;</span>
+                <span class="p">)</span>
+            <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+
+        <span class="n">specific_tips</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">specific_tips</span> <span class="o">+=</span> <span class="n">parse_string</span><span class="p">(</span><span class="n">torchscript</span><span class="p">())</span>
+        <span class="n">specific_tips</span> <span class="o">+=</span> <span class="n">parse_string</span><span class="p">(</span><span class="n">apex</span><span class="p">())</span>
+        <span class="n">specific_tips</span> <span class="o">+=</span> <span class="n">parse_string</span><span class="p">(</span><span class="n">Inplace</span><span class="p">()</span><span class="o">.</span><span class="n">tips</span><span class="p">(</span><span class="n">module</span><span class="p">))</span>
+        <span class="n">specific_tips</span> <span class="o">+=</span> <span class="n">parse_string</span><span class="p">(</span><span class="n">Depthwise</span><span class="p">()</span><span class="o">.</span><span class="n">tips</span><span class="p">(</span><span class="n">module</span><span class="p">))</span>
+        <span class="n">specific_tips</span> <span class="o">+=</span> <span class="n">parse_string</span><span class="p">(</span><span class="n">TensorCores</span><span class="p">()</span><span class="o">.</span><span class="n">tips</span><span class="p">(</span><span class="n">module</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">specific_tips</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">specific_tips</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">===========================SPECIFIC TIPS===========================</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="o">+</span> <span class="n">specific_tips</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">specific_tips</span>
+
+    <span class="c1">###########################################################################</span>
+    <span class="c1">#</span>
+    <span class="c1">#                               MAIN LOGIC</span>
+    <span class="c1">#</span>
+    <span class="c1">###########################################################################</span>
 
     <span class="n">results</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
     <span class="k">if</span> <span class="n">general</span><span class="p">:</span>
-        <span class="n">results</span> <span class="o">+=</span> <span class="n">general_tips</span>
+        <span class="n">results</span> <span class="o">+=</span> <span class="n">general_tips</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">specific</span><span class="p">:</span>
-        <span class="n">results</span> <span class="o">+=</span> <span class="n">specific_tips</span>
+        <span class="n">results</span> <span class="o">+=</span> <span class="n">specific_tips</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="n">results</span></div>
-
-
-<span class="c1"># Add automatic model&#39;s improvements (fix data type)</span>
-<span class="c1"># def improve(module: torch.nn.Module):</span>
-<span class="c1">#     pass</span>
 </pre></div>
 
              </article>
@@ -481,17 +489,24 @@
       <div class="main-menu">
         <ul>
           <li>
-            <a href="https://szymonmaszke.github.io/torchfunc/#torchfunc">Docs</a>
+            <a href="#">Docs</a>
           </li>
 
           <li>
-            <a href="https://szymonmaszke.github.io/torchfunc/related.html">Related Projects</a>
+            <a href="#">Related Projects</a>
           </li>
 
           <li>
-            <a href="https://github.com/szymonmaszke/torchfunc">GitHub</a>
+            <a href="#">GitHub</a>
           </li>
 
+          <li>
+            <a href="">Docs</a>
+          </li>
+
+          <li>
+            <a href="">Github</a>
+          </li>
         </ul>
       </div>
     </div>

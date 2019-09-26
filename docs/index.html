@@ -110,7 +110,7 @@
               
               
                 <div class="version">
-                  0.1.0
+                  0.1.1
                 </div>
               
             
@@ -141,10 +141,9 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="packages/torchfunc.html">torchfunc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="packages/torchfunc.cuda.html">torchfunc.cuda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packages/torchfunc.hooks.html">torchfunc.hooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="packages/torchfunc.module.html">torchfunc.module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="packages/torchfunc.performance.html">torchfunc.performance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="packages/torchfunc.plot.html">torchfunc.plot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="packages/torchfunc.record.html">torchfunc.record</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="related.html">Related projects</a></li>
@@ -225,24 +224,30 @@
 <p><strong>torchfunc</strong> is PyTorch oriented library with a goal to help you with:</p>
 <ul class="simple">
 <li><p>Improving and analysing performance of your neural network</p></li>
-<li><p>Plotting and visualizing modules</p></li>
-<li><p>Record neuron activity and tailor it to your specific task or target</p></li>
-<li><p>Get information about your host operating system, CUDA devices and others</p></li>
+<li><p>Record/analyse internal state of <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Module</span></code> as data passes through it</p></li>
+<li><p>Do the above based on external conditions (using single <code class="xref py py-obj docutils literal notranslate"><span class="pre">Callable</span></code> to specify it)</p></li>
 <li><p>Day-to-day neural network related duties (model size, seeding, performance measurements etc.)</p></li>
+<li><p>Get information about your host operating system, CUDA devices and others</p></li>
 </ul>
-<p>It <strong>is not</strong> directly related with model creation but should be considered more of an environment
-around this process. If you are looking for this functionality check
-<a class="reference external" href="https://github.com/szymonmaszke/torchnet">torchnet</a> and <a class="reference external" href="https://szymonmaszke.github.io/torchfunc/related.html">related projects</a>.</p>
+<p>See <a class="reference external" href="https://szymonmaszke.github.io/torchfunc/related.html">related projects</a> for
+other helpful libraries revolving around PyTorch.</p>
 <div class="section" id="modules">
 <h2>Modules<a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="packages/torchfunc.html">torchfunc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="packages/torchfunc.cuda.html">torchfunc.cuda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packages/torchfunc.hooks.html">torchfunc.hooks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="packages/torchfunc.hooks/torchfunc.hooks.recorders.html">torchfunc.hooks.recorders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="packages/torchfunc.hooks/torchfunc.hooks.registrators.html">torchfunc.hooks.registrators</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="packages/torchfunc.module.html">torchfunc.module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="packages/torchfunc.performance.html">torchfunc.performance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="packages/torchfunc.plot.html">torchfunc.plot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="packages/torchfunc.record.html">torchfunc.record</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packages/torchfunc.performance.html">torchfunc.performance</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="packages/torchfunc.performance/torchfunc.performance.layers.html">torchfunc.performance.layers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="packages/torchfunc.performance/torchfunc.performance.technology.html">torchfunc.performance.technology</a></li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
@@ -253,19 +258,28 @@ around this process. If you are looking for this functionality check
 <p>Following installation methods are available:</p>
 <div class="section" id="pip">
 <h3><a class="reference external" href="https://pypi.org/project/torchfunc/">pip:</a><a class="headerlink" href="#pip" title="Permalink to this headline">¶</a></h3>
+<p>To install latest release:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install --user torchfunc
+</pre></div>
+</div>
+<p>To install <code class="xref py py-obj docutils literal notranslate"><span class="pre">nightly</span></code> version:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install --user torchfunc-nightly
 </pre></div>
 </div>
 </div>
 <div class="section" id="docker">
 <h3><a class="reference external" href="https://cloud.docker.com/repository/docker/szymonmaszke/torchfunc">Docker:</a><a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h3>
 <p>Various <a class="reference internal" href="packages/torchfunc.html#module-torchfunc" title="torchfunc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchfunc</span></code></a> images are available both CPU and GPU-enabled.
-You can find them inside Docker Cloud at <code class="xref py py-obj docutils literal notranslate"><span class="pre">szymonmaszke/torchfunc</span></code></p>
+You can find them in Docker Cloud at <code class="xref py py-obj docutils literal notranslate"><span class="pre">szymonmaszke/torchfunc</span></code></p>
 <div class="section" id="cpu">
 <h4>CPU<a class="headerlink" href="#cpu" title="Permalink to this headline">¶</a></h4>
 <p>CPU image is based on <a class="reference external" href="https://hub.docker.com/_/ubuntu">ubuntu:18.04</a> and
-can be pulled with:</p>
+official release can be pulled with:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker pull szymonmaszke/torchfunc:18.04
+</pre></div>
+</div>
+<p>For <code class="xref py py-obj docutils literal notranslate"><span class="pre">nightly</span></code> release:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker pull szymonmaszke/torchfunc:nightly_18.04
 </pre></div>
 </div>
 <p>This image is significantly lighter due to lack of GPU support.</p>
@@ -273,7 +287,8 @@ can be pulled with:</p>
 <div class="section" id="gpu">
 <h4>GPU<a class="headerlink" href="#gpu" title="Permalink to this headline">¶</a></h4>
 <p>All images are based on <a class="reference external" href="https://hub.docker.com/r/nvidia/cuda/">nvidia/cuda</a> Docker image.
-Each has corresponding tag. CUDA 10.1, 10 and 9.2 with and without CUDNN7 support are available.</p>
+Each has corresponding CUDA version tag ( <code class="xref py py-obj docutils literal notranslate"><span class="pre">10.1</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">10</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">9.2</span></code>) CUDNN7 support
+and base image ( <a class="reference external" href="https://hub.docker.com/_/ubuntu">ubuntu:18.04</a> ).</p>
 <p>Following images are available:</p>
 <ul class="simple">
 <li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">10.1-cudnn7-runtime-ubuntu18.04</span></code></p></li>
@@ -285,6 +300,11 @@ Each has corresponding tag. CUDA 10.1, 10 and 9.2 with and without CUDNN7 suppor
 </ul>
 <p>Example pull:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker pull szymonmaszke/torchfunc:10.1-cudnn7-runtime-ubuntu18.04
+</pre></div>
+</div>
+<p>You can use <code class="xref py py-obj docutils literal notranslate"><span class="pre">nightly</span></code> builds as well, just prefix the tag with <code class="xref py py-obj docutils literal notranslate"><span class="pre">nightly_</span></code>, for example
+like this:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>docker pull szymonmaszke/torchfunc:nightly_10.1-cudnn7-runtime-ubuntu18.04
 </pre></div>
 </div>
 </div>
@@ -434,17 +454,24 @@ Each has corresponding tag. CUDA 10.1, 10 and 9.2 with and without CUDNN7 suppor
       <div class="main-menu">
         <ul>
           <li>
-            <a href="https://szymonmaszke.github.io/torchfunc/#torchfunc">Docs</a>
+            <a href="#">Docs</a>
           </li>
 
           <li>
-            <a href="https://szymonmaszke.github.io/torchfunc/related.html">Related Projects</a>
+            <a href="#">Related Projects</a>
           </li>
 
           <li>
-            <a href="https://github.com/szymonmaszke/torchfunc">GitHub</a>
+            <a href="#">GitHub</a>
           </li>
 
+          <li>
+            <a href="">Docs</a>
+          </li>
+
+          <li>
+            <a href="">Github</a>
+          </li>
         </ul>
       </div>
     </div>

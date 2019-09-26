@@ -33,7 +33,7 @@
   <link rel="stylesheet" href="../../_static/katex-math.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="torchfunc.plot" href="../torchfunc.plot.html" />
+    <link rel="next" title="Related projects" href="../../related.html" />
     <link rel="prev" title="torchfunc.performance.layers" href="torchfunc.performance.layers.html" /> 
 
   
@@ -111,7 +111,7 @@
               
               
                 <div class="version">
-                  0.1.0
+                  0.1.1
                 </div>
               
             
@@ -142,10 +142,9 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../torchfunc.html">torchfunc</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../torchfunc.cuda.html">torchfunc.cuda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../torchfunc.hooks.html">torchfunc.hooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../torchfunc.module.html">torchfunc.module</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../torchfunc.performance.html">torchfunc.performance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../torchfunc.plot.html">torchfunc.plot</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../torchfunc.record.html">torchfunc.record</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../related.html">Related projects</a></li>
@@ -223,16 +222,14 @@
 <p><strong>Analyse technological aspects (e.g. compatibility with Tensor Cores) of your module.</strong></p>
 <p>Using functionalities below you can check whether your architecture can use
 technology dependent speed improvements.</p>
-<p>If you want to contribute to this module, please see <code class="xref py py-obj docutils literal notranslate"><span class="pre">ROADMAP.md</span></code> in <a class="reference internal" href="../torchfunc.html#module-torchfunc" title="torchfunc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchfunc</span></code></a> github
-repository.</p>
 <dl class="class">
 <dt id="torchfunc.performance.technology.TensorCores">
 <em class="property">class </em><code class="sig-prename descclassname">torchfunc.performance.technology.</code><code class="sig-name descname">TensorCores</code><span class="sig-paren">(</span><em class="sig-param">linear_types: Tuple[torch.nn.modules.module.Module] = (&lt;class 'torch.nn.modules.linear.Linear'&gt;</em>, <em class="sig-param">&lt;class 'torch.nn.modules.linear.Bilinear'&gt;)</em>, <em class="sig-param">convolution_types: Tuple[torch.nn.modules.module.Module] = (&lt;class 'torch.nn.modules.conv.Conv1d'&gt;</em>, <em class="sig-param">&lt;class 'torch.nn.modules.conv.Conv2d'&gt;</em>, <em class="sig-param">&lt;class 'torch.nn.modules.conv.Conv3d'&gt;)</em>, <em class="sig-param">linear_inputs: Dict[torch.nn.modules.module.Module</em>, <em class="sig-param">Tuple[str]] = None</em>, <em class="sig-param">linear_outputs: Dict[torch.nn.modules.module.Module</em>, <em class="sig-param">Tuple[str]] = None</em>, <em class="sig-param">convolution_inputs: Dict[torch.nn.modules.module.Module</em>, <em class="sig-param">Tuple[str]] = None</em>, <em class="sig-param">convolution_outputs: Dict[torch.nn.modules.module.Module</em>, <em class="sig-param">Tuple[str]] = None</em>, <em class="sig-param">float_types: Tuple = (torch.float16</em>, <em class="sig-param">)</em>, <em class="sig-param">integer_types: Tuple = (torch.int16</em>, <em class="sig-param">)</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/performance/technology.html#TensorCores"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.performance.technology.TensorCores" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Perform Tensor Cores compatibility tests for given module and it’s submodules/children.</strong></p>
 <p>Interpretation of data returned from this function may pose some problems to users
 unfamiliar with ideas standing behind Tensor Cores.</p>
-<p>You can use <code class="xref py py-obj docutils literal notranslate"><span class="pre">torchscripts.performance.tips</span></code> to get user friendly information
-about your <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Module</span></code>.</p>
+<p>Is is advised to use method <a class="reference internal" href="#torchfunc.performance.technology.TensorCores.tips" title="torchfunc.performance.technology.TensorCores.tips"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tips</span></code></a> to get user friendly information your
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Module</span></code>’s compatitilibty with Tensor Cores.</p>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
     <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">half</span><span class="p">(),</span> <span class="c1"># Half precision is compatible</span>
@@ -487,6 +484,25 @@ Contains list of submodule’s indices posing this problem.</p>
 </dl>
 </dd></dl>
 
+<dl class="method">
+<dt id="torchfunc.performance.technology.TensorCores.tips">
+<code class="sig-name descname">tips</code><span class="sig-paren">(</span><em class="sig-param">module: torch.nn.modules.module.Module</em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="../../_modules/torchfunc/performance/technology.html#TensorCores.tips"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.performance.technology.TensorCores.tips" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Return</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code> <strong>representation of</strong> <a class="reference internal" href="#torchfunc.performance.technology.TensorCores.modules" title="torchfunc.performance.technology.TensorCores.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules()</span></code></a> <strong>method.</strong></p>
+<p>It is advised to use this function to get tips in order to easily fix
+possible performance issues related to Tensor Cores.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>module</strong> (<em>torch.nn.Module</em>) – Module to be scanned</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>String representing tips related to Tensor Cores.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -499,7 +515,7 @@ Contains list of submodule’s indices posing this problem.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../torchfunc.plot.html" class="btn btn-neutral float-right" title="torchfunc.plot" accesskey="n" rel="next">Next <img src="../../_static/images/chevron-right-orange.svg" class="next-page"></a>
+        <a href="../../related.html" class="btn btn-neutral float-right" title="Related projects" accesskey="n" rel="next">Next <img src="../../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
         <a href="torchfunc.performance.layers.html" class="btn btn-neutral" title="torchfunc.performance.layers" accesskey="p" rel="prev"><img src="../../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
@@ -613,17 +629,24 @@ Contains list of submodule’s indices posing this problem.</p>
       <div class="main-menu">
         <ul>
           <li>
-            <a href="https://szymonmaszke.github.io/torchfunc/#torchfunc">Docs</a>
+            <a href="#">Docs</a>
           </li>
 
           <li>
-            <a href="https://szymonmaszke.github.io/torchfunc/related.html">Related Projects</a>
+            <a href="#">Related Projects</a>
           </li>
 
           <li>
-            <a href="https://github.com/szymonmaszke/torchfunc">GitHub</a>
+            <a href="#">GitHub</a>
           </li>
 
+          <li>
+            <a href="">Docs</a>
+          </li>
+
+          <li>
+            <a href="">Github</a>
+          </li>
         </ul>
       </div>
     </div>

@@ -146,7 +146,7 @@ class Snapshot(Base):
         return new
 
     def pop(self, index: int = -1):
-        r"""**Remove module at `index` from memory.**
+        r"""**Remove module at** `index` **from memory.**
 
         Parameters
         ----------
@@ -193,7 +193,7 @@ class Snapshot(Base):
 
             module_{index}_{timestamp}.pt
 
-        See `PyTorch's docs <https://pytorch.org/tutorials/beginner/saving_loading_models.html#save-load-entire-model>`
+        See `PyTorch's docs <https://pytorch.org/tutorials/beginner/saving_loading_models.html#save-load-entire-model>`__
         for more information.
 
         Parameters
@@ -203,9 +203,9 @@ class Snapshot(Base):
             Defaults to current working directory.
         remove : bool, optional
             Whether module should be removed from memory after saving. Useful
-            for keeping only best/last model in memory. Default: False
+            for keeping only best/last model in memory. Default: `False`
         *indices: int, optional
-            Possibly empty *args containing indices of modules to be saved.
+            Possibly empty varargs containing indices of modules to be saved.
             Negative indexing is supported.
             If empty, save all models.
 
@@ -233,7 +233,7 @@ class Snapshot(Base):
             Whether module should be removed from memory after saving. Useful
             for keeping only best/last model in memory. Default: False
         *indices: int, optional
-            Possibly empty *args containing indices of modules to be saved.
+            Possibly empty varargs containing indices of modules to be saved.
             Negative indexing is supported.
             If empty, save all models.
 
