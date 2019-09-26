@@ -8,19 +8,50 @@
 
 [**torchfunc**](https://szymonmaszke.github.io/torchfunc/) is library revolving around [PyTorch](https://pytorch.org/) with a goal to help you with:
 
-* Improving and analysing performance of your neural network
-* Daily neural network duties (model size, seeding, performance measurements etc.)
-* Plotting and visualizing modules
-* Record neuron activity and tailor it to your specific task or target
+
+* Improving and analysing performance of your neural network (e.g. Tensor Cores compatibility)
+* Record/analyse internal state of `torch.nn.Module` as data passes through it
+* Do the above based on external conditions (using single `Callable` to specify it)
+* Day-to-day neural network related duties (model size, seeding, performance measurements etc.)
 * Get information about your host operating system, CUDA devices and others
 
 # Quick examples
 
-- Seed globaly, Freeze weights, check inference time and model size
+- __Get instant performance tips about your module. All problems described by comments
+will be shown by `torchfunc.performance.tips`:__
+
+```python
+class Model(torch.nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.convolution = torch.nn.Sequential(
+            torch.nn.Conv2d(1, 32, 3),
+            torch.nn.ReLU(inplace=True),  # Inplace may harm kernel fusion
+            torch.nn.Conv2d(32, 128, 3, groups=32),  # Depthwise is slower in PyTorch
+            torch.nn.ReLU(inplace=True),  # Same as before
+            torch.nn.Conv2d(128, 250, 3),  # Wrong output size for TensorCores
+        )
+
+        self.classifier = torch.nn.Sequential(
+            torch.nn.Linear(250, 64),  # Wrong input size for TensorCores
+            torch.nn.ReLU(),  # Fine, no info about this layer
+            torch.nn.Linear(64, 10),  # Wrong output size for TensorCores
+        )
+
+    def forward(self, inputs):
+        convolved = torch.nn.AdaptiveAvgPool2d(1)(self.convolution(inputs)).flatten()
+        return self.classifier(convolved)
+
+# All you have to do
+print(torchfunc.performance.tips(Model()))
+```
+
+- __Seed globaly (including `numpy` and `cuda`), freeze weights, check inference time and model size:__
 
 ```python
 # Inb4 MNIST, you can use any module with those functions
 model = torch.nn.Linear(784, 10)
+torchfunc.seed(0)
 frozen = torchfunc.module.freeze(model, bias=False)
 
 with torchfunc.Timer() as timer:
@@ -32,10 +63,10 @@ with torchfunc.Timer() as timer:
 print(f"Overall time {timer}; Model size: {torchfunc.sizeof(frozen)}")
 ```
 
-- Recorder and sum per-layer activation statistics as data passes through network:
+- __Record and sum per-layer activation statistics as data passes through network:__
 
 ```python
-# MNIST classifier
+# Still MNIST but any module can be put in it's place
 model = torch.nn.Sequential(
     torch.nn.Linear(784, 100),
     torch.nn.ReLU(),
@@ -43,17 +74,17 @@ model = torch.nn.Sequential(
     torch.nn.ReLU(),
     torch.nn.Linear(50, 10),
 )
-# Recorder which sums layer inputs from consecutive forward calls
-recorder = torchfunc.record.ForwardPreRecorder(reduction=lambda x, y: x+y)
-# Record inputs going into Linear(100, 50) and Linear(50, 10)
-recorder.children(model, indices=(2, 3))
+# Recorder which sums all inputs to layers
+recorder = torchfunc.hooks.recorders.ForwardPre(reduction=lambda x, y: x+y)
+# Record only for torch.nn.Linear
+recorder.children(model, types=(torch.nn.Linear,))
 # Train your network normally (or pass data through it)
 ...
-# Save tensors (of shape 100 and 50) in folder, each named 1.pt and 2.pt respectively
-recorder.save(pathlib.Path("./analysis"))
+# Activations of all neurons of first layer! 
+print(recorder[1]) # You can also post-process this data easily with apply
 ```
 
-For performance tips, plotting and other check [**torchfunc documentation**](https://szymonmaszke.github.io/torchfunc/).
+For other examples (and how to use condition), see [documentation]()
 
 # Installation
 
@@ -89,4 +120,4 @@ Nightly builds are also available, just prefix tag with `nightly_`. If you are g
 
 If you find any issue or you think some functionality may be useful to others and fits this library, please [open new Issue](https://help.github.com/en/articles/creating-an-issue) or [create Pull Request](https://help.github.com/en/articles/creating-a-pull-request-from-a-fork).
 
-To get an overview of something which one can done to help this project, see [Roadmap](https://github.com/szymonmaszke/torchfunc/blob/master/ROADMAP.md)
+To get an overview of things one can do to help this project, see [Roadmap](https://github.com/szymonmaszke/torchfunc/blob/master/ROADMAP.md).
