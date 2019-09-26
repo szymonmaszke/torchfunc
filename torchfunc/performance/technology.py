@@ -269,3 +269,63 @@ class TensorCores(Base):
         """
 
         return self._analyse(module, "children")
+
+    def tips(self, module: torch.nn.Module) -> str:
+        r"""**Return** `str` **representation of** `modules()` **method.**
+
+        It is advised to use this function to get tips in order to easily fix
+        possible performance issues related to Tensor Cores.
+
+        Parameters
+        ----------
+        module : torch.nn.Module
+                Module to be scanned
+
+        Returns
+        -------
+        str
+                String representing tips related to Tensor Cores.
+        """
+        data = self.modules(module)
+
+        def types():
+            _types = data["type"]
+
+            def parse_type(is_float: bool, goal):
+                key = "float" if is_float else "integer"
+                if _types[key]:
+                    return f"\nModules where {key} type is not {goal}:\n" + str(
+                        _types[key]
+                    )
+                return ""
+
+            return parse_type(True, "torch.half") + parse_type(False, "torch.short")
+
+        def shape():
+            def parse_shape(dictionary, is_input: bool, goal):
+                key = "inputs" if is_input else "outputs"
+                if dictionary[key]:
+                    return (
+                        f"\nModules where {key} shape should be divisable by {goal}:\n"
+                        + str(dictionary[key])
+                    )
+                return ""
+
+            _shapes = data["shape"]
+
+            def floating():
+                _floats = _shapes["float"]
+                return parse_shape(_floats, True, 8) + parse_shape(_floats, False, 8)
+
+            def integer():
+                _integers = _shapes["integer"]
+                return parse_shape(_integers, True, 16) + parse_shape(
+                    _integers, False, 16
+                )
+
+            return floating() + integer()
+
+        output = types() + shape()
+        if output != "":
+            output = "TensorCores incompatible modules:" + output
+        return output
