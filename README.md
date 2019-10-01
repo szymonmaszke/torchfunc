@@ -8,14 +8,13 @@
 
 [**torchfunc**](https://szymonmaszke.github.io/torchfunc/) is library revolving around [PyTorch](https://pytorch.org/) with a goal to help you with:
 
-
 * Improving and analysing performance of your neural network (e.g. Tensor Cores compatibility)
 * Record/analyse internal state of `torch.nn.Module` as data passes through it
 * Do the above based on external conditions (using single `Callable` to specify it)
 * Day-to-day neural network related duties (model size, seeding, performance measurements etc.)
 * Get information about your host operating system, CUDA devices and others
 
-# Quick examples
+# :bulb: Examples
 
 - __Get instant performance tips about your module. All problems described by comments
 will be shown by `torchfunc.performance.tips`:__
@@ -86,9 +85,9 @@ print(recorder[1]) # You can also post-process this data easily with apply
 
 For other examples (and how to use condition), see [documentation]()
 
-# Installation
+# :wrench: Installation
 
-## [pip](<https://pypi.org/project/torchfunc/>)
+## :snake: [pip](<https://pypi.org/project/torchfunc/>)
 
 ### Latest release:
 
@@ -102,7 +101,7 @@ pip install --user torchfunc
 pip install --user torchfunc-nightly
 ```
 
-## [Docker](https://cloud.docker.com/repository/docker/szymonmaszke/torchfunc)
+## :whale2: [Docker](https://cloud.docker.com/repository/docker/szymonmaszke/torchfunc)
 
 __CPU standalone__ and various versions of __GPU enabled__ images are available
 at [dockerhub](https://cloud.docker.com/repository/docker/szymonmaszke/torchfunc).
@@ -116,7 +115,7 @@ docker pull szymonmaszke/torchfunc:18.04
 Nightly builds are also available, just prefix tag with `nightly_`. If you are going for `GPU` image make sure you have
 [nvidia/docker](https://github.com/NVIDIA/nvidia-docker) installed and it's runtime set.
 
-# Contributing
+# :question: Contributing
 
 If you find any issue or you think some functionality may be useful to others and fits this library, please [open new Issue](https://help.github.com/en/articles/creating-an-issue) or [create Pull Request](https://help.github.com/en/articles/creating-a-pull-request-from-a-fork).
 
