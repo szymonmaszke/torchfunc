@@ -83,7 +83,7 @@ recorder.children(model, types=(torch.nn.Linear,))
 print(recorder[1]) # You can also post-process this data easily with apply
 ```
 
-For other examples (and how to use condition), see [documentation]()
+For other examples (and how to use condition), see [documentation](https://szymonmaszke.github.io/torchfunc/)
 
 # :wrench: Installation
 
