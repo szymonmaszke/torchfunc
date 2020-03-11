@@ -58,7 +58,7 @@ with torchfunc.Timer() as timer:
   print(timer.checkpoint()) # Time since the beginning
   frozen(torch.randn(128, 784)
   print(timer.checkpoint()) # Since last checkpoint
-  
+
 print(f"Overall time {timer}; Model size: {torchfunc.sizeof(frozen)}")
 ```
 
@@ -79,7 +79,7 @@ recorder = torchfunc.hooks.recorders.ForwardPre(reduction=lambda x, y: x+y)
 recorder.children(model, types=(torch.nn.Linear,))
 # Train your network normally (or pass data through it)
 ...
-# Activations of all neurons of first layer! 
+# Activations of all neurons of first layer!
 print(recorder[1]) # You can also post-process this data easily with apply
 ```
 
@@ -101,10 +101,10 @@ pip install --user torchfunc
 pip install --user torchfunc-nightly
 ```
 
-## :whale2: [Docker](https://cloud.docker.com/repository/docker/szymonmaszke/torchfunc)
+## :whale2: [Docker](https://hub.docker.com/r/szymonmaszke/torchfunc)
 
 __CPU standalone__ and various versions of __GPU enabled__ images are available
-at [dockerhub](https://cloud.docker.com/repository/docker/szymonmaszke/torchfunc).
+at [dockerhub](https://hub.docker.com/r/szymonmaszke/torchfunc/tags).
 
 For CPU quickstart, issue:
 
