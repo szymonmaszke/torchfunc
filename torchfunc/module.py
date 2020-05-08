@@ -91,6 +91,36 @@ def unfreeze(
     return _switch(module, weight, bias, value=False)
 
 
+def device(obj):
+    r"""**Return ** `device` **of** `torch.nn.module` **or other** `obj` **containing device field**.
+
+    Example::
+
+        module = torch.nn.Linear(100, 10)
+        print(torchfunc.module.device(module)) # "cpu"
+
+    Parameters
+    ----------
+    obj : torch.nn.Module or torch.Tensor
+        Object containing `device` field or containing parameters with device, e.g. module
+
+    Returns
+    -------
+    Optional[torch.device]
+        Instance of device on which object is currently held. If object is contained
+        on multiple devices, `None` is returned
+
+    """
+    if isinstance(obj, torch.nn.Module):
+        device = next(obj.paramaters()).device
+        for parameter in enumerate(obj.parameters()):
+            if parameter.device != device:
+                return None
+
+        return device
+
+    return obj.device
+
 class Snapshot(Base):
     r"""**Save module snapshots in memory and/or disk.**
 
