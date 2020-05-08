@@ -5,6 +5,7 @@ For performance analysis of `torch.nn.Module` please see subpackage `performance
 
 """
 
+import contextlib
 import copy
 import datetime
 import pathlib
@@ -120,6 +121,39 @@ def device(obj):
         return device
 
     return obj.device
+
+
+# Check for every device of parameter and optionally cast?
+@contextlib.contextmanager
+def switch_device(obj, target):
+    r"""**Context manager/decorator switching** `device` **of** `torch.nn.module` **or other** `obj` **to the specified target**.
+
+    After `with` block ends (or function) specified object is casted back to original
+    device.
+
+    Example::
+
+        module = torch.nn.Linear(100, 10)
+        with torchfunc.module.switch_device(module, torch.device("cuda")):
+            ... # module is on cuda now
+
+        torchfunc.module.device(module) # back on CPU
+
+    Parameters
+    ----------
+    obj : torch.nn.Module or torch.Tensor
+        Object containing `device` field or containing parameters with device, e.g. module
+    target : torch.device-like
+        PyTorch device or string, compatible with `to` cast.
+
+    """
+    current_device = device(obj)
+    obj.to(target)
+    try:
+        yield current_device
+    finally:
+        obj.to(current_device)
+
 
 class Snapshot(Base):
     r"""**Save module snapshots in memory and/or disk.**
