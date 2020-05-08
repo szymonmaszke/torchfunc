@@ -92,6 +92,81 @@ def unfreeze(
     return _switch(module, weight, bias, value=False)
 
 
+def named_parameters(
+    module: torch.nn.Module, name: str, prefix: str = "", recurse: bool = True
+):
+    r"""**Iterate only over** `module`'s **parameters having** `name` **as part of their name.**
+
+    Parameters
+    ----------
+    module : torch.nn.Module
+        Module whose weights and biases will be unfrozen.
+    name : str
+        Name which parameter needs to be returned
+    prefix : str, optional
+        Prefix to prepend to all parameter names. Default: `''` (no prefix)
+    recurse : bool, optional
+        If `True`, then yields parameters of this module and all submodules.
+        Otherwise, yields only parameters that are direct members of this module.
+        Default: `True`
+
+    Yields
+    ------
+    torch.nn.Parameter
+        Module's parameters satisfying `name` constraint
+
+    """
+    for param_name, param in module.named_parameters():
+        if name in param_name:
+            yield param
+
+
+def weight_parameters(module: torch.nn.Module, prefix: str = "", recurse: bool = True):
+    r"""**Iterate only over** `module`'s **parameters considered weights**.
+
+    Parameters
+    ----------
+    module : torch.nn.Module
+        Module whose weights and biases will be unfrozen.
+    prefix : str, optional
+        Prefix to prepend to all parameter names. Default: `''` (no prefix)
+    recurse : bool, optional
+        If `True`, then yields parameters of this module and all submodules.
+        Otherwise, yields only parameters that are direct members of this module.
+        Default: `True`
+
+    Yields
+    ------
+    torch.nn.Parameter
+        Module's parameters being `weight` (e.g. their name consist `weight` string)
+
+    """
+    yield from named_parameters(module, "weight", prefix, recurse)
+
+
+def bias_parameters(module: torch.nn.Module, prefix: str = "", recurse: bool = True):
+    r"""**Iterate only over** `module`'s **parameters considered biases**.
+
+    Parameters
+    ----------
+    module : torch.nn.Module
+        Module whose weights and biases will be unfrozen.
+    prefix : str, optional
+        Prefix to prepend to all parameter names. Default: `''` (no prefix)
+    recurse : bool, optional
+        If `True`, then yields parameters of this module and all submodules.
+        Otherwise, yields only parameters that are direct members of this module.
+        Default: `True`
+
+    Yields
+    ------
+    torch.nn.Parameter
+        Module's parameters being `bias` (e.g. their name consist `bias` string)
+
+    """
+    yield from named_parameters(module, "bias", prefix, recurse)
+
+
 def device(obj):
     r"""**Return ** `device` **of** `torch.nn.module` **or other** `obj` **containing device field**.
 
