@@ -103,6 +103,7 @@ class Timer(Base, contextlib.AbstractContextManager):
     def __exit__(self, *_, **__) -> None:
         self.last = self.function()
         self.ended: bool = True
+        return False
 
     def __str__(self) -> str:
         return str(self.time())
@@ -166,6 +167,7 @@ class seed(Base):
     def __exit__(self, *_, **__):
         torch.manual_seed(self._last_seed)
         np.random.seed(self._last_seed)
+        return False
 
     def __call__(self, function):
         @wraps(function)
