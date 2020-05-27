@@ -258,7 +258,7 @@ def sizeof(obj) -> int:
 
 
 def installed(module: str) -> bool:
-    """Return True if module is installed.
+    """**Return True if module is installed.**
 
     **Example**::
 

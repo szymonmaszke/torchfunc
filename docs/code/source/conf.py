@@ -19,7 +19,7 @@ import pytorch_sphinx_theme
 def get_version():
     namespace = {}
 
-    exec(open("../../../torchdata/_version.py").read(), namespace)  # get version
+    exec(open("../../../torchfunc/_version.py").read(), namespace)  # get version
     return namespace["__version__"]
 
 
