@@ -50,9 +50,9 @@ You may want to decrease number of groups (like it's done for ResNeXt) for possi
 =======> TensorCores incompatible modules:
 Modules where float type is not torch.half:
 [2, 4, 6, 8, 10]
-Modules where inputs shape should be divisable by 8:
+Modules where inputs shape should be divisible by 8:
 [2, 8]
-Modules where outputs shape should be divisable by 8:
+Modules where outputs shape should be divisible by 8:
 [6, 10]"""
     tips = torchfunc.performance.tips(Model())
     print(tips)
