@@ -325,7 +325,9 @@ class ForwardPre(_Recorder):
         "Record input values before forward of specified layer(s)."
     )
 
-    def __init__(self, condition: typing.Callable, reduction: typing.Callable):
+    def __init__(
+        self, condition: typing.Callable = None, reduction: typing.Callable = None
+    ):
         self.condition = condition
         self.reduction = reduction
 
@@ -341,7 +343,9 @@ class ForwardInput(_Recorder):
         "Record input values after forward of specified layer(s)."
     )
 
-    def __init__(self, condition: typing.Callable, reduction: typing.Callable):
+    def __init__(
+        self, condition: typing.Callable = None, reduction: typing.Callable = None
+    ):
         self.condition = condition
         self.reduction = reduction
 
@@ -357,7 +361,9 @@ class ForwardOutput(_Recorder):
         "Record output values after forward of specified layer(s)."
     )
 
-    def __init__(self, condition: typing.Callable, reduction: typing.Callable):
+    def __init__(
+        self, condition: typing.Callable = None, reduction: typing.Callable = None
+    ):
         self.condition = condition
         self.reduction = reduction
 
@@ -373,7 +379,9 @@ class BackwardInput(_Recorder):
         "Record input gradients after those are calculated w.r.t. specified module."
     )
 
-    def __init__(self, condition: typing.Callable, reduction: typing.Callable):
+    def __init__(
+        self, condition: typing.Callable = None, reduction: typing.Callable = None
+    ):
         self.condition = condition
         self.reduction = reduction
 
@@ -389,7 +397,9 @@ class BackwardOutput(_Recorder):
         "Record output gradients after those are calculated w.r.t. specified module."
     )
 
-    def __init__(self, condition: typing.Callable, reduction: typing.Callable):
+    def __init__(
+        self, condition: typing.Callable = None, reduction: typing.Callable = None
+    ):
         self.condition = condition
         self.reduction = reduction
 
