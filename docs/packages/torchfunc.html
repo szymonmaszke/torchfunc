@@ -29,7 +29,7 @@
 
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!-- <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /> -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" type="text/css" />
   <link rel="stylesheet" href="../_static/katex-math.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -111,7 +111,7 @@
               
               
                 <div class="version">
-                  0.1.1
+                  0.2.0
                 </div>
               
             
@@ -217,7 +217,7 @@
               
   <div class="section" id="module-torchfunc">
 <span id="torchfunc"></span><h1>torchfunc<a class="headerlink" href="#module-torchfunc" title="Permalink to this headline">¶</a></h1>
-<dl class="class">
+<dl class="py class">
 <dt id="torchfunc.Timer">
 <em class="property">class </em><code class="sig-prename descclassname">torchfunc.</code><code class="sig-name descname">Timer</code><span class="sig-paren">(</span><em class="sig-param">function: Callable = &lt;built-in function perf_counter&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchfunc.html#Timer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.Timer" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Measure execution time of function.</strong></p>
@@ -250,7 +250,7 @@ to execute whole block will be returned by <a class="reference internal" href="#
 <dd class="field-odd"><p><strong>function</strong> (<em>Callable</em><em>, </em><em>optional</em>) – No argument function used to measure time. Default: time.perf_counter</p>
 </dd>
 </dl>
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.Timer.checkpoint">
 <code class="sig-name descname">checkpoint</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchfunc.html#Timer.checkpoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.Timer.checkpoint" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Time taken since last checkpoint call.</strong></p>
@@ -267,7 +267,7 @@ usually fraction of seconds</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.Timer.time">
 <code class="sig-name descname">time</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchfunc.html#Timer.time"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.Timer.time" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Time taken since the object creation (measurements beginning).</strong></p>
@@ -284,9 +284,9 @@ usually fraction of seconds</p>
 
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="torchfunc.info">
-<code class="sig-prename descclassname">torchfunc.</code><code class="sig-name descname">info</code><span class="sig-paren">(</span><em class="sig-param">general: bool = True</em>, <em class="sig-param">cuda: bool = True</em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="../_modules/torchfunc.html#info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.info" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">torchfunc.</code><code class="sig-name descname">info</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">general</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">cuda</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="../_modules/torchfunc.html#info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.info" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Return host related info as string.</strong></p>
 <p>This function may help you tailor your module’s architecture to specific environment
 it will be run on.</p>
@@ -316,10 +316,10 @@ it will be run on.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="torchfunc.installed">
-<code class="sig-prename descclassname">torchfunc.</code><code class="sig-name descname">installed</code><span class="sig-paren">(</span><em class="sig-param">module: str</em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/torchfunc.html#installed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.installed" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return True if module is installed.</p>
+<code class="sig-prename descclassname">torchfunc.</code><code class="sig-name descname">installed</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">module</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span> &#x2192; bool<a class="reference internal" href="../_modules/torchfunc.html#installed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.installed" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Return True if module is installed.</strong></p>
 <p><strong>Example</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check whether mixed precision library available</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">torchfunc</span><span class="o">.</span><span class="n">installed</span><span class="p">(</span><span class="s2">&quot;apex&quot;</span><span class="p">))</span>
@@ -338,9 +338,9 @@ it will be run on.</p>
 </dl>
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="torchfunc.seed">
-<em class="property">class </em><code class="sig-prename descclassname">torchfunc.</code><code class="sig-name descname">seed</code><span class="sig-paren">(</span><em class="sig-param">value: int</em>, <em class="sig-param">cuda: bool = False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchfunc.html#seed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.seed" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchfunc.</code><code class="sig-name descname">seed</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="n">cuda</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchfunc.html#seed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.seed" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Seed PyTorch and numpy.</strong></p>
 <p>This code is based on PyTorch’s reproducibility guide: <a class="reference external" href="https://pytorch.org/docs/stable/notes/randomness.html">https://pytorch.org/docs/stable/notes/randomness.html</a>
 Can be used as standard seeding procedure, context manager (seed will be changed only within block) or function decorator.</p>
@@ -367,24 +367,18 @@ or decorator, hence it will be set to original PyTorch’s seed.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>value</strong> (<em>int</em>) – Seed value used in np.random_seed and torch.manual_seed. Usually int is provided</p></li>
-<li><p><strong>cuda</strong> (<em>bool</em><em>, </em><em>optional</em>) – <p>Whether to set PyTorch’s cuda backend into deterministic mode (setting cudnn.benchmark to <code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code>
+<li><p><strong>cuda</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to set PyTorch’s cuda backend into deterministic mode (setting cudnn.benchmark to <code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code>
 and cudnn.deterministic to <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>). If <code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code>, consecutive runs may be slightly different.
-If <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>, automatic autotuning for convolutions layers with consistent input shape will be turned off.</p>
-<p>Default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code></p>
-</p></li>
+If <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>, automatic autotuning for convolutions layers with consistent input shape will be turned off.
+Default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code></p></li>
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
-<dt id="torchfunc.seed.cuda">
-<code class="sig-name descname">cuda</code><em class="property"> = False</em><a class="headerlink" href="#torchfunc.seed.cuda" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="torchfunc.sizeof">
-<code class="sig-prename descclassname">torchfunc.</code><code class="sig-name descname">sizeof</code><span class="sig-paren">(</span><em class="sig-param">obj</em><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="../_modules/torchfunc.html#sizeof"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.sizeof" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">torchfunc.</code><code class="sig-name descname">sizeof</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj</span></em><span class="sig-paren">)</span> &#x2192; int<a class="reference internal" href="../_modules/torchfunc.html#sizeof"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.sizeof" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Get size in bytes of Tensor, torch.nn.Module or standard object.</strong></p>
 <p>Specific routines are defined for torch.tensor objects and torch.nn.Module
 objects. They will calculate how much memory in bytes those object consume.</p>
@@ -468,13 +462,13 @@ objects. They will calculate how much memory in bytes those object consume.</p>
 
      
        <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-         <script type="text/javascript" src="../_static/jquery.js"></script>
-         <script type="text/javascript" src="../_static/underscore.js"></script>
-         <script type="text/javascript" src="../_static/doctools.js"></script>
-         <script type="text/javascript" src="../_static/language_data.js"></script>
-         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"></script>
-         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js"></script>
-         <script type="text/javascript" src="../_static/katex_autorenderer.js"></script>
+         <script src="../_static/jquery.js"></script>
+         <script src="../_static/underscore.js"></script>
+         <script src="../_static/doctools.js"></script>
+         <script src="../_static/language_data.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script>
+         <script src="../_static/katex_autorenderer.js"></script>
      
 
   

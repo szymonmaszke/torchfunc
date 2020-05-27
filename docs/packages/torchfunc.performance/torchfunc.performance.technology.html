@@ -29,7 +29,7 @@
 
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <!-- <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" /> -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/katex-math.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -111,7 +111,7 @@
               
               
                 <div class="version">
-                  0.1.1
+                  0.2.0
                 </div>
               
             
@@ -222,9 +222,9 @@
 <p><strong>Analyse technological aspects (e.g. compatibility with Tensor Cores) of your module.</strong></p>
 <p>Using functionalities below you can check whether your architecture can use
 technology dependent speed improvements.</p>
-<dl class="class">
+<dl class="py class">
 <dt id="torchfunc.performance.technology.TensorCores">
-<em class="property">class </em><code class="sig-prename descclassname">torchfunc.performance.technology.</code><code class="sig-name descname">TensorCores</code><span class="sig-paren">(</span><em class="sig-param">linear_types: Tuple[torch.nn.modules.module.Module] = (&lt;class 'torch.nn.modules.linear.Linear'&gt;</em>, <em class="sig-param">&lt;class 'torch.nn.modules.linear.Bilinear'&gt;)</em>, <em class="sig-param">convolution_types: Tuple[torch.nn.modules.module.Module] = (&lt;class 'torch.nn.modules.conv.Conv1d'&gt;</em>, <em class="sig-param">&lt;class 'torch.nn.modules.conv.Conv2d'&gt;</em>, <em class="sig-param">&lt;class 'torch.nn.modules.conv.Conv3d'&gt;)</em>, <em class="sig-param">linear_inputs: Dict[torch.nn.modules.module.Module</em>, <em class="sig-param">Tuple[str]] = None</em>, <em class="sig-param">linear_outputs: Dict[torch.nn.modules.module.Module</em>, <em class="sig-param">Tuple[str]] = None</em>, <em class="sig-param">convolution_inputs: Dict[torch.nn.modules.module.Module</em>, <em class="sig-param">Tuple[str]] = None</em>, <em class="sig-param">convolution_outputs: Dict[torch.nn.modules.module.Module</em>, <em class="sig-param">Tuple[str]] = None</em>, <em class="sig-param">float_types: Tuple = (torch.float16</em>, <em class="sig-param">)</em>, <em class="sig-param">integer_types: Tuple = (torch.int16</em>, <em class="sig-param">)</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/performance/technology.html#TensorCores"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.performance.technology.TensorCores" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchfunc.performance.technology.</code><code class="sig-name descname">TensorCores</code><span class="sig-paren">(</span><em class="sig-param">linear_types=(&lt;class 'torch.nn.modules.linear.Linear'&gt;</em>, <em class="sig-param">&lt;class 'torch.nn.modules.linear.Bilinear'&gt;)</em>, <em class="sig-param">convolution_types=(&lt;class 'torch.nn.modules.conv.Conv1d'&gt;</em>, <em class="sig-param">&lt;class 'torch.nn.modules.conv.Conv2d'&gt;</em>, <em class="sig-param">&lt;class 'torch.nn.modules.conv.Conv3d'&gt;)</em>, <em class="sig-param">linear_inputs=None</em>, <em class="sig-param">linear_outputs=None</em>, <em class="sig-param">convolution_inputs=None</em>, <em class="sig-param">convolution_outputs=None</em>, <em class="sig-param">float_types=(torch.float16</em>, <em class="sig-param">)</em>, <em class="sig-param">integer_types=(torch.int16</em>, <em class="sig-param">)</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/performance/technology.html#TensorCores"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.performance.technology.TensorCores" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Perform Tensor Cores compatibility tests for given module and it’s submodules/children.</strong></p>
 <p>Interpretation of data returned from this function may pose some problems to users
 unfamiliar with ideas standing behind Tensor Cores.</p>
@@ -244,7 +244,7 @@ unfamiliar with ideas standing behind Tensor Cores.</p>
 <span class="c1"># And last Linear (wrong shape)</span>
 </pre></div>
 </div>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="torchfunc.performance.technology.TensorCores.linear_types">
 <code class="sig-name descname">linear_types</code><a class="headerlink" href="#torchfunc.performance.technology.TensorCores.linear_types" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tuple of types to be considered linear and which should run with tensor
@@ -257,7 +257,7 @@ cores kernels.</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="torchfunc.performance.technology.TensorCores.convolution_types">
 <code class="sig-name descname">convolution_types</code><a class="headerlink" href="#torchfunc.performance.technology.TensorCores.convolution_types" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tuple of types to be considered convolutional and which should run with tensor
@@ -270,7 +270,7 @@ cores kernels.</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="torchfunc.performance.technology.TensorCores.linear_inputs">
 <code class="sig-name descname">linear_inputs</code><a class="headerlink" href="#torchfunc.performance.technology.TensorCores.linear_inputs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dict-like where key is the type of module (e.g. <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Linear</span></code>) and values
@@ -286,7 +286,7 @@ More than one input can be specified, as is the case for <code class="xref py py
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="torchfunc.performance.technology.TensorCores.linear_outputs">
 <code class="sig-name descname">linear_outputs</code><a class="headerlink" href="#torchfunc.performance.technology.TensorCores.linear_outputs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dict-like where key is the type of module (e.g. <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Linear</span></code>) and values
@@ -302,7 +302,7 @@ More than one output can be specified, same as <a class="reference internal" hre
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="torchfunc.performance.technology.TensorCores.convolution_inputs">
 <code class="sig-name descname">convolution_inputs</code><a class="headerlink" href="#torchfunc.performance.technology.TensorCores.convolution_inputs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dict-like where key is the type of module (e.g. <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Conv2d</span></code>) and values
@@ -318,7 +318,7 @@ More than one output can be specified, same as <a class="reference internal" hre
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="torchfunc.performance.technology.TensorCores.convolution_outputs">
 <code class="sig-name descname">convolution_outputs</code><a class="headerlink" href="#torchfunc.performance.technology.TensorCores.convolution_outputs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dict-like where key is the type of module (e.g. torch.nn.Conv2d) and values
@@ -334,7 +334,7 @@ More than one output can be specified, same as linear_inputs.</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="torchfunc.performance.technology.TensorCores.float_types">
 <code class="sig-name descname">float_types</code><a class="headerlink" href="#torchfunc.performance.technology.TensorCores.float_types" title="Permalink to this definition">¶</a></dt>
 <dd><p>Floating point types compatible with TensorCores.</p>
@@ -346,7 +346,7 @@ More than one output can be specified, same as linear_inputs.</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="torchfunc.performance.technology.TensorCores.integer_types">
 <code class="sig-name descname">integer_types</code><a class="headerlink" href="#torchfunc.performance.technology.TensorCores.integer_types" title="Permalink to this definition">¶</a></dt>
 <dd><p>Interger types compatible with TensorCores.</p>
@@ -358,9 +358,9 @@ More than one output can be specified, same as linear_inputs.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.performance.technology.TensorCores.children">
-<code class="sig-name descname">children</code><span class="sig-paren">(</span><em class="sig-param">module: torch.nn.modules.module.Module</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/performance/technology.html#TensorCores.children"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.performance.technology.TensorCores.children" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">children</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">module</span><span class="p">:</span> <span class="n">torch.nn.modules.module.Module</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/performance/technology.html#TensorCores.children"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.performance.technology.TensorCores.children" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Check Tensor Cores compatibility using</strong> <a class="reference internal" href="#torchfunc.performance.technology.TensorCores.children" title="torchfunc.performance.technology.TensorCores.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children()</span></code></a> <strong>method (shallow scanning).</strong></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -401,49 +401,9 @@ Contains list of submodule’s indices posing this problem.</p>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
-<dt>
-<code class="sig-name descname">convolution_inputs</code><em class="property"> = None</em></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt>
-<code class="sig-name descname">convolution_outputs</code><em class="property"> = None</em></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt>
-<code class="sig-name descname">convolution_types</code><em class="property"> = (&lt;class 'torch.nn.modules.conv.Conv1d'&gt;, &lt;class 'torch.nn.modules.conv.Conv2d'&gt;, &lt;class 'torch.nn.modules.conv.Conv3d'&gt;)</em></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt>
-<code class="sig-name descname">float_types</code><em class="property"> = (torch.float16,)</em></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt>
-<code class="sig-name descname">integer_types</code><em class="property"> = (torch.int16,)</em></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt>
-<code class="sig-name descname">linear_inputs</code><em class="property"> = None</em></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt>
-<code class="sig-name descname">linear_outputs</code><em class="property"> = None</em></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt>
-<code class="sig-name descname">linear_types</code><em class="property"> = (&lt;class 'torch.nn.modules.linear.Linear'&gt;, &lt;class 'torch.nn.modules.linear.Bilinear'&gt;)</em></dt>
-<dd></dd></dl>
-
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.performance.technology.TensorCores.modules">
-<code class="sig-name descname">modules</code><span class="sig-paren">(</span><em class="sig-param">module: torch.nn.modules.module.Module</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/performance/technology.html#TensorCores.modules"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.performance.technology.TensorCores.modules" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">modules</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">module</span><span class="p">:</span> <span class="n">torch.nn.modules.module.Module</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/performance/technology.html#TensorCores.modules"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.performance.technology.TensorCores.modules" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Check Tensor Cores compatibility using</strong> <a class="reference internal" href="#torchfunc.performance.technology.TensorCores.modules" title="torchfunc.performance.technology.TensorCores.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules()</span></code></a> <strong>method (recursive scanning).</strong></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -484,9 +444,9 @@ Contains list of submodule’s indices posing this problem.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.performance.technology.TensorCores.tips">
-<code class="sig-name descname">tips</code><span class="sig-paren">(</span><em class="sig-param">module: torch.nn.modules.module.Module</em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="../../_modules/torchfunc/performance/technology.html#TensorCores.tips"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.performance.technology.TensorCores.tips" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">tips</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">module</span><span class="p">:</span> <span class="n">torch.nn.modules.module.Module</span></em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="../../_modules/torchfunc/performance/technology.html#TensorCores.tips"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.performance.technology.TensorCores.tips" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Return</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code> <strong>representation of</strong> <a class="reference internal" href="#torchfunc.performance.technology.TensorCores.modules" title="torchfunc.performance.technology.TensorCores.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules()</span></code></a> <strong>method.</strong></p>
 <p>It is advised to use this function to get tips in order to easily fix
 possible performance issues related to Tensor Cores.</p>
@@ -563,13 +523,13 @@ possible performance issues related to Tensor Cores.</p>
 
      
        <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-         <script type="text/javascript" src="../../_static/jquery.js"></script>
-         <script type="text/javascript" src="../../_static/underscore.js"></script>
-         <script type="text/javascript" src="../../_static/doctools.js"></script>
-         <script type="text/javascript" src="../../_static/language_data.js"></script>
-         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"></script>
-         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js"></script>
-         <script type="text/javascript" src="../../_static/katex_autorenderer.js"></script>
+         <script src="../../_static/jquery.js"></script>
+         <script src="../../_static/underscore.js"></script>
+         <script src="../../_static/doctools.js"></script>
+         <script src="../../_static/language_data.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script>
+         <script src="../../_static/katex_autorenderer.js"></script>
      
 
   

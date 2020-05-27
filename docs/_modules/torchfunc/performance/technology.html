@@ -29,7 +29,7 @@
 
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <!-- <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" /> -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/katex-math.css" type="text/css" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -109,7 +109,7 @@
               
               
                 <div class="version">
-                  0.1.1
+                  0.2.0
                 </div>
               
             
@@ -224,20 +224,18 @@
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">collections</span>
-<span class="kn">import</span> <span class="nn">dataclasses</span>
 <span class="kn">import</span> <span class="nn">typing</span>
 
 <span class="kn">import</span> <span class="nn">torch</span>
 
-<span class="kn">from</span> <span class="nn">.._base</span> <span class="k">import</span> <span class="n">Base</span>
+<span class="kn">from</span> <span class="nn">.._base</span> <span class="kn">import</span> <span class="n">Base</span>
 
 <span class="c1"># TO-DO</span>
 <span class="c1"># https://stackoverflow.com/questions/47913943/is-it-possible-to-see-that-kernel-execution-happened-on-tensor-cores-or-not-via (?)</span>
 <span class="c1"># Arithmetic Intensity: https://docs.nvidia.com/deeplearning/sdk/dl-performance-guide/index.html#math-mem</span>
 
 
-<div class="viewcode-block" id="TensorCores"><a class="viewcode-back" href="../../../packages/torchfunc.performance/torchfunc.performance.technology.html#torchfunc.performance.technology.TensorCores">[docs]</a><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span><span class="p">(</span><span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="k">class</span> <span class="nc">TensorCores</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+<div class="viewcode-block" id="TensorCores"><a class="viewcode-back" href="../../../packages/torchfunc.performance/torchfunc.performance.technology.html#torchfunc.performance.technology.TensorCores">[docs]</a><span class="k">class</span> <span class="nc">TensorCores</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Perform Tensor Cores compatibility tests for given module and it&#39;s submodules/children.**</span>
 
 <span class="sd">    Interpretation of data returned from this function may pose some problems to users</span>
@@ -315,31 +313,41 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">linear_types</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Tuple</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Bilinear</span><span class="p">)</span>
-    <span class="n">convolution_types</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Tuple</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv1d</span><span class="p">,</span>
-        <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">,</span>
-        <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv3d</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="n">linear_inputs</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">linear_outputs</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">convolution_inputs</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">convolution_outputs</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">float_types</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Tuple</span> <span class="o">=</span> <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">half</span><span class="p">,)</span>
-    <span class="n">integer_types</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Tuple</span> <span class="o">=</span> <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">short</span><span class="p">,)</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">linear_types</span><span class="o">=</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Bilinear</span><span class="p">,),</span>
+        <span class="n">convolution_types</span><span class="o">=</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv1d</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv3d</span><span class="p">,),</span>
+        <span class="n">linear_inputs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">linear_outputs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">convolution_inputs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">convolution_outputs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">float_types</span><span class="o">=</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">half</span><span class="p">,),</span>
+        <span class="n">integer_types</span><span class="o">=</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">short</span><span class="p">,),</span>
+    <span class="p">):</span>
 
-    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">linear_inputs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">linear_types</span> <span class="o">=</span> <span class="n">linear_types</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">convolution_types</span> <span class="o">=</span> <span class="n">convolution_types</span>
+        <span class="k">if</span> <span class="n">linear_inputs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">linear_inputs</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;in_features&quot;</span><span class="p">,))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">linear_inputs</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Bilinear</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;in_features1&quot;</span><span class="p">,</span> <span class="s2">&quot;in_features2&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">linear_outputs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">linear_inputs</span> <span class="o">=</span> <span class="n">linear_inputs</span>
+        <span class="k">if</span> <span class="n">linear_outputs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">linear_outputs</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;out_features&quot;</span><span class="p">,))</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">convolution_inputs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">linear_outputs</span> <span class="o">=</span> <span class="n">linear_outputs</span>
+        <span class="k">if</span> <span class="n">convolution_inputs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">convolution_inputs</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;in_channels&quot;</span><span class="p">,))</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">convolution_outputs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">convolution_inputs</span> <span class="o">=</span> <span class="n">convolution_inputs</span>
+        <span class="k">if</span> <span class="n">convolution_outputs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">convolution_outputs</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span>
                 <span class="k">lambda</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;out_channels&quot;</span><span class="p">,)</span>
             <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">convolution_outputs</span> <span class="o">=</span> <span class="n">convolution_outputs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">float_types</span> <span class="o">=</span> <span class="n">float_types</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">integer_types</span> <span class="o">=</span> <span class="n">integer_types</span>
 
     <span class="k">def</span> <span class="nf">_analyse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">module</span><span class="p">,</span> <span class="n">function</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">def</span> <span class="nf">_correct_types</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">submodule</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">is_float</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
@@ -509,9 +517,9 @@
             <span class="k">def</span> <span class="nf">parse_type</span><span class="p">(</span><span class="n">is_float</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">goal</span><span class="p">):</span>
                 <span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;float&quot;</span> <span class="k">if</span> <span class="n">is_float</span> <span class="k">else</span> <span class="s2">&quot;integer&quot;</span>
                 <span class="k">if</span> <span class="n">_types</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
-                    <span class="k">return</span> <span class="n">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Modules where </span><span class="si">{key}</span><span class="s2"> type is not </span><span class="si">{goal}</span><span class="s2">:</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span>
-                        <span class="n">_types</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
-                    <span class="p">)</span>
+                    <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Modules where </span><span class="si">{}</span><span class="s2"> type is not </span><span class="si">{}</span><span class="s2">:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="n">key</span><span class="p">,</span> <span class="n">goal</span>
+                    <span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">_types</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
                 <span class="k">return</span> <span class="s2">&quot;&quot;</span>
 
             <span class="k">return</span> <span class="n">parse_type</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;torch.half&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="n">parse_type</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;torch.short&quot;</span><span class="p">)</span>
@@ -520,9 +528,10 @@
             <span class="k">def</span> <span class="nf">parse_shape</span><span class="p">(</span><span class="n">dictionary</span><span class="p">,</span> <span class="n">is_input</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">goal</span><span class="p">):</span>
                 <span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;inputs&quot;</span> <span class="k">if</span> <span class="n">is_input</span> <span class="k">else</span> <span class="s2">&quot;outputs&quot;</span>
                 <span class="k">if</span> <span class="n">dictionary</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
-                    <span class="k">return</span> <span class="p">(</span>
-                        <span class="n">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Modules where </span><span class="si">{key}</span><span class="s2"> shape should be divisable by </span><span class="si">{goal}</span><span class="s2">:</span><span class="se">\n</span><span class="s2">&quot;</span>
-                        <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+                    <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Modules where </span><span class="si">{}</span><span class="s2"> shape should be divisible by </span><span class="si">{}</span><span class="s2">:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="n">key</span><span class="p">,</span> <span class="n">goal</span>
+                    <span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span>
+                        <span class="n">dictionary</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
                     <span class="p">)</span>
                 <span class="k">return</span> <span class="s2">&quot;&quot;</span>
 
@@ -589,13 +598,13 @@
 
      
        <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-         <script type="text/javascript" src="../../../_static/jquery.js"></script>
-         <script type="text/javascript" src="../../../_static/underscore.js"></script>
-         <script type="text/javascript" src="../../../_static/doctools.js"></script>
-         <script type="text/javascript" src="../../../_static/language_data.js"></script>
-         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"></script>
-         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js"></script>
-         <script type="text/javascript" src="../../../_static/katex_autorenderer.js"></script>
+         <script src="../../../_static/jquery.js"></script>
+         <script src="../../../_static/underscore.js"></script>
+         <script src="../../../_static/doctools.js"></script>
+         <script src="../../../_static/language_data.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script>
+         <script src="../../../_static/katex_autorenderer.js"></script>
      
 
   

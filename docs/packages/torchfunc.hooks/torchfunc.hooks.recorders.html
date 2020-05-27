@@ -29,7 +29,7 @@
 
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <!-- <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" /> -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/katex-math.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -111,7 +111,7 @@
               
               
                 <div class="version">
-                  0.1.1
+                  0.2.0
                 </div>
               
             
@@ -252,9 +252,9 @@ both of <code class="xref py py-obj docutils literal notranslate"><span class="p
 <p>Additionally one can post-process data contained within <code class="xref py py-obj docutils literal notranslate"><span class="pre">recorder</span></code> using <code class="xref py py-obj docutils literal notranslate"><span class="pre">apply</span></code>
 functionality.</p>
 <p>Concrete methods recording different data passing through network are specified below:</p>
-<dl class="class">
+<dl class="py class">
 <dt id="torchfunc.hooks.recorders.BackwardInput">
-<em class="property">class </em><code class="sig-prename descclassname">torchfunc.hooks.recorders.</code><code class="sig-name descname">BackwardInput</code><span class="sig-paren">(</span><em class="sig-param">condition: Callable = None</em>, <em class="sig-param">reduction: Callable = None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/hooks/recorders.html#BackwardInput"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.hooks.recorders.BackwardInput" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchfunc.hooks.recorders.</code><code class="sig-name descname">BackwardInput</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">condition</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">reduction</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/hooks/recorders.html#BackwardInput"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.hooks.recorders.BackwardInput" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Record input gradients after those are calculated w.r.t. specified module.</strong></p>
 <p>You can record only some of the data based on external conditions if <code class="xref py py-obj docutils literal notranslate"><span class="pre">condition</span></code>
 <code class="xref py py-obj docutils literal notranslate"><span class="pre">callable</span></code> is specified.</p>
@@ -273,7 +273,7 @@ Default: <code class="xref py py-obj docutils literal notranslate"><span class="
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="torchfunc.hooks.recorders.BackwardInput.data">
 <code class="sig-name descname">data</code><a class="headerlink" href="#torchfunc.hooks.recorders.BackwardInput.data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Keeps data passing through subrecorders, optionally reduced by <code class="xref py py-obj docutils literal notranslate"><span class="pre">reduction</span></code>.
@@ -285,7 +285,7 @@ Each item represents data for specified <code class="xref py py-obj docutils lit
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="torchfunc.hooks.recorders.BackwardInput.subrecorders">
 <code class="sig-name descname">subrecorders</code><a class="headerlink" href="#torchfunc.hooks.recorders.BackwardInput.subrecorders" title="Permalink to this definition">¶</a></dt>
 <dd><p>List containing registered subrecorders.</p>
@@ -296,7 +296,7 @@ Each item represents data for specified <code class="xref py py-obj docutils lit
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="torchfunc.hooks.recorders.BackwardInput.handles">
 <code class="sig-name descname">handles</code><a class="headerlink" href="#torchfunc.hooks.recorders.BackwardInput.handles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handles for registered subrecorders, each corresponds to specific <code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorder</span></code>.
@@ -308,9 +308,9 @@ Can be used to unregister certain subrecorders (though discouraged, please use <
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.BackwardInput.apply">
-<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param">function: Callable</em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.BackwardInput.apply" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">function</span><span class="p">:</span> <span class="n">Callable</span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.BackwardInput.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Apply function to data contained in each subrecorder.</strong></p>
 <p>Data will be modified an saved inside data of each subrecorder.
 This function may make <code class="xref py py-obj docutils literal notranslate"><span class="pre">recorder</span></code> unusable, it’s up to user
@@ -323,9 +323,9 @@ returning anything.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.BackwardInput.apply_sample">
-<code class="sig-name descname">apply_sample</code><span class="sig-paren">(</span><em class="sig-param">function: Callable</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#torchfunc.hooks.recorders.BackwardInput.apply_sample" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">apply_sample</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">function</span><span class="p">:</span> <span class="n">Callable</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#torchfunc.hooks.recorders.BackwardInput.apply_sample" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Apply function to data contained in each subrecorder.</strong></p>
 <p>Works like <a class="reference internal" href="#torchfunc.hooks.recorders.BackwardInput.apply" title="torchfunc.hooks.recorders.BackwardInput.apply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply</span></code></a>, except <code class="xref py py-obj docutils literal notranslate"><span class="pre">Callable</span></code> is passed number of samples passed
 through <code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorder</span></code> as second argument</p>
@@ -337,9 +337,9 @@ through <code class="xref py py-obj docutils literal notranslate"><span class="p
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.BackwardInput.children">
-<code class="sig-name descname">children</code><span class="sig-paren">(</span><em class="sig-param">network</em>, <em class="sig-param">types: Tuple[Any] = None</em>, <em class="sig-param">indices: List[int] = None</em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.BackwardInput.children" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">children</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span></em>, <em class="sig-param"><span class="n">types</span><span class="p">:</span> <span class="n">Tuple<span class="p">[</span>Any<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">indices</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.BackwardInput.children" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Register</strong> <a class="reference internal" href="#torchfunc.hooks.recorders.BackwardInput.subrecorders" title="torchfunc.hooks.recorders.BackwardInput.subrecorders"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorders</span></code></a> <strong>using types and/or indices via</strong> <a class="reference internal" href="#torchfunc.hooks.recorders.BackwardInput.children" title="torchfunc.hooks.recorders.BackwardInput.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code></a> <strong>method</strong>.</p>
 <p>This function will use <a class="reference internal" href="#torchfunc.hooks.recorders.BackwardInput.children" title="torchfunc.hooks.recorders.BackwardInput.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code></a> method of <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Module</span></code> to iterate over available submodules. If you wish to iterate recursively, use <a class="reference internal" href="#torchfunc.hooks.recorders.BackwardInput.modules" title="torchfunc.hooks.recorders.BackwardInput.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code></a>.</p>
 <p><strong>Important:</strong></p>
@@ -365,7 +365,7 @@ Default: <code class="xref py py-obj docutils literal notranslate"><span class="
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.BackwardInput.iter_samples">
 <code class="sig-name descname">iter_samples</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.BackwardInput.iter_samples" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Iterate over count of samples for each subrecorder</strong>.</p>
@@ -382,9 +382,9 @@ Default: <code class="xref py py-obj docutils literal notranslate"><span class="
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.BackwardInput.modules">
-<code class="sig-name descname">modules</code><span class="sig-paren">(</span><em class="sig-param">module: torch.nn.modules.module.Module</em>, <em class="sig-param">types: Tuple[Any] = None</em>, <em class="sig-param">indices: List[int] = None</em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.BackwardInput.modules" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">modules</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">module</span><span class="p">:</span> <span class="n">torch.nn.modules.module.Module</span></em>, <em class="sig-param"><span class="n">types</span><span class="p">:</span> <span class="n">Tuple<span class="p">[</span>Any<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">indices</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.BackwardInput.modules" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Register</strong> <a class="reference internal" href="#torchfunc.hooks.recorders.BackwardInput.subrecorders" title="torchfunc.hooks.recorders.BackwardInput.subrecorders"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorders</span></code></a> <strong>using types and/or indices via</strong> <a class="reference internal" href="#torchfunc.hooks.recorders.BackwardInput.modules" title="torchfunc.hooks.recorders.BackwardInput.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code></a> <strong>method</strong>.</p>
 <p>This function will use <a class="reference internal" href="#torchfunc.hooks.recorders.BackwardInput.modules" title="torchfunc.hooks.recorders.BackwardInput.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code></a> method of <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Module</span></code> to iterate over available submodules. If you wish to iterate non-recursively, use <a class="reference internal" href="#torchfunc.hooks.recorders.BackwardInput.children" title="torchfunc.hooks.recorders.BackwardInput.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code></a>.</p>
 <p><strong>Important:</strong></p>
@@ -410,9 +410,9 @@ Default: <code class="xref py py-obj docutils literal notranslate"><span class="
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.BackwardInput.remove">
-<code class="sig-name descname">remove</code><span class="sig-paren">(</span><em class="sig-param">index</em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.BackwardInput.remove" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">remove</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.BackwardInput.remove" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Remove subrecorder specified by</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">index</span></code>.</p>
 <p>Subrecorder will not record data passing through it and will be removed
 from <a class="reference internal" href="#torchfunc.hooks.recorders.BackwardInput.subrecorders" title="torchfunc.hooks.recorders.BackwardInput.subrecorders"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorders</span></code></a> attribute.</p>
@@ -429,9 +429,9 @@ from <a class="reference internal" href="#torchfunc.hooks.recorders.BackwardInpu
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.BackwardInput.samples">
-<code class="sig-name descname">samples</code><span class="sig-paren">(</span><em class="sig-param">index</em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#torchfunc.hooks.recorders.BackwardInput.samples" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">samples</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#torchfunc.hooks.recorders.BackwardInput.samples" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Count of samples passed through subrecorder under</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">index</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -446,9 +446,9 @@ from <a class="reference internal" href="#torchfunc.hooks.recorders.BackwardInpu
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.BackwardInput.save">
-<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param">path: pathlib.Path</em>, <em class="sig-param">mkdir: bool = False</em>, <em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.BackwardInput.save" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span><span class="p">:</span> <span class="n">pathlib.Path</span></em>, <em class="sig-param"><span class="n">mkdir</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.BackwardInput.save" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Save data tensors within specified path.</strong></p>
 <p>Each data tensor will be indexed by integer <code class="xref py py-obj docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">N)</span></code>, where indices
 represent consecutive <a class="reference internal" href="#torchfunc.hooks.recorders.BackwardInput.subrecorders" title="torchfunc.hooks.recorders.BackwardInput.subrecorders"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorders</span></code></a>.</p>
@@ -466,9 +466,9 @@ represent consecutive <a class="reference internal" href="#torchfunc.hooks.recor
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="torchfunc.hooks.recorders.BackwardOutput">
-<em class="property">class </em><code class="sig-prename descclassname">torchfunc.hooks.recorders.</code><code class="sig-name descname">BackwardOutput</code><span class="sig-paren">(</span><em class="sig-param">condition: Callable = None</em>, <em class="sig-param">reduction: Callable = None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/hooks/recorders.html#BackwardOutput"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.hooks.recorders.BackwardOutput" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchfunc.hooks.recorders.</code><code class="sig-name descname">BackwardOutput</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">condition</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">reduction</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/hooks/recorders.html#BackwardOutput"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.hooks.recorders.BackwardOutput" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Record output gradients after those are calculated w.r.t. specified module.</strong></p>
 <p>You can record only some of the data based on external conditions if <code class="xref py py-obj docutils literal notranslate"><span class="pre">condition</span></code>
 <code class="xref py py-obj docutils literal notranslate"><span class="pre">callable</span></code> is specified.</p>
@@ -487,7 +487,7 @@ Default: <code class="xref py py-obj docutils literal notranslate"><span class="
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="torchfunc.hooks.recorders.BackwardOutput.data">
 <code class="sig-name descname">data</code><a class="headerlink" href="#torchfunc.hooks.recorders.BackwardOutput.data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Keeps data passing through subrecorders, optionally reduced by <code class="xref py py-obj docutils literal notranslate"><span class="pre">reduction</span></code>.
@@ -499,7 +499,7 @@ Each item represents data for specified <code class="xref py py-obj docutils lit
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="torchfunc.hooks.recorders.BackwardOutput.subrecorders">
 <code class="sig-name descname">subrecorders</code><a class="headerlink" href="#torchfunc.hooks.recorders.BackwardOutput.subrecorders" title="Permalink to this definition">¶</a></dt>
 <dd><p>List containing registered subrecorders.</p>
@@ -510,7 +510,7 @@ Each item represents data for specified <code class="xref py py-obj docutils lit
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="torchfunc.hooks.recorders.BackwardOutput.handles">
 <code class="sig-name descname">handles</code><a class="headerlink" href="#torchfunc.hooks.recorders.BackwardOutput.handles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handles for registered subrecorders, each corresponds to specific <code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorder</span></code>.
@@ -522,9 +522,9 @@ Can be used to unregister certain subrecorders (though discouraged, please use <
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.BackwardOutput.apply">
-<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param">function: Callable</em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.BackwardOutput.apply" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">function</span><span class="p">:</span> <span class="n">Callable</span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.BackwardOutput.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Apply function to data contained in each subrecorder.</strong></p>
 <p>Data will be modified an saved inside data of each subrecorder.
 This function may make <code class="xref py py-obj docutils literal notranslate"><span class="pre">recorder</span></code> unusable, it’s up to user
@@ -537,9 +537,9 @@ returning anything.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.BackwardOutput.apply_sample">
-<code class="sig-name descname">apply_sample</code><span class="sig-paren">(</span><em class="sig-param">function: Callable</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#torchfunc.hooks.recorders.BackwardOutput.apply_sample" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">apply_sample</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">function</span><span class="p">:</span> <span class="n">Callable</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#torchfunc.hooks.recorders.BackwardOutput.apply_sample" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Apply function to data contained in each subrecorder.</strong></p>
 <p>Works like <a class="reference internal" href="#torchfunc.hooks.recorders.BackwardOutput.apply" title="torchfunc.hooks.recorders.BackwardOutput.apply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply</span></code></a>, except <code class="xref py py-obj docutils literal notranslate"><span class="pre">Callable</span></code> is passed number of samples passed
 through <code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorder</span></code> as second argument</p>
@@ -551,9 +551,9 @@ through <code class="xref py py-obj docutils literal notranslate"><span class="p
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.BackwardOutput.children">
-<code class="sig-name descname">children</code><span class="sig-paren">(</span><em class="sig-param">network</em>, <em class="sig-param">types: Tuple[Any] = None</em>, <em class="sig-param">indices: List[int] = None</em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.BackwardOutput.children" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">children</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span></em>, <em class="sig-param"><span class="n">types</span><span class="p">:</span> <span class="n">Tuple<span class="p">[</span>Any<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">indices</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.BackwardOutput.children" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Register</strong> <a class="reference internal" href="#torchfunc.hooks.recorders.BackwardOutput.subrecorders" title="torchfunc.hooks.recorders.BackwardOutput.subrecorders"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorders</span></code></a> <strong>using types and/or indices via</strong> <a class="reference internal" href="#torchfunc.hooks.recorders.BackwardOutput.children" title="torchfunc.hooks.recorders.BackwardOutput.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code></a> <strong>method</strong>.</p>
 <p>This function will use <a class="reference internal" href="#torchfunc.hooks.recorders.BackwardOutput.children" title="torchfunc.hooks.recorders.BackwardOutput.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code></a> method of <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Module</span></code> to iterate over available submodules. If you wish to iterate recursively, use <a class="reference internal" href="#torchfunc.hooks.recorders.BackwardOutput.modules" title="torchfunc.hooks.recorders.BackwardOutput.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code></a>.</p>
 <p><strong>Important:</strong></p>
@@ -579,7 +579,7 @@ Default: <code class="xref py py-obj docutils literal notranslate"><span class="
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.BackwardOutput.iter_samples">
 <code class="sig-name descname">iter_samples</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.BackwardOutput.iter_samples" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Iterate over count of samples for each subrecorder</strong>.</p>
@@ -596,9 +596,9 @@ Default: <code class="xref py py-obj docutils literal notranslate"><span class="
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.BackwardOutput.modules">
-<code class="sig-name descname">modules</code><span class="sig-paren">(</span><em class="sig-param">module: torch.nn.modules.module.Module</em>, <em class="sig-param">types: Tuple[Any] = None</em>, <em class="sig-param">indices: List[int] = None</em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.BackwardOutput.modules" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">modules</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">module</span><span class="p">:</span> <span class="n">torch.nn.modules.module.Module</span></em>, <em class="sig-param"><span class="n">types</span><span class="p">:</span> <span class="n">Tuple<span class="p">[</span>Any<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">indices</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.BackwardOutput.modules" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Register</strong> <a class="reference internal" href="#torchfunc.hooks.recorders.BackwardOutput.subrecorders" title="torchfunc.hooks.recorders.BackwardOutput.subrecorders"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorders</span></code></a> <strong>using types and/or indices via</strong> <a class="reference internal" href="#torchfunc.hooks.recorders.BackwardOutput.modules" title="torchfunc.hooks.recorders.BackwardOutput.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code></a> <strong>method</strong>.</p>
 <p>This function will use <a class="reference internal" href="#torchfunc.hooks.recorders.BackwardOutput.modules" title="torchfunc.hooks.recorders.BackwardOutput.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code></a> method of <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Module</span></code> to iterate over available submodules. If you wish to iterate non-recursively, use <a class="reference internal" href="#torchfunc.hooks.recorders.BackwardOutput.children" title="torchfunc.hooks.recorders.BackwardOutput.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code></a>.</p>
 <p><strong>Important:</strong></p>
@@ -624,9 +624,9 @@ Default: <code class="xref py py-obj docutils literal notranslate"><span class="
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.BackwardOutput.remove">
-<code class="sig-name descname">remove</code><span class="sig-paren">(</span><em class="sig-param">index</em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.BackwardOutput.remove" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">remove</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.BackwardOutput.remove" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Remove subrecorder specified by</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">index</span></code>.</p>
 <p>Subrecorder will not record data passing through it and will be removed
 from <a class="reference internal" href="#torchfunc.hooks.recorders.BackwardOutput.subrecorders" title="torchfunc.hooks.recorders.BackwardOutput.subrecorders"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorders</span></code></a> attribute.</p>
@@ -643,9 +643,9 @@ from <a class="reference internal" href="#torchfunc.hooks.recorders.BackwardOutp
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.BackwardOutput.samples">
-<code class="sig-name descname">samples</code><span class="sig-paren">(</span><em class="sig-param">index</em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#torchfunc.hooks.recorders.BackwardOutput.samples" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">samples</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#torchfunc.hooks.recorders.BackwardOutput.samples" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Count of samples passed through subrecorder under</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">index</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -660,9 +660,9 @@ from <a class="reference internal" href="#torchfunc.hooks.recorders.BackwardOutp
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.BackwardOutput.save">
-<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param">path: pathlib.Path</em>, <em class="sig-param">mkdir: bool = False</em>, <em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.BackwardOutput.save" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span><span class="p">:</span> <span class="n">pathlib.Path</span></em>, <em class="sig-param"><span class="n">mkdir</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.BackwardOutput.save" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Save data tensors within specified path.</strong></p>
 <p>Each data tensor will be indexed by integer <code class="xref py py-obj docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">N)</span></code>, where indices
 represent consecutive <a class="reference internal" href="#torchfunc.hooks.recorders.BackwardOutput.subrecorders" title="torchfunc.hooks.recorders.BackwardOutput.subrecorders"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorders</span></code></a>.</p>
@@ -680,9 +680,9 @@ represent consecutive <a class="reference internal" href="#torchfunc.hooks.recor
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="torchfunc.hooks.recorders.ForwardInput">
-<em class="property">class </em><code class="sig-prename descclassname">torchfunc.hooks.recorders.</code><code class="sig-name descname">ForwardInput</code><span class="sig-paren">(</span><em class="sig-param">condition: Callable = None</em>, <em class="sig-param">reduction: Callable = None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/hooks/recorders.html#ForwardInput"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardInput" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchfunc.hooks.recorders.</code><code class="sig-name descname">ForwardInput</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">condition</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">reduction</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/hooks/recorders.html#ForwardInput"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardInput" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Record input values after forward of specified layer(s).</strong></p>
 <p>You can record only some of the data based on external conditions if <code class="xref py py-obj docutils literal notranslate"><span class="pre">condition</span></code>
 <code class="xref py py-obj docutils literal notranslate"><span class="pre">callable</span></code> is specified.</p>
@@ -701,7 +701,7 @@ Default: <code class="xref py py-obj docutils literal notranslate"><span class="
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="torchfunc.hooks.recorders.ForwardInput.data">
 <code class="sig-name descname">data</code><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardInput.data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Keeps data passing through subrecorders, optionally reduced by <code class="xref py py-obj docutils literal notranslate"><span class="pre">reduction</span></code>.
@@ -713,7 +713,7 @@ Each item represents data for specified <code class="xref py py-obj docutils lit
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="torchfunc.hooks.recorders.ForwardInput.subrecorders">
 <code class="sig-name descname">subrecorders</code><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardInput.subrecorders" title="Permalink to this definition">¶</a></dt>
 <dd><p>List containing registered subrecorders.</p>
@@ -724,7 +724,7 @@ Each item represents data for specified <code class="xref py py-obj docutils lit
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="torchfunc.hooks.recorders.ForwardInput.handles">
 <code class="sig-name descname">handles</code><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardInput.handles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handles for registered subrecorders, each corresponds to specific <code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorder</span></code>.
@@ -736,9 +736,9 @@ Can be used to unregister certain subrecorders (though discouraged, please use <
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.ForwardInput.apply">
-<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param">function: Callable</em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardInput.apply" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">function</span><span class="p">:</span> <span class="n">Callable</span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardInput.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Apply function to data contained in each subrecorder.</strong></p>
 <p>Data will be modified an saved inside data of each subrecorder.
 This function may make <code class="xref py py-obj docutils literal notranslate"><span class="pre">recorder</span></code> unusable, it’s up to user
@@ -751,9 +751,9 @@ returning anything.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.ForwardInput.apply_sample">
-<code class="sig-name descname">apply_sample</code><span class="sig-paren">(</span><em class="sig-param">function: Callable</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#torchfunc.hooks.recorders.ForwardInput.apply_sample" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">apply_sample</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">function</span><span class="p">:</span> <span class="n">Callable</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#torchfunc.hooks.recorders.ForwardInput.apply_sample" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Apply function to data contained in each subrecorder.</strong></p>
 <p>Works like <a class="reference internal" href="#torchfunc.hooks.recorders.ForwardInput.apply" title="torchfunc.hooks.recorders.ForwardInput.apply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply</span></code></a>, except <code class="xref py py-obj docutils literal notranslate"><span class="pre">Callable</span></code> is passed number of samples passed
 through <code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorder</span></code> as second argument</p>
@@ -765,9 +765,9 @@ through <code class="xref py py-obj docutils literal notranslate"><span class="p
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.ForwardInput.children">
-<code class="sig-name descname">children</code><span class="sig-paren">(</span><em class="sig-param">network</em>, <em class="sig-param">types: Tuple[Any] = None</em>, <em class="sig-param">indices: List[int] = None</em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardInput.children" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">children</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span></em>, <em class="sig-param"><span class="n">types</span><span class="p">:</span> <span class="n">Tuple<span class="p">[</span>Any<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">indices</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardInput.children" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Register</strong> <a class="reference internal" href="#torchfunc.hooks.recorders.ForwardInput.subrecorders" title="torchfunc.hooks.recorders.ForwardInput.subrecorders"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorders</span></code></a> <strong>using types and/or indices via</strong> <a class="reference internal" href="#torchfunc.hooks.recorders.ForwardInput.children" title="torchfunc.hooks.recorders.ForwardInput.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code></a> <strong>method</strong>.</p>
 <p>This function will use <a class="reference internal" href="#torchfunc.hooks.recorders.ForwardInput.children" title="torchfunc.hooks.recorders.ForwardInput.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code></a> method of <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Module</span></code> to iterate over available submodules. If you wish to iterate recursively, use <a class="reference internal" href="#torchfunc.hooks.recorders.ForwardInput.modules" title="torchfunc.hooks.recorders.ForwardInput.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code></a>.</p>
 <p><strong>Important:</strong></p>
@@ -793,7 +793,7 @@ Default: <code class="xref py py-obj docutils literal notranslate"><span class="
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.ForwardInput.iter_samples">
 <code class="sig-name descname">iter_samples</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardInput.iter_samples" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Iterate over count of samples for each subrecorder</strong>.</p>
@@ -810,9 +810,9 @@ Default: <code class="xref py py-obj docutils literal notranslate"><span class="
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.ForwardInput.modules">
-<code class="sig-name descname">modules</code><span class="sig-paren">(</span><em class="sig-param">module: torch.nn.modules.module.Module</em>, <em class="sig-param">types: Tuple[Any] = None</em>, <em class="sig-param">indices: List[int] = None</em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardInput.modules" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">modules</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">module</span><span class="p">:</span> <span class="n">torch.nn.modules.module.Module</span></em>, <em class="sig-param"><span class="n">types</span><span class="p">:</span> <span class="n">Tuple<span class="p">[</span>Any<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">indices</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardInput.modules" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Register</strong> <a class="reference internal" href="#torchfunc.hooks.recorders.ForwardInput.subrecorders" title="torchfunc.hooks.recorders.ForwardInput.subrecorders"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorders</span></code></a> <strong>using types and/or indices via</strong> <a class="reference internal" href="#torchfunc.hooks.recorders.ForwardInput.modules" title="torchfunc.hooks.recorders.ForwardInput.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code></a> <strong>method</strong>.</p>
 <p>This function will use <a class="reference internal" href="#torchfunc.hooks.recorders.ForwardInput.modules" title="torchfunc.hooks.recorders.ForwardInput.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code></a> method of <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Module</span></code> to iterate over available submodules. If you wish to iterate non-recursively, use <a class="reference internal" href="#torchfunc.hooks.recorders.ForwardInput.children" title="torchfunc.hooks.recorders.ForwardInput.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code></a>.</p>
 <p><strong>Important:</strong></p>
@@ -838,9 +838,9 @@ Default: <code class="xref py py-obj docutils literal notranslate"><span class="
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.ForwardInput.remove">
-<code class="sig-name descname">remove</code><span class="sig-paren">(</span><em class="sig-param">index</em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardInput.remove" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">remove</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardInput.remove" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Remove subrecorder specified by</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">index</span></code>.</p>
 <p>Subrecorder will not record data passing through it and will be removed
 from <a class="reference internal" href="#torchfunc.hooks.recorders.ForwardInput.subrecorders" title="torchfunc.hooks.recorders.ForwardInput.subrecorders"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorders</span></code></a> attribute.</p>
@@ -857,9 +857,9 @@ from <a class="reference internal" href="#torchfunc.hooks.recorders.ForwardInput
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.ForwardInput.samples">
-<code class="sig-name descname">samples</code><span class="sig-paren">(</span><em class="sig-param">index</em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#torchfunc.hooks.recorders.ForwardInput.samples" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">samples</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#torchfunc.hooks.recorders.ForwardInput.samples" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Count of samples passed through subrecorder under</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">index</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -874,9 +874,9 @@ from <a class="reference internal" href="#torchfunc.hooks.recorders.ForwardInput
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.ForwardInput.save">
-<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param">path: pathlib.Path</em>, <em class="sig-param">mkdir: bool = False</em>, <em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardInput.save" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span><span class="p">:</span> <span class="n">pathlib.Path</span></em>, <em class="sig-param"><span class="n">mkdir</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardInput.save" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Save data tensors within specified path.</strong></p>
 <p>Each data tensor will be indexed by integer <code class="xref py py-obj docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">N)</span></code>, where indices
 represent consecutive <a class="reference internal" href="#torchfunc.hooks.recorders.ForwardInput.subrecorders" title="torchfunc.hooks.recorders.ForwardInput.subrecorders"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorders</span></code></a>.</p>
@@ -894,9 +894,9 @@ represent consecutive <a class="reference internal" href="#torchfunc.hooks.recor
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="torchfunc.hooks.recorders.ForwardOutput">
-<em class="property">class </em><code class="sig-prename descclassname">torchfunc.hooks.recorders.</code><code class="sig-name descname">ForwardOutput</code><span class="sig-paren">(</span><em class="sig-param">condition: Callable = None</em>, <em class="sig-param">reduction: Callable = None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/hooks/recorders.html#ForwardOutput"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardOutput" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchfunc.hooks.recorders.</code><code class="sig-name descname">ForwardOutput</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">condition</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">reduction</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/hooks/recorders.html#ForwardOutput"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardOutput" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Record output values after forward of specified layer(s).</strong></p>
 <p>You can record only some of the data based on external conditions if <code class="xref py py-obj docutils literal notranslate"><span class="pre">condition</span></code>
 <code class="xref py py-obj docutils literal notranslate"><span class="pre">callable</span></code> is specified.</p>
@@ -915,7 +915,7 @@ Default: <code class="xref py py-obj docutils literal notranslate"><span class="
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="torchfunc.hooks.recorders.ForwardOutput.data">
 <code class="sig-name descname">data</code><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardOutput.data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Keeps data passing through subrecorders, optionally reduced by <code class="xref py py-obj docutils literal notranslate"><span class="pre">reduction</span></code>.
@@ -927,7 +927,7 @@ Each item represents data for specified <code class="xref py py-obj docutils lit
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="torchfunc.hooks.recorders.ForwardOutput.subrecorders">
 <code class="sig-name descname">subrecorders</code><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardOutput.subrecorders" title="Permalink to this definition">¶</a></dt>
 <dd><p>List containing registered subrecorders.</p>
@@ -938,7 +938,7 @@ Each item represents data for specified <code class="xref py py-obj docutils lit
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="torchfunc.hooks.recorders.ForwardOutput.handles">
 <code class="sig-name descname">handles</code><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardOutput.handles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handles for registered subrecorders, each corresponds to specific <code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorder</span></code>.
@@ -950,9 +950,9 @@ Can be used to unregister certain subrecorders (though discouraged, please use <
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.ForwardOutput.apply">
-<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param">function: Callable</em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardOutput.apply" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">function</span><span class="p">:</span> <span class="n">Callable</span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardOutput.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Apply function to data contained in each subrecorder.</strong></p>
 <p>Data will be modified an saved inside data of each subrecorder.
 This function may make <code class="xref py py-obj docutils literal notranslate"><span class="pre">recorder</span></code> unusable, it’s up to user
@@ -965,9 +965,9 @@ returning anything.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.ForwardOutput.apply_sample">
-<code class="sig-name descname">apply_sample</code><span class="sig-paren">(</span><em class="sig-param">function: Callable</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#torchfunc.hooks.recorders.ForwardOutput.apply_sample" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">apply_sample</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">function</span><span class="p">:</span> <span class="n">Callable</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#torchfunc.hooks.recorders.ForwardOutput.apply_sample" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Apply function to data contained in each subrecorder.</strong></p>
 <p>Works like <a class="reference internal" href="#torchfunc.hooks.recorders.ForwardOutput.apply" title="torchfunc.hooks.recorders.ForwardOutput.apply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply</span></code></a>, except <code class="xref py py-obj docutils literal notranslate"><span class="pre">Callable</span></code> is passed number of samples passed
 through <code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorder</span></code> as second argument</p>
@@ -979,9 +979,9 @@ through <code class="xref py py-obj docutils literal notranslate"><span class="p
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.ForwardOutput.children">
-<code class="sig-name descname">children</code><span class="sig-paren">(</span><em class="sig-param">network</em>, <em class="sig-param">types: Tuple[Any] = None</em>, <em class="sig-param">indices: List[int] = None</em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardOutput.children" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">children</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span></em>, <em class="sig-param"><span class="n">types</span><span class="p">:</span> <span class="n">Tuple<span class="p">[</span>Any<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">indices</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardOutput.children" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Register</strong> <a class="reference internal" href="#torchfunc.hooks.recorders.ForwardOutput.subrecorders" title="torchfunc.hooks.recorders.ForwardOutput.subrecorders"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorders</span></code></a> <strong>using types and/or indices via</strong> <a class="reference internal" href="#torchfunc.hooks.recorders.ForwardOutput.children" title="torchfunc.hooks.recorders.ForwardOutput.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code></a> <strong>method</strong>.</p>
 <p>This function will use <a class="reference internal" href="#torchfunc.hooks.recorders.ForwardOutput.children" title="torchfunc.hooks.recorders.ForwardOutput.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code></a> method of <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Module</span></code> to iterate over available submodules. If you wish to iterate recursively, use <a class="reference internal" href="#torchfunc.hooks.recorders.ForwardOutput.modules" title="torchfunc.hooks.recorders.ForwardOutput.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code></a>.</p>
 <p><strong>Important:</strong></p>
@@ -1007,7 +1007,7 @@ Default: <code class="xref py py-obj docutils literal notranslate"><span class="
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.ForwardOutput.iter_samples">
 <code class="sig-name descname">iter_samples</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardOutput.iter_samples" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Iterate over count of samples for each subrecorder</strong>.</p>
@@ -1024,9 +1024,9 @@ Default: <code class="xref py py-obj docutils literal notranslate"><span class="
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.ForwardOutput.modules">
-<code class="sig-name descname">modules</code><span class="sig-paren">(</span><em class="sig-param">module: torch.nn.modules.module.Module</em>, <em class="sig-param">types: Tuple[Any] = None</em>, <em class="sig-param">indices: List[int] = None</em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardOutput.modules" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">modules</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">module</span><span class="p">:</span> <span class="n">torch.nn.modules.module.Module</span></em>, <em class="sig-param"><span class="n">types</span><span class="p">:</span> <span class="n">Tuple<span class="p">[</span>Any<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">indices</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardOutput.modules" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Register</strong> <a class="reference internal" href="#torchfunc.hooks.recorders.ForwardOutput.subrecorders" title="torchfunc.hooks.recorders.ForwardOutput.subrecorders"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorders</span></code></a> <strong>using types and/or indices via</strong> <a class="reference internal" href="#torchfunc.hooks.recorders.ForwardOutput.modules" title="torchfunc.hooks.recorders.ForwardOutput.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code></a> <strong>method</strong>.</p>
 <p>This function will use <a class="reference internal" href="#torchfunc.hooks.recorders.ForwardOutput.modules" title="torchfunc.hooks.recorders.ForwardOutput.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code></a> method of <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Module</span></code> to iterate over available submodules. If you wish to iterate non-recursively, use <a class="reference internal" href="#torchfunc.hooks.recorders.ForwardOutput.children" title="torchfunc.hooks.recorders.ForwardOutput.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code></a>.</p>
 <p><strong>Important:</strong></p>
@@ -1052,9 +1052,9 @@ Default: <code class="xref py py-obj docutils literal notranslate"><span class="
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.ForwardOutput.remove">
-<code class="sig-name descname">remove</code><span class="sig-paren">(</span><em class="sig-param">index</em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardOutput.remove" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">remove</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardOutput.remove" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Remove subrecorder specified by</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">index</span></code>.</p>
 <p>Subrecorder will not record data passing through it and will be removed
 from <a class="reference internal" href="#torchfunc.hooks.recorders.ForwardOutput.subrecorders" title="torchfunc.hooks.recorders.ForwardOutput.subrecorders"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorders</span></code></a> attribute.</p>
@@ -1071,9 +1071,9 @@ from <a class="reference internal" href="#torchfunc.hooks.recorders.ForwardOutpu
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.ForwardOutput.samples">
-<code class="sig-name descname">samples</code><span class="sig-paren">(</span><em class="sig-param">index</em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#torchfunc.hooks.recorders.ForwardOutput.samples" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">samples</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#torchfunc.hooks.recorders.ForwardOutput.samples" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Count of samples passed through subrecorder under</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">index</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1088,9 +1088,9 @@ from <a class="reference internal" href="#torchfunc.hooks.recorders.ForwardOutpu
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.ForwardOutput.save">
-<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param">path: pathlib.Path</em>, <em class="sig-param">mkdir: bool = False</em>, <em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardOutput.save" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span><span class="p">:</span> <span class="n">pathlib.Path</span></em>, <em class="sig-param"><span class="n">mkdir</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardOutput.save" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Save data tensors within specified path.</strong></p>
 <p>Each data tensor will be indexed by integer <code class="xref py py-obj docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">N)</span></code>, where indices
 represent consecutive <a class="reference internal" href="#torchfunc.hooks.recorders.ForwardOutput.subrecorders" title="torchfunc.hooks.recorders.ForwardOutput.subrecorders"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorders</span></code></a>.</p>
@@ -1108,9 +1108,9 @@ represent consecutive <a class="reference internal" href="#torchfunc.hooks.recor
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="torchfunc.hooks.recorders.ForwardPre">
-<em class="property">class </em><code class="sig-prename descclassname">torchfunc.hooks.recorders.</code><code class="sig-name descname">ForwardPre</code><span class="sig-paren">(</span><em class="sig-param">condition: Callable = None</em>, <em class="sig-param">reduction: Callable = None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/hooks/recorders.html#ForwardPre"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardPre" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchfunc.hooks.recorders.</code><code class="sig-name descname">ForwardPre</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">condition</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">reduction</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/hooks/recorders.html#ForwardPre"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardPre" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Record input values before forward of specified layer(s).</strong></p>
 <p>You can record only some of the data based on external conditions if <code class="xref py py-obj docutils literal notranslate"><span class="pre">condition</span></code>
 <code class="xref py py-obj docutils literal notranslate"><span class="pre">callable</span></code> is specified.</p>
@@ -1129,7 +1129,7 @@ Default: <code class="xref py py-obj docutils literal notranslate"><span class="
 </ul>
 </dd>
 </dl>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="torchfunc.hooks.recorders.ForwardPre.data">
 <code class="sig-name descname">data</code><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardPre.data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Keeps data passing through subrecorders, optionally reduced by <code class="xref py py-obj docutils literal notranslate"><span class="pre">reduction</span></code>.
@@ -1141,7 +1141,7 @@ Each item represents data for specified <code class="xref py py-obj docutils lit
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="torchfunc.hooks.recorders.ForwardPre.subrecorders">
 <code class="sig-name descname">subrecorders</code><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardPre.subrecorders" title="Permalink to this definition">¶</a></dt>
 <dd><p>List containing registered subrecorders.</p>
@@ -1152,7 +1152,7 @@ Each item represents data for specified <code class="xref py py-obj docutils lit
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="torchfunc.hooks.recorders.ForwardPre.handles">
 <code class="sig-name descname">handles</code><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardPre.handles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handles for registered subrecorders, each corresponds to specific <code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorder</span></code>.
@@ -1164,9 +1164,9 @@ Can be used to unregister certain subrecorders (though discouraged, please use <
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.ForwardPre.apply">
-<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param">function: Callable</em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardPre.apply" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">function</span><span class="p">:</span> <span class="n">Callable</span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardPre.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Apply function to data contained in each subrecorder.</strong></p>
 <p>Data will be modified an saved inside data of each subrecorder.
 This function may make <code class="xref py py-obj docutils literal notranslate"><span class="pre">recorder</span></code> unusable, it’s up to user
@@ -1179,9 +1179,9 @@ returning anything.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.ForwardPre.apply_sample">
-<code class="sig-name descname">apply_sample</code><span class="sig-paren">(</span><em class="sig-param">function: Callable</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#torchfunc.hooks.recorders.ForwardPre.apply_sample" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">apply_sample</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">function</span><span class="p">:</span> <span class="n">Callable</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#torchfunc.hooks.recorders.ForwardPre.apply_sample" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Apply function to data contained in each subrecorder.</strong></p>
 <p>Works like <a class="reference internal" href="#torchfunc.hooks.recorders.ForwardPre.apply" title="torchfunc.hooks.recorders.ForwardPre.apply"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply</span></code></a>, except <code class="xref py py-obj docutils literal notranslate"><span class="pre">Callable</span></code> is passed number of samples passed
 through <code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorder</span></code> as second argument</p>
@@ -1193,9 +1193,9 @@ through <code class="xref py py-obj docutils literal notranslate"><span class="p
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.ForwardPre.children">
-<code class="sig-name descname">children</code><span class="sig-paren">(</span><em class="sig-param">network</em>, <em class="sig-param">types: Tuple[Any] = None</em>, <em class="sig-param">indices: List[int] = None</em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardPre.children" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">children</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span></em>, <em class="sig-param"><span class="n">types</span><span class="p">:</span> <span class="n">Tuple<span class="p">[</span>Any<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">indices</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardPre.children" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Register</strong> <a class="reference internal" href="#torchfunc.hooks.recorders.ForwardPre.subrecorders" title="torchfunc.hooks.recorders.ForwardPre.subrecorders"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorders</span></code></a> <strong>using types and/or indices via</strong> <a class="reference internal" href="#torchfunc.hooks.recorders.ForwardPre.children" title="torchfunc.hooks.recorders.ForwardPre.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code></a> <strong>method</strong>.</p>
 <p>This function will use <a class="reference internal" href="#torchfunc.hooks.recorders.ForwardPre.children" title="torchfunc.hooks.recorders.ForwardPre.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code></a> method of <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Module</span></code> to iterate over available submodules. If you wish to iterate recursively, use <a class="reference internal" href="#torchfunc.hooks.recorders.ForwardPre.modules" title="torchfunc.hooks.recorders.ForwardPre.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code></a>.</p>
 <p><strong>Important:</strong></p>
@@ -1221,7 +1221,7 @@ Default: <code class="xref py py-obj docutils literal notranslate"><span class="
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.ForwardPre.iter_samples">
 <code class="sig-name descname">iter_samples</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardPre.iter_samples" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Iterate over count of samples for each subrecorder</strong>.</p>
@@ -1238,9 +1238,9 @@ Default: <code class="xref py py-obj docutils literal notranslate"><span class="
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.ForwardPre.modules">
-<code class="sig-name descname">modules</code><span class="sig-paren">(</span><em class="sig-param">module: torch.nn.modules.module.Module</em>, <em class="sig-param">types: Tuple[Any] = None</em>, <em class="sig-param">indices: List[int] = None</em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardPre.modules" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">modules</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">module</span><span class="p">:</span> <span class="n">torch.nn.modules.module.Module</span></em>, <em class="sig-param"><span class="n">types</span><span class="p">:</span> <span class="n">Tuple<span class="p">[</span>Any<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">indices</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardPre.modules" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Register</strong> <a class="reference internal" href="#torchfunc.hooks.recorders.ForwardPre.subrecorders" title="torchfunc.hooks.recorders.ForwardPre.subrecorders"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorders</span></code></a> <strong>using types and/or indices via</strong> <a class="reference internal" href="#torchfunc.hooks.recorders.ForwardPre.modules" title="torchfunc.hooks.recorders.ForwardPre.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code></a> <strong>method</strong>.</p>
 <p>This function will use <a class="reference internal" href="#torchfunc.hooks.recorders.ForwardPre.modules" title="torchfunc.hooks.recorders.ForwardPre.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code></a> method of <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Module</span></code> to iterate over available submodules. If you wish to iterate non-recursively, use <a class="reference internal" href="#torchfunc.hooks.recorders.ForwardPre.children" title="torchfunc.hooks.recorders.ForwardPre.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code></a>.</p>
 <p><strong>Important:</strong></p>
@@ -1266,9 +1266,9 @@ Default: <code class="xref py py-obj docutils literal notranslate"><span class="
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.ForwardPre.remove">
-<code class="sig-name descname">remove</code><span class="sig-paren">(</span><em class="sig-param">index</em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardPre.remove" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">remove</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardPre.remove" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Remove subrecorder specified by</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">index</span></code>.</p>
 <p>Subrecorder will not record data passing through it and will be removed
 from <a class="reference internal" href="#torchfunc.hooks.recorders.ForwardPre.subrecorders" title="torchfunc.hooks.recorders.ForwardPre.subrecorders"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorders</span></code></a> attribute.</p>
@@ -1285,9 +1285,9 @@ from <a class="reference internal" href="#torchfunc.hooks.recorders.ForwardPre.s
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.ForwardPre.samples">
-<code class="sig-name descname">samples</code><span class="sig-paren">(</span><em class="sig-param">index</em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#torchfunc.hooks.recorders.ForwardPre.samples" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">samples</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span></em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#torchfunc.hooks.recorders.ForwardPre.samples" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Count of samples passed through subrecorder under</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">index</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1302,9 +1302,9 @@ from <a class="reference internal" href="#torchfunc.hooks.recorders.ForwardPre.s
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.recorders.ForwardPre.save">
-<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param">path: pathlib.Path</em>, <em class="sig-param">mkdir: bool = False</em>, <em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardPre.save" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span><span class="p">:</span> <span class="n">pathlib.Path</span></em>, <em class="sig-param"><span class="n">mkdir</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.recorders.ForwardPre.save" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Save data tensors within specified path.</strong></p>
 <p>Each data tensor will be indexed by integer <code class="xref py py-obj docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">N)</span></code>, where indices
 represent consecutive <a class="reference internal" href="#torchfunc.hooks.recorders.ForwardPre.subrecorders" title="torchfunc.hooks.recorders.ForwardPre.subrecorders"><code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorders</span></code></a>.</p>
@@ -1380,13 +1380,13 @@ represent consecutive <a class="reference internal" href="#torchfunc.hooks.recor
 
      
        <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-         <script type="text/javascript" src="../../_static/jquery.js"></script>
-         <script type="text/javascript" src="../../_static/underscore.js"></script>
-         <script type="text/javascript" src="../../_static/doctools.js"></script>
-         <script type="text/javascript" src="../../_static/language_data.js"></script>
-         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"></script>
-         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js"></script>
-         <script type="text/javascript" src="../../_static/katex_autorenderer.js"></script>
+         <script src="../../_static/jquery.js"></script>
+         <script src="../../_static/underscore.js"></script>
+         <script src="../../_static/doctools.js"></script>
+         <script src="../../_static/language_data.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script>
+         <script src="../../_static/katex_autorenderer.js"></script>
      
 
   

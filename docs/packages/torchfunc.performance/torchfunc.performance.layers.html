@@ -29,7 +29,7 @@
 
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <!-- <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" /> -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/katex-math.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -111,7 +111,7 @@
               
               
                 <div class="version">
-                  0.1.1
+                  0.2.0
                 </div>
               
             
@@ -222,9 +222,9 @@
 <p><strong>Check any performance caveats related to PyTorch and it’s layers.</strong></p>
 <p>Using functionalities below you can check whether your architecture follows
 current good practices related to performance of <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Module</span></code> concrete layers.</p>
-<dl class="class">
+<dl class="py class">
 <dt id="torchfunc.performance.layers.Depthwise">
-<em class="property">class </em><code class="sig-prename descclassname">torchfunc.performance.layers.</code><code class="sig-name descname">Depthwise</code><span class="sig-paren">(</span><em class="sig-param">checkers: Tuple[Callable[[torch.nn.modules.module.Module], bool]] = None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/performance/layers.html#Depthwise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.performance.layers.Depthwise" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchfunc.performance.layers.</code><code class="sig-name descname">Depthwise</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">checkers</span><span class="p">:</span> <span class="n">Tuple<span class="p">[</span>Callable<span class="p">[</span><span class="p">[</span>torch.nn.modules.module.Module<span class="p">]</span><span class="p">, </span>bool<span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/performance/layers.html#Depthwise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.performance.layers.Depthwise" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Check whether any convolution layer is a so-called depthwise convolution.</strong></p>
 <p>Depthwise convolution is faster for images with input data in format
 (batch, height, width, channel) as specialized kernels are available.</p>
@@ -243,7 +243,7 @@ performance-wise.</p>
     <span class="nb">print</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="c1"># Should print 0 and 2</span>
 </pre></div>
 </div>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="torchfunc.performance.layers.Depthwise.checkers">
 <code class="sig-name descname">checkers</code><a class="headerlink" href="#torchfunc.performance.layers.Depthwise.checkers" title="Permalink to this definition">¶</a></dt>
 <dd><p>Functions checking whether given module is depthwise convolution.
@@ -257,9 +257,9 @@ to module’s <code class="xref py py-obj docutils literal notranslate"><span cl
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.performance.layers.Depthwise.children">
-<code class="sig-name descname">children</code><span class="sig-paren">(</span><em class="sig-param">module: torch.nn.modules.module.Module</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/performance/layers.html#Depthwise.children"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.performance.layers.Depthwise.children" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">children</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">module</span><span class="p">:</span> <span class="n">torch.nn.modules.module.Module</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/performance/layers.html#Depthwise.children"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.performance.layers.Depthwise.children" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Look for Depthwise convolution using module’s</strong> <a class="reference internal" href="#torchfunc.performance.layers.Depthwise.children" title="torchfunc.performance.layers.Depthwise.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children()</span></code></a> <strong>method (shallow scanning).</strong></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -271,9 +271,9 @@ to module’s <code class="xref py py-obj docutils literal notranslate"><span cl
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.performance.layers.Depthwise.default_checker">
-<em class="property">classmethod </em><code class="sig-name descname">default_checker</code><span class="sig-paren">(</span><em class="sig-param">module</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/performance/layers.html#Depthwise.default_checker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.performance.layers.Depthwise.default_checker" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="sig-name descname">default_checker</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">module</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/performance/layers.html#Depthwise.default_checker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.performance.layers.Depthwise.default_checker" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Default checking method suitable for PyTorch’s built-in convolution layers.</strong></p>
 <p>Checks whether count of groups is equal to count of in_channels.</p>
 <p><strong>Important:</strong></p>
@@ -293,9 +293,9 @@ module that is passed to this function.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.performance.layers.Depthwise.modules">
-<code class="sig-name descname">modules</code><span class="sig-paren">(</span><em class="sig-param">module: torch.nn.modules.module.Module</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/performance/layers.html#Depthwise.modules"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.performance.layers.Depthwise.modules" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">modules</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">module</span><span class="p">:</span> <span class="n">torch.nn.modules.module.Module</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/performance/layers.html#Depthwise.modules"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.performance.layers.Depthwise.modules" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Look for Depthwise convolution using</strong> <a class="reference internal" href="#torchfunc.performance.layers.Depthwise.modules" title="torchfunc.performance.layers.Depthwise.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules()</span></code></a> <strong>method (recursive scanning).</strong></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -307,9 +307,9 @@ module that is passed to this function.</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.performance.layers.Depthwise.tips">
-<code class="sig-name descname">tips</code><span class="sig-paren">(</span><em class="sig-param">module: torch.nn.modules.module.Module</em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="../../_modules/torchfunc/performance/layers.html#Depthwise.tips"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.performance.layers.Depthwise.tips" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">tips</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">module</span><span class="p">:</span> <span class="n">torch.nn.modules.module.Module</span></em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="../../_modules/torchfunc/performance/layers.html#Depthwise.tips"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.performance.layers.Depthwise.tips" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Return</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code> <strong>representation of</strong> <a class="reference internal" href="#torchfunc.performance.layers.Depthwise.modules" title="torchfunc.performance.layers.Depthwise.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules()</span></code></a> <strong>method.</strong></p>
 <p>It is advised to use this function to get tips in order to easily fix
 performance issues related to depthwise convolution.</p>
@@ -328,9 +328,9 @@ performance issues related to depthwise convolution.</p>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="torchfunc.performance.layers.Inplace">
-<em class="property">class </em><code class="sig-prename descclassname">torchfunc.performance.layers.</code><code class="sig-name descname">Inplace</code><span class="sig-paren">(</span><em class="sig-param">inplace: Tuple[str] = ('inplace'</em>, <em class="sig-param">)</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/performance/layers.html#Inplace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.performance.layers.Inplace" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchfunc.performance.layers.</code><code class="sig-name descname">Inplace</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">inplace</span><span class="p">:</span> <span class="n">Tuple<span class="p">[</span>str<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">'inplace'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/performance/layers.html#Inplace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.performance.layers.Inplace" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Check whether any submodule/child of module is set to inplace mode.</strong></p>
 <p>Inplace operations may interfere with traced module (kernel fusion) and cause slowdowns.
 See <a class="reference external" href="https://github.com/pytorch/pytorch/issues/23655">this issue</a> for more information.</p>
@@ -348,7 +348,7 @@ See <a class="reference external" href="https://github.com/pytorch/pytorch/issue
 </pre></div>
 </div>
 <p>For easy to follow guidelines, use <a class="reference internal" href="#torchfunc.performance.layers.Inplace.tips" title="torchfunc.performance.layers.Inplace.tips"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tips</span></code></a> method of this class.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="torchfunc.performance.layers.Inplace.attribute">
 <code class="sig-name descname">attribute</code><a class="headerlink" href="#torchfunc.performance.layers.Inplace.attribute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Attributes names indicating whether current op is inplace. Do not specify if you are not using
@@ -362,36 +362,31 @@ and is <code class="xref py py-obj docutils literal notranslate"><span class="pr
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.performance.layers.Inplace.children">
-<code class="sig-name descname">children</code><span class="sig-paren">(</span><em class="sig-param">module: torch.nn.modules.module.Module</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/performance/layers.html#Inplace.children"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.performance.layers.Inplace.children" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">children</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">module</span><span class="p">:</span> <span class="n">torch.nn.modules.module.Module</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/performance/layers.html#Inplace.children"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.performance.layers.Inplace.children" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Look for inplace operation using</strong> <a class="reference internal" href="#torchfunc.performance.layers.Inplace.children" title="torchfunc.performance.layers.Inplace.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children()</span></code></a> <strong>method (shallow scanning).</strong></p>
 <dl class="field-list simple">
 <dt class="field-odd">Yields</dt>
-<dd class="field-odd"><p><em>int</em> – Indices where module is probably <a class="reference internal" href="#torchfunc.performance.layers.Inplace.inplace" title="torchfunc.performance.layers.Inplace.inplace"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inplace</span></code></a>.</p>
+<dd class="field-odd"><p><em>int</em> – Indices where module is probably <code class="xref py py-obj docutils literal notranslate"><span class="pre">inplace</span></code>.</p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="torchfunc.performance.layers.Inplace.inplace">
-<code class="sig-name descname">inplace</code><em class="property"> = ('inplace',)</em><a class="headerlink" href="#torchfunc.performance.layers.Inplace.inplace" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.performance.layers.Inplace.modules">
-<code class="sig-name descname">modules</code><span class="sig-paren">(</span><em class="sig-param">module: torch.nn.modules.module.Module</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/performance/layers.html#Inplace.modules"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.performance.layers.Inplace.modules" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">modules</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">module</span><span class="p">:</span> <span class="n">torch.nn.modules.module.Module</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/performance/layers.html#Inplace.modules"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.performance.layers.Inplace.modules" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Look for inplace operation using</strong> <a class="reference internal" href="#torchfunc.performance.layers.Inplace.modules" title="torchfunc.performance.layers.Inplace.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules()</span></code></a> <strong>method (recursive scanning).</strong></p>
 <dl class="field-list simple">
 <dt class="field-odd">Yields</dt>
-<dd class="field-odd"><p><em>int</em> – Indices where module is probably <a class="reference internal" href="#torchfunc.performance.layers.Inplace.inplace" title="torchfunc.performance.layers.Inplace.inplace"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inplace</span></code></a>.</p>
+<dd class="field-odd"><p><em>int</em> – Indices where module is probably <code class="xref py py-obj docutils literal notranslate"><span class="pre">inplace</span></code>.</p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.performance.layers.Inplace.tips">
-<code class="sig-name descname">tips</code><span class="sig-paren">(</span><em class="sig-param">module: torch.nn.modules.module.Module</em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="../../_modules/torchfunc/performance/layers.html#Inplace.tips"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.performance.layers.Inplace.tips" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">tips</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">module</span><span class="p">:</span> <span class="n">torch.nn.modules.module.Module</span></em><span class="sig-paren">)</span> &#x2192; str<a class="reference internal" href="../../_modules/torchfunc/performance/layers.html#Inplace.tips"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.performance.layers.Inplace.tips" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Return</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">str</span></code> <strong>representation of</strong> <a class="reference internal" href="#torchfunc.performance.layers.Inplace.modules" title="torchfunc.performance.layers.Inplace.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules()</span></code></a> <strong>method.</strong></p>
 <p>It is advised to use this function to get tips in order to easily fix
 performance issues related to inplace operations.</p>
@@ -468,13 +463,13 @@ performance issues related to inplace operations.</p>
 
      
        <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-         <script type="text/javascript" src="../../_static/jquery.js"></script>
-         <script type="text/javascript" src="../../_static/underscore.js"></script>
-         <script type="text/javascript" src="../../_static/doctools.js"></script>
-         <script type="text/javascript" src="../../_static/language_data.js"></script>
-         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"></script>
-         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js"></script>
-         <script type="text/javascript" src="../../_static/katex_autorenderer.js"></script>
+         <script src="../../_static/jquery.js"></script>
+         <script src="../../_static/underscore.js"></script>
+         <script src="../../_static/doctools.js"></script>
+         <script src="../../_static/language_data.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script>
+         <script src="../../_static/katex_autorenderer.js"></script>
      
 
   

@@ -29,7 +29,7 @@
 
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!-- <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /> -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" type="text/css" />
   <link rel="stylesheet" href="../_static/katex-math.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -111,7 +111,7 @@
               
               
                 <div class="version">
-                  0.1.1
+                  0.2.0
                 </div>
               
             
@@ -219,9 +219,9 @@
 <span id="torchfunc-module"></span><h1>torchfunc.module<a class="headerlink" href="#module-torchfunc.module" title="Permalink to this headline">¶</a></h1>
 <p><strong>This module provides functionalities related to torch.nn.Module instances (e.g. freezing parameters).</strong></p>
 <p>For performance analysis of <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Module</span></code> please see subpackage <code class="xref py py-obj docutils literal notranslate"><span class="pre">performance</span></code>.</p>
-<dl class="class">
+<dl class="py class">
 <dt id="torchfunc.module.Snapshot">
-<em class="property">class </em><code class="sig-prename descclassname">torchfunc.module.</code><code class="sig-name descname">Snapshot</code><span class="sig-paren">(</span><em class="sig-param">*modules: torch.nn.modules.module.Module</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchfunc/module.html#Snapshot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.module.Snapshot" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchfunc.module.</code><code class="sig-name descname">Snapshot</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">modules</span><span class="p">:</span> <span class="n">torch.nn.modules.module.Module</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchfunc/module.html#Snapshot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.module.Snapshot" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Save module snapshots in memory and/or disk.</strong></p>
 <p>Next modules can be added with <code class="xref py py-obj docutils literal notranslate"><span class="pre">+</span></code> or <code class="xref py py-obj docutils literal notranslate"><span class="pre">+=</span></code> and their state or whole model saved
 to disk with appropriate methods.</p>
@@ -240,9 +240,9 @@ to mutate contained modules).</p>
 <dd class="field-odd"><p><strong>*modules</strong> (<em>torch.nn.Module</em>) – Var args of PyTorch modules to be kept.</p>
 </dd>
 </dl>
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.module.Snapshot.pop">
-<code class="sig-name descname">pop</code><span class="sig-paren">(</span><em class="sig-param">index: int = -1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchfunc/module.html#Snapshot.pop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.module.Snapshot.pop" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">pop</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">- 1</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchfunc/module.html#Snapshot.pop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.module.Snapshot.pop" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Remove module at</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">index</span></code> <strong>from memory.</strong></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -257,12 +257,12 @@ to mutate contained modules).</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.module.Snapshot.save">
-<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param">folder: pathlib.Path = None</em>, <em class="sig-param">remove: bool = False</em>, <em class="sig-param">*indices: int</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="../_modules/torchfunc/module.html#Snapshot.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.module.Snapshot.save" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">folder</span><span class="p">:</span> <span class="n">pathlib.Path</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">remove</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">indices</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="../_modules/torchfunc/module.html#Snapshot.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.module.Snapshot.save" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Save module to disk.</strong></p>
 <p>Snapshot(s) will be saved using the following naming convention:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module_</span><span class="p">{</span><span class="n">index</span><span class="p">}</span><span class="n">_</span><span class="p">{</span><span class="n">timestamp</span><span class="p">}</span><span class="o">.</span><span class="n">pt</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module_</span><span class="s2">&quot;index&quot;</span><span class="n">_</span><span class="s2">&quot;timestamp&quot;</span><span class="o">.</span><span class="n">pt</span>
 </pre></div>
 </div>
 <p>See <a class="reference external" href="https://pytorch.org/tutorials/beginner/saving_loading_models.html#save-load-entire-model">PyTorch’s docs</a>
@@ -282,12 +282,12 @@ If empty, save all models.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.module.Snapshot.save_state">
-<code class="sig-name descname">save_state</code><span class="sig-paren">(</span><em class="sig-param">folder: pathlib.Path = None</em>, <em class="sig-param">remove: bool = False</em>, <em class="sig-param">*indices: int</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="../_modules/torchfunc/module.html#Snapshot.save_state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.module.Snapshot.save_state" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">save_state</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">folder</span><span class="p">:</span> <span class="n">pathlib.Path</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">remove</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">indices</span><span class="p">:</span> <span class="n">int</span></em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="../_modules/torchfunc/module.html#Snapshot.save_state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.module.Snapshot.save_state" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Save module’s state to disk.</strong></p>
 <p>Snapshot(s) will be saved with using the following naming convention:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module_</span><span class="p">{</span><span class="n">index</span><span class="p">}</span><span class="n">_</span><span class="p">{</span><span class="n">timestamp</span><span class="p">}</span><span class="o">.</span><span class="n">pt</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module_</span><span class="s2">&quot;index&quot;</span><span class="n">_</span><span class="s2">&quot;timestamp&quot;</span><span class="o">.</span><span class="n">pt</span>
 </pre></div>
 </div>
 <p>See PyTorch’s docs about <a class="reference external" href="https://pytorch.org/tutorials/beginner/saving_loading_models.html#save-load-state-dict-recommended">state_dict</a> for more
@@ -309,9 +309,52 @@ If empty, save all models.</p></li>
 
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
+<dt id="torchfunc.module.bias_parameters">
+<code class="sig-prename descclassname">torchfunc.module.</code><code class="sig-name descname">bias_parameters</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">module</span><span class="p">:</span> <span class="n">torch.nn.modules.module.Module</span></em>, <em class="sig-param"><span class="n">prefix</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">''</span></em>, <em class="sig-param"><span class="n">recurse</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchfunc/module.html#bias_parameters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.module.bias_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Iterate only over</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">module</span></code>’s <strong>parameters considered biases</strong>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>module</strong> (<em>torch.nn.Module</em>) – Module whose weights and biases will be unfrozen.</p></li>
+<li><p><strong>prefix</strong> (<em>str</em><em>, </em><em>optional</em>) – Prefix to prepend to all parameter names. Default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">''</span></code> (no prefix)</p></li>
+<li><p><strong>recurse</strong> (<em>bool</em><em>, </em><em>optional</em>) – If <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>, then yields parameters of this module and all submodules.
+Otherwise, yields only parameters that are direct members of this module.
+Default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields</dt>
+<dd class="field-even"><p><em>torch.nn.Parameter</em> – Module’s parameters being <code class="xref py py-obj docutils literal notranslate"><span class="pre">bias</span></code> (e.g. their name consist <code class="xref py py-obj docutils literal notranslate"><span class="pre">bias</span></code> string)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="torchfunc.module.device">
+<code class="sig-prename descclassname">torchfunc.module.</code><code class="sig-name descname">device</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchfunc/module.html#device"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.module.device" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Return ** `device` **of</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.module</span></code> <strong>or other</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">obj</span></code> <strong>containing device field</strong>.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">torchfunc</span><span class="o">.</span><span class="n">module</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="n">module</span><span class="p">))</span> <span class="c1"># &quot;cpu&quot;</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>obj</strong> (<em>torch.nn.Module</em><em> or </em><em>torch.Tensor</em>) – Object containing <a class="reference internal" href="#torchfunc.module.device" title="torchfunc.module.device"><code class="xref py py-obj docutils literal notranslate"><span class="pre">device</span></code></a> field or containing parameters with device, e.g. module</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Instance of device on which object is currently held. If object is contained
+on multiple devices, <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code> is returned</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Optional[torch.device]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt id="torchfunc.module.freeze">
-<code class="sig-prename descclassname">torchfunc.module.</code><code class="sig-name descname">freeze</code><span class="sig-paren">(</span><em class="sig-param">module: torch.nn.modules.module.Module</em>, <em class="sig-param">weight: bool = True</em>, <em class="sig-param">bias: bool = True</em><span class="sig-paren">)</span> &#x2192; torch.nn.modules.module.Module<a class="reference internal" href="../_modules/torchfunc/module.html#freeze"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.module.freeze" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">torchfunc.module.</code><code class="sig-name descname">freeze</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">module</span><span class="p">:</span> <span class="n">torch.nn.modules.module.Module</span></em>, <em class="sig-param"><span class="n">weight</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">bias</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; torch.nn.modules.module.Module<a class="reference internal" href="../_modules/torchfunc/module.html#freeze"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.module.freeze" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Freeze module’s parameters.</strong></p>
 <p>Sets <code class="xref py py-obj docutils literal notranslate"><span class="pre">requires_grad</span></code> to <code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code> for specified parameters in module.
 If bias and weight are specified, ALL parameters will be frozen (even if their names
@@ -345,9 +388,54 @@ call the function twice consecutively (once with <code class="xref py py-obj doc
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
+<dt id="torchfunc.module.named_parameters">
+<code class="sig-prename descclassname">torchfunc.module.</code><code class="sig-name descname">named_parameters</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">module</span><span class="p">:</span> <span class="n">torch.nn.modules.module.Module</span></em>, <em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">prefix</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">''</span></em>, <em class="sig-param"><span class="n">recurse</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchfunc/module.html#named_parameters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.module.named_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Iterate only over</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">module</span></code>’s <strong>parameters having</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code> <strong>as part of their name.</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>module</strong> (<em>torch.nn.Module</em>) – Module whose weights and biases will be unfrozen.</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – Name which parameter needs to be returned</p></li>
+<li><p><strong>prefix</strong> (<em>str</em><em>, </em><em>optional</em>) – Prefix to prepend to all parameter names. Default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">''</span></code> (no prefix)</p></li>
+<li><p><strong>recurse</strong> (<em>bool</em><em>, </em><em>optional</em>) – If <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>, then yields parameters of this module and all submodules.
+Otherwise, yields only parameters that are direct members of this module.
+Default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields</dt>
+<dd class="field-even"><p><em>torch.nn.Parameter</em> – Module’s parameters satisfying <code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code> constraint</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="torchfunc.module.switch_device">
+<code class="sig-prename descclassname">torchfunc.module.</code><code class="sig-name descname">switch_device</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj</span></em>, <em class="sig-param"><span class="n">target</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchfunc/module.html#switch_device"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.module.switch_device" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Context manager/decorator switching</strong> <a class="reference internal" href="#torchfunc.module.device" title="torchfunc.module.device"><code class="xref py py-obj docutils literal notranslate"><span class="pre">device</span></code></a> <strong>of</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.module</span></code> <strong>or other</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">obj</span></code> <strong>to the specified target</strong>.</p>
+<p>After <code class="xref py py-obj docutils literal notranslate"><span class="pre">with</span></code> block ends (or function) specified object is casted back to original
+device.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">torchfunc</span><span class="o">.</span><span class="n">module</span><span class="o">.</span><span class="n">switch_device</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span><span class="p">)):</span>
+    <span class="o">...</span> <span class="c1"># module is on cuda now</span>
+
+<span class="n">torchfunc</span><span class="o">.</span><span class="n">module</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="n">module</span><span class="p">)</span> <span class="c1"># back on CPU</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<em>torch.nn.Module</em><em> or </em><em>torch.Tensor</em>) – Object containing <a class="reference internal" href="#torchfunc.module.device" title="torchfunc.module.device"><code class="xref py py-obj docutils literal notranslate"><span class="pre">device</span></code></a> field or containing parameters with device, e.g. module</p></li>
+<li><p><strong>target</strong> (<em>torch.device-like</em>) – PyTorch device or string, compatible with <code class="xref py py-obj docutils literal notranslate"><span class="pre">to</span></code> cast.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt id="torchfunc.module.unfreeze">
-<code class="sig-prename descclassname">torchfunc.module.</code><code class="sig-name descname">unfreeze</code><span class="sig-paren">(</span><em class="sig-param">module: torch.nn.modules.module.Module</em>, <em class="sig-param">weight: bool = True</em>, <em class="sig-param">bias: bool = True</em><span class="sig-paren">)</span> &#x2192; torch.nn.modules.module.Module<a class="reference internal" href="../_modules/torchfunc/module.html#unfreeze"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.module.unfreeze" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">torchfunc.module.</code><code class="sig-name descname">unfreeze</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">module</span><span class="p">:</span> <span class="n">torch.nn.modules.module.Module</span></em>, <em class="sig-param"><span class="n">weight</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">bias</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; torch.nn.modules.module.Module<a class="reference internal" href="../_modules/torchfunc/module.html#unfreeze"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.module.unfreeze" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Unfreeze module’s parameters.</strong></p>
 <p>Sets <code class="xref py py-obj docutils literal notranslate"><span class="pre">requires_grad</span></code> to <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code> for all parameters in module.
 Works as complementary function to freeze, see it’s documentation.</p>
@@ -364,6 +452,26 @@ Works as complementary function to freeze, see it’s documentation.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>torch.nn.Module</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="torchfunc.module.weight_parameters">
+<code class="sig-prename descclassname">torchfunc.module.</code><code class="sig-name descname">weight_parameters</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">module</span><span class="p">:</span> <span class="n">torch.nn.modules.module.Module</span></em>, <em class="sig-param"><span class="n">prefix</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">''</span></em>, <em class="sig-param"><span class="n">recurse</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchfunc/module.html#weight_parameters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.module.weight_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Iterate only over</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">module</span></code>’s <strong>parameters considered weights</strong>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>module</strong> (<em>torch.nn.Module</em>) – Module whose weights and biases will be unfrozen.</p></li>
+<li><p><strong>prefix</strong> (<em>str</em><em>, </em><em>optional</em>) – Prefix to prepend to all parameter names. Default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">''</span></code> (no prefix)</p></li>
+<li><p><strong>recurse</strong> (<em>bool</em><em>, </em><em>optional</em>) – If <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>, then yields parameters of this module and all submodules.
+Otherwise, yields only parameters that are direct members of this module.
+Default: <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields</dt>
+<dd class="field-even"><p><em>torch.nn.Parameter</em> – Module’s parameters being <code class="xref py py-obj docutils literal notranslate"><span class="pre">weight</span></code> (e.g. their name consist <code class="xref py py-obj docutils literal notranslate"><span class="pre">weight</span></code> string)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -426,13 +534,13 @@ Works as complementary function to freeze, see it’s documentation.</p>
 
      
        <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-         <script type="text/javascript" src="../_static/jquery.js"></script>
-         <script type="text/javascript" src="../_static/underscore.js"></script>
-         <script type="text/javascript" src="../_static/doctools.js"></script>
-         <script type="text/javascript" src="../_static/language_data.js"></script>
-         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"></script>
-         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js"></script>
-         <script type="text/javascript" src="../_static/katex_autorenderer.js"></script>
+         <script src="../_static/jquery.js"></script>
+         <script src="../_static/underscore.js"></script>
+         <script src="../_static/doctools.js"></script>
+         <script src="../_static/language_data.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script>
+         <script src="../_static/katex_autorenderer.js"></script>
      
 
   

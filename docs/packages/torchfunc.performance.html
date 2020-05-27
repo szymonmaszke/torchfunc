@@ -29,7 +29,7 @@
 
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!-- <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /> -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" type="text/css" />
   <link rel="stylesheet" href="../_static/katex-math.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -111,7 +111,7 @@
               
               
                 <div class="version">
-                  0.1.1
+                  0.2.0
                 </div>
               
             
@@ -230,9 +230,9 @@
 <span class="target" id="module-torchfunc.performance"></span><p><strong>This package allows you to get info and tips about performance of your neural networks.</strong></p>
 <p>Following functions should be considered as general recommendations.
 For specific/customized tips, use specific submodules.</p>
-<dl class="function">
+<dl class="py function">
 <dt id="torchfunc.performance.report">
-<code class="sig-prename descclassname">torchfunc.performance.</code><code class="sig-name descname">report</code><span class="sig-paren">(</span><em class="sig-param">module: torch.nn.modules.module.Module</em><span class="sig-paren">)</span> &#x2192; Dict[str, Any]<a class="reference internal" href="../_modules/torchfunc/performance.html#report"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.performance.report" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">torchfunc.performance.</code><code class="sig-name descname">report</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">module</span><span class="p">:</span> <span class="n">torch.nn.modules.module.Module</span></em><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>str<span class="p">, </span>Any<span class="p">]</span><a class="reference internal" href="../_modules/torchfunc/performance.html#report"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.performance.report" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Run essential module’s performance analysis with default settings.</strong></p>
 <p>Following tests will be performed:</p>
 <ul class="simple">
@@ -276,9 +276,9 @@ guidelines use function <a class="reference internal" href="#torchfunc.performan
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="torchfunc.performance.tips">
-<code class="sig-prename descclassname">torchfunc.performance.</code><code class="sig-name descname">tips</code><span class="sig-paren">(</span><em class="sig-param">module: torch.nn.modules.module.Module</em>, <em class="sig-param">general: bool = True</em>, <em class="sig-param">specific: bool = True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchfunc/performance.html#tips"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.performance.tips" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">torchfunc.performance.</code><code class="sig-name descname">tips</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">module</span><span class="p">:</span> <span class="n">torch.nn.modules.module.Module</span></em>, <em class="sig-param"><span class="n">general</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">specific</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchfunc/performance.html#tips"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.performance.tips" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Return string describing possible performance improvements one can undertake.</strong></p>
 <p>Internally report will be called and it’s output parsed and described.
 It is the easiest way to get information about your module/network
@@ -370,13 +370,13 @@ one can take to improve module’s performance.</p>
 
      
        <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-         <script type="text/javascript" src="../_static/jquery.js"></script>
-         <script type="text/javascript" src="../_static/underscore.js"></script>
-         <script type="text/javascript" src="../_static/doctools.js"></script>
-         <script type="text/javascript" src="../_static/language_data.js"></script>
-         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"></script>
-         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js"></script>
-         <script type="text/javascript" src="../_static/katex_autorenderer.js"></script>
+         <script src="../_static/jquery.js"></script>
+         <script src="../_static/underscore.js"></script>
+         <script src="../_static/doctools.js"></script>
+         <script src="../_static/language_data.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script>
+         <script src="../_static/katex_autorenderer.js"></script>
      
 
   

@@ -29,7 +29,7 @@
 
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <!-- <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" /> -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/katex-math.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -109,7 +109,7 @@
               
               
                 <div class="version">
-                  0.1.1
+                  0.2.0
                 </div>
               
             
@@ -221,13 +221,14 @@
 
 <span class="sd">&quot;&quot;&quot;</span>
 
+<span class="kn">import</span> <span class="nn">contextlib</span>
 <span class="kn">import</span> <span class="nn">copy</span>
 <span class="kn">import</span> <span class="nn">datetime</span>
 <span class="kn">import</span> <span class="nn">pathlib</span>
 
 <span class="kn">import</span> <span class="nn">torch</span>
 
-<span class="kn">from</span> <span class="nn">._base</span> <span class="k">import</span> <span class="n">Base</span>
+<span class="kn">from</span> <span class="nn">._base</span> <span class="kn">import</span> <span class="n">Base</span>
 
 
 <span class="k">def</span> <span class="nf">_switch</span><span class="p">(</span><span class="n">module</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span> <span class="n">weight</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">bias</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
@@ -307,6 +308,144 @@
     <span class="k">return</span> <span class="n">_switch</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">bias</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
 
 
+<div class="viewcode-block" id="named_parameters"><a class="viewcode-back" href="../../packages/torchfunc.module.html#torchfunc.module.named_parameters">[docs]</a><span class="k">def</span> <span class="nf">named_parameters</span><span class="p">(</span>
+    <span class="n">module</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">recurse</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Iterate only over** `module`&#39;s **parameters having** `name` **as part of their name.**</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    module : torch.nn.Module</span>
+<span class="sd">        Module whose weights and biases will be unfrozen.</span>
+<span class="sd">    name : str</span>
+<span class="sd">        Name which parameter needs to be returned</span>
+<span class="sd">    prefix : str, optional</span>
+<span class="sd">        Prefix to prepend to all parameter names. Default: `&#39;&#39;` (no prefix)</span>
+<span class="sd">    recurse : bool, optional</span>
+<span class="sd">        If `True`, then yields parameters of this module and all submodules.</span>
+<span class="sd">        Otherwise, yields only parameters that are direct members of this module.</span>
+<span class="sd">        Default: `True`</span>
+
+<span class="sd">    Yields</span>
+<span class="sd">    ------</span>
+<span class="sd">    torch.nn.Parameter</span>
+<span class="sd">        Module&#39;s parameters satisfying `name` constraint</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">param_name</span><span class="p">,</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">module</span><span class="o">.</span><span class="n">named_parameters</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">param_name</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">param</span></div>
+
+
+<div class="viewcode-block" id="weight_parameters"><a class="viewcode-back" href="../../packages/torchfunc.module.html#torchfunc.module.weight_parameters">[docs]</a><span class="k">def</span> <span class="nf">weight_parameters</span><span class="p">(</span><span class="n">module</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">recurse</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Iterate only over** `module`&#39;s **parameters considered weights**.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    module : torch.nn.Module</span>
+<span class="sd">        Module whose weights and biases will be unfrozen.</span>
+<span class="sd">    prefix : str, optional</span>
+<span class="sd">        Prefix to prepend to all parameter names. Default: `&#39;&#39;` (no prefix)</span>
+<span class="sd">    recurse : bool, optional</span>
+<span class="sd">        If `True`, then yields parameters of this module and all submodules.</span>
+<span class="sd">        Otherwise, yields only parameters that are direct members of this module.</span>
+<span class="sd">        Default: `True`</span>
+
+<span class="sd">    Yields</span>
+<span class="sd">    ------</span>
+<span class="sd">    torch.nn.Parameter</span>
+<span class="sd">        Module&#39;s parameters being `weight` (e.g. their name consist `weight` string)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">yield from</span> <span class="n">named_parameters</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="s2">&quot;weight&quot;</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">recurse</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="bias_parameters"><a class="viewcode-back" href="../../packages/torchfunc.module.html#torchfunc.module.bias_parameters">[docs]</a><span class="k">def</span> <span class="nf">bias_parameters</span><span class="p">(</span><span class="n">module</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">recurse</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Iterate only over** `module`&#39;s **parameters considered biases**.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    module : torch.nn.Module</span>
+<span class="sd">        Module whose weights and biases will be unfrozen.</span>
+<span class="sd">    prefix : str, optional</span>
+<span class="sd">        Prefix to prepend to all parameter names. Default: `&#39;&#39;` (no prefix)</span>
+<span class="sd">    recurse : bool, optional</span>
+<span class="sd">        If `True`, then yields parameters of this module and all submodules.</span>
+<span class="sd">        Otherwise, yields only parameters that are direct members of this module.</span>
+<span class="sd">        Default: `True`</span>
+
+<span class="sd">    Yields</span>
+<span class="sd">    ------</span>
+<span class="sd">    torch.nn.Parameter</span>
+<span class="sd">        Module&#39;s parameters being `bias` (e.g. their name consist `bias` string)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">yield from</span> <span class="n">named_parameters</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="s2">&quot;bias&quot;</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">recurse</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="device"><a class="viewcode-back" href="../../packages/torchfunc.module.html#torchfunc.module.device">[docs]</a><span class="k">def</span> <span class="nf">device</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Return ** `device` **of** `torch.nn.module` **or other** `obj` **containing device field**.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        module = torch.nn.Linear(100, 10)</span>
+<span class="sd">        print(torchfunc.module.device(module)) # &quot;cpu&quot;</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    obj : torch.nn.Module or torch.Tensor</span>
+<span class="sd">        Object containing `device` field or containing parameters with device, e.g. module</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Optional[torch.device]</span>
+<span class="sd">        Instance of device on which object is currently held. If object is contained</span>
+<span class="sd">        on multiple devices, `None` is returned</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+        <span class="n">device</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">paramaters</span><span class="p">())</span><span class="o">.</span><span class="n">device</span>
+        <span class="k">for</span> <span class="n">parameter</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">parameters</span><span class="p">()):</span>
+            <span class="k">if</span> <span class="n">parameter</span><span class="o">.</span><span class="n">device</span> <span class="o">!=</span> <span class="n">device</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">return</span> <span class="n">device</span>
+
+    <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">device</span></div>
+
+
+<span class="c1"># Check for every device of parameter and optionally cast?</span>
+<div class="viewcode-block" id="switch_device"><a class="viewcode-back" href="../../packages/torchfunc.module.html#torchfunc.module.switch_device">[docs]</a><span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
+<span class="k">def</span> <span class="nf">switch_device</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Context manager/decorator switching** `device` **of** `torch.nn.module` **or other** `obj` **to the specified target**.</span>
+
+<span class="sd">    After `with` block ends (or function) specified object is casted back to original</span>
+<span class="sd">    device.</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        module = torch.nn.Linear(100, 10)</span>
+<span class="sd">        with torchfunc.module.switch_device(module, torch.device(&quot;cuda&quot;)):</span>
+<span class="sd">            ... # module is on cuda now</span>
+
+<span class="sd">        torchfunc.module.device(module) # back on CPU</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    obj : torch.nn.Module or torch.Tensor</span>
+<span class="sd">        Object containing `device` field or containing parameters with device, e.g. module</span>
+<span class="sd">    target : torch.device-like</span>
+<span class="sd">        PyTorch device or string, compatible with `to` cast.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">current_device</span> <span class="o">=</span> <span class="n">device</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+    <span class="n">obj</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">current_device</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">current_device</span><span class="p">)</span></div>
+
+
 <div class="viewcode-block" id="Snapshot"><a class="viewcode-back" href="../../packages/torchfunc.module.html#torchfunc.module.Snapshot">[docs]</a><span class="k">class</span> <span class="nc">Snapshot</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;**Save module snapshots in memory and/or disk.**</span>
 
@@ -332,31 +471,31 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">modules</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">modules</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">modules</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">modules</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">modules</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">modules</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">timestamps</span> <span class="o">=</span> <span class="p">[]</span>
 
-    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modules</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modules</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">__iadd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__iadd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">timestamps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
         <span class="k">return</span> <span class="bp">self</span>
 
-    <span class="k">def</span> <span class="nf">__radd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__radd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span> <span class="o">+</span> <span class="n">other</span>
 
-    <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
         <span class="n">new</span> <span class="o">=</span> <span class="n">Snapshot</span><span class="p">(</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modules</span><span class="p">))</span>
         <span class="n">new</span> <span class="o">+=</span> <span class="n">other</span>
         <span class="k">return</span> <span class="n">new</span>
@@ -386,9 +525,9 @@
             <span class="k">if</span> <span class="n">state</span><span class="p">:</span>
                 <span class="n">module</span> <span class="o">=</span> <span class="n">module</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()</span>
             <span class="n">name</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span>
-                <span class="n">f</span><span class="s2">&quot;module_&quot;</span> <span class="o">+</span> <span class="s2">&quot;state_&quot;</span>
+                <span class="s2">&quot;module_&quot;</span> <span class="o">+</span> <span class="s2">&quot;state_&quot;</span>
                 <span class="k">if</span> <span class="n">state</span>
-                <span class="k">else</span> <span class="s2">&quot;&quot;</span> <span class="o">+</span> <span class="n">f</span><span class="s2">&quot;{len(self.modules)}_</span><span class="si">{self.timestamps[index]}</span><span class="s2">.pt&quot;</span>
+                <span class="k">else</span> <span class="s2">&quot;&quot;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">_</span><span class="si">{}</span><span class="s2">.pt&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modules</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">timestamps</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
             <span class="p">)</span>
             <span class="k">if</span> <span class="n">remove</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
@@ -407,7 +546,7 @@
 
 <span class="sd">        Snapshot(s) will be saved using the following naming convention::</span>
 
-<span class="sd">            module_{index}_{timestamp}.pt</span>
+<span class="sd">            module_&quot;index&quot;_&quot;timestamp&quot;.pt</span>
 
 <span class="sd">        See `PyTorch&#39;s docs &lt;https://pytorch.org/tutorials/beginner/saving_loading_models.html#save-load-entire-model&gt;`__</span>
 <span class="sd">        for more information.</span>
@@ -435,7 +574,7 @@
 
 <span class="sd">        Snapshot(s) will be saved with using the following naming convention::</span>
 
-<span class="sd">            module_{index}_{timestamp}.pt</span>
+<span class="sd">            module_&quot;index&quot;_&quot;timestamp&quot;.pt</span>
 
 <span class="sd">        See PyTorch&#39;s docs about `state_dict &lt;https://pytorch.org/tutorials/beginner/saving_loading_models.html#save-load-state-dict-recommended&gt;`__ for more</span>
 <span class="sd">        information.</span>
@@ -500,13 +639,13 @@
 
      
        <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-         <script type="text/javascript" src="../../_static/jquery.js"></script>
-         <script type="text/javascript" src="../../_static/underscore.js"></script>
-         <script type="text/javascript" src="../../_static/doctools.js"></script>
-         <script type="text/javascript" src="../../_static/language_data.js"></script>
-         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"></script>
-         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js"></script>
-         <script type="text/javascript" src="../../_static/katex_autorenderer.js"></script>
+         <script src="../../_static/jquery.js"></script>
+         <script src="../../_static/underscore.js"></script>
+         <script src="../../_static/doctools.js"></script>
+         <script src="../../_static/language_data.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script>
+         <script src="../../_static/katex_autorenderer.js"></script>
      
 
   

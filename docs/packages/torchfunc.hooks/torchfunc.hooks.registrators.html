@@ -29,7 +29,7 @@
 
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <!-- <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" /> -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/katex-math.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -111,7 +111,7 @@
               
               
                 <div class="version">
-                  0.1.1
+                  0.2.0
                 </div>
               
             
@@ -240,11 +240,11 @@
 </div>
 <p>You could specify indices instead of types (for example all inputs to <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Linear</span></code> will be registered),
 and iterate over <code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code> instead of <code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code>.</p>
-<dl class="class">
+<dl class="py class">
 <dt id="torchfunc.hooks.registrators.Backward">
-<em class="property">class </em><code class="sig-prename descclassname">torchfunc.hooks.registrators.</code><code class="sig-name descname">Backward</code><span class="sig-paren">(</span><em class="sig-param">hook: Callable</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/hooks/registrators.html#Backward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.hooks.registrators.Backward" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchfunc.hooks.registrators.</code><code class="sig-name descname">Backward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hook</span><span class="p">:</span> <span class="n">Callable</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/hooks/registrators.html#Backward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.hooks.registrators.Backward" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Register backward hook based on module’s type or indices.</strong></p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="torchfunc.hooks.registrators.Backward.handles">
 <code class="sig-name descname">handles</code><a class="headerlink" href="#torchfunc.hooks.registrators.Backward.handles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handles for registered hooks, each corresponds to specific submodule.
@@ -256,9 +256,9 @@ Can be used to unregister certain hooks (though discouraged).</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.registrators.Backward.children">
-<code class="sig-name descname">children</code><span class="sig-paren">(</span><em class="sig-param">network</em>, <em class="sig-param">types: Tuple[Any] = None</em>, <em class="sig-param">indices: List[int] = None</em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.registrators.Backward.children" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">children</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span></em>, <em class="sig-param"><span class="n">types</span><span class="p">:</span> <span class="n">Tuple<span class="p">[</span>Any<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">indices</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.registrators.Backward.children" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Register</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorders</span></code> <strong>using types and/or indices via</strong> <a class="reference internal" href="#torchfunc.hooks.registrators.Backward.children" title="torchfunc.hooks.registrators.Backward.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code></a> <strong>hook</strong>.</p>
 <p>This function will use <a class="reference internal" href="#torchfunc.hooks.registrators.Backward.children" title="torchfunc.hooks.registrators.Backward.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code></a> method of <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Module</span></code> to iterate over available submodules. If you wish to iterate recursively, use <a class="reference internal" href="#torchfunc.hooks.registrators.Backward.modules" title="torchfunc.hooks.registrators.Backward.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code></a>.</p>
 <p><strong>Important:</strong></p>
@@ -284,9 +284,9 @@ Default: <code class="xref py py-obj docutils literal notranslate"><span class="
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.registrators.Backward.modules">
-<code class="sig-name descname">modules</code><span class="sig-paren">(</span><em class="sig-param">module: torch.nn.modules.module.Module</em>, <em class="sig-param">types: Tuple[Any] = None</em>, <em class="sig-param">indices: List[int] = None</em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.registrators.Backward.modules" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">modules</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">module</span><span class="p">:</span> <span class="n">torch.nn.modules.module.Module</span></em>, <em class="sig-param"><span class="n">types</span><span class="p">:</span> <span class="n">Tuple<span class="p">[</span>Any<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">indices</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.registrators.Backward.modules" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Register</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">hook</span></code> <strong>using types and/or indices via</strong> <a class="reference internal" href="#torchfunc.hooks.registrators.Backward.modules" title="torchfunc.hooks.registrators.Backward.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code></a> <strong>hook</strong>.</p>
 <p>This function will use <a class="reference internal" href="#torchfunc.hooks.registrators.Backward.modules" title="torchfunc.hooks.registrators.Backward.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code></a> method of <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Module</span></code> to iterate over available submodules. If you wish to iterate non-recursively, use <a class="reference internal" href="#torchfunc.hooks.registrators.Backward.children" title="torchfunc.hooks.registrators.Backward.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code></a>.</p>
 <p><strong>Important:</strong></p>
@@ -312,9 +312,9 @@ Default: <code class="xref py py-obj docutils literal notranslate"><span class="
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.registrators.Backward.remove">
-<code class="sig-name descname">remove</code><span class="sig-paren">(</span><em class="sig-param">index</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#torchfunc.hooks.registrators.Backward.remove" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">remove</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#torchfunc.hooks.registrators.Backward.remove" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Remove hook specified by</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">index</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -325,11 +325,11 @@ Default: <code class="xref py py-obj docutils literal notranslate"><span class="
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="torchfunc.hooks.registrators.Forward">
-<em class="property">class </em><code class="sig-prename descclassname">torchfunc.hooks.registrators.</code><code class="sig-name descname">Forward</code><span class="sig-paren">(</span><em class="sig-param">hook: Callable</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/hooks/registrators.html#Forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.hooks.registrators.Forward" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchfunc.hooks.registrators.</code><code class="sig-name descname">Forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hook</span><span class="p">:</span> <span class="n">Callable</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/hooks/registrators.html#Forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.hooks.registrators.Forward" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Register forward hook based on module’s type or indices.</strong></p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="torchfunc.hooks.registrators.Forward.handles">
 <code class="sig-name descname">handles</code><a class="headerlink" href="#torchfunc.hooks.registrators.Forward.handles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handles for registered hooks, each corresponds to specific submodule.
@@ -341,9 +341,9 @@ Can be used to unregister certain hooks (though discouraged).</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.registrators.Forward.children">
-<code class="sig-name descname">children</code><span class="sig-paren">(</span><em class="sig-param">network</em>, <em class="sig-param">types: Tuple[Any] = None</em>, <em class="sig-param">indices: List[int] = None</em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.registrators.Forward.children" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">children</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span></em>, <em class="sig-param"><span class="n">types</span><span class="p">:</span> <span class="n">Tuple<span class="p">[</span>Any<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">indices</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.registrators.Forward.children" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Register</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorders</span></code> <strong>using types and/or indices via</strong> <a class="reference internal" href="#torchfunc.hooks.registrators.Forward.children" title="torchfunc.hooks.registrators.Forward.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code></a> <strong>hook</strong>.</p>
 <p>This function will use <a class="reference internal" href="#torchfunc.hooks.registrators.Forward.children" title="torchfunc.hooks.registrators.Forward.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code></a> method of <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Module</span></code> to iterate over available submodules. If you wish to iterate recursively, use <a class="reference internal" href="#torchfunc.hooks.registrators.Forward.modules" title="torchfunc.hooks.registrators.Forward.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code></a>.</p>
 <p><strong>Important:</strong></p>
@@ -369,9 +369,9 @@ Default: <code class="xref py py-obj docutils literal notranslate"><span class="
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.registrators.Forward.modules">
-<code class="sig-name descname">modules</code><span class="sig-paren">(</span><em class="sig-param">module: torch.nn.modules.module.Module</em>, <em class="sig-param">types: Tuple[Any] = None</em>, <em class="sig-param">indices: List[int] = None</em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.registrators.Forward.modules" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">modules</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">module</span><span class="p">:</span> <span class="n">torch.nn.modules.module.Module</span></em>, <em class="sig-param"><span class="n">types</span><span class="p">:</span> <span class="n">Tuple<span class="p">[</span>Any<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">indices</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.registrators.Forward.modules" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Register</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">hook</span></code> <strong>using types and/or indices via</strong> <a class="reference internal" href="#torchfunc.hooks.registrators.Forward.modules" title="torchfunc.hooks.registrators.Forward.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code></a> <strong>hook</strong>.</p>
 <p>This function will use <a class="reference internal" href="#torchfunc.hooks.registrators.Forward.modules" title="torchfunc.hooks.registrators.Forward.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code></a> method of <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Module</span></code> to iterate over available submodules. If you wish to iterate non-recursively, use <a class="reference internal" href="#torchfunc.hooks.registrators.Forward.children" title="torchfunc.hooks.registrators.Forward.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code></a>.</p>
 <p><strong>Important:</strong></p>
@@ -397,9 +397,9 @@ Default: <code class="xref py py-obj docutils literal notranslate"><span class="
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.registrators.Forward.remove">
-<code class="sig-name descname">remove</code><span class="sig-paren">(</span><em class="sig-param">index</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#torchfunc.hooks.registrators.Forward.remove" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">remove</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#torchfunc.hooks.registrators.Forward.remove" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Remove hook specified by</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">index</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -410,11 +410,11 @@ Default: <code class="xref py py-obj docutils literal notranslate"><span class="
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="torchfunc.hooks.registrators.ForwardPre">
-<em class="property">class </em><code class="sig-prename descclassname">torchfunc.hooks.registrators.</code><code class="sig-name descname">ForwardPre</code><span class="sig-paren">(</span><em class="sig-param">hook: Callable</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/hooks/registrators.html#ForwardPre"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.hooks.registrators.ForwardPre" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchfunc.hooks.registrators.</code><code class="sig-name descname">ForwardPre</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hook</span><span class="p">:</span> <span class="n">Callable</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/torchfunc/hooks/registrators.html#ForwardPre"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchfunc.hooks.registrators.ForwardPre" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Register forward pre hook based on module’s type or indices.</strong></p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="torchfunc.hooks.registrators.ForwardPre.handles">
 <code class="sig-name descname">handles</code><a class="headerlink" href="#torchfunc.hooks.registrators.ForwardPre.handles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handles for registered hooks, each corresponds to specific submodule.
@@ -426,9 +426,9 @@ Can be used to unregister certain hooks (though discouraged).</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.registrators.ForwardPre.children">
-<code class="sig-name descname">children</code><span class="sig-paren">(</span><em class="sig-param">network</em>, <em class="sig-param">types: Tuple[Any] = None</em>, <em class="sig-param">indices: List[int] = None</em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.registrators.ForwardPre.children" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">children</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">network</span></em>, <em class="sig-param"><span class="n">types</span><span class="p">:</span> <span class="n">Tuple<span class="p">[</span>Any<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">indices</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.registrators.ForwardPre.children" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Register</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">subrecorders</span></code> <strong>using types and/or indices via</strong> <a class="reference internal" href="#torchfunc.hooks.registrators.ForwardPre.children" title="torchfunc.hooks.registrators.ForwardPre.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code></a> <strong>hook</strong>.</p>
 <p>This function will use <a class="reference internal" href="#torchfunc.hooks.registrators.ForwardPre.children" title="torchfunc.hooks.registrators.ForwardPre.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code></a> method of <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Module</span></code> to iterate over available submodules. If you wish to iterate recursively, use <a class="reference internal" href="#torchfunc.hooks.registrators.ForwardPre.modules" title="torchfunc.hooks.registrators.ForwardPre.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code></a>.</p>
 <p><strong>Important:</strong></p>
@@ -454,9 +454,9 @@ Default: <code class="xref py py-obj docutils literal notranslate"><span class="
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.registrators.ForwardPre.modules">
-<code class="sig-name descname">modules</code><span class="sig-paren">(</span><em class="sig-param">module: torch.nn.modules.module.Module</em>, <em class="sig-param">types: Tuple[Any] = None</em>, <em class="sig-param">indices: List[int] = None</em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.registrators.ForwardPre.modules" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">modules</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">module</span><span class="p">:</span> <span class="n">torch.nn.modules.module.Module</span></em>, <em class="sig-param"><span class="n">types</span><span class="p">:</span> <span class="n">Tuple<span class="p">[</span>Any<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">indices</span><span class="p">:</span> <span class="n">List<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#torchfunc.hooks.registrators.ForwardPre.modules" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Register</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">hook</span></code> <strong>using types and/or indices via</strong> <a class="reference internal" href="#torchfunc.hooks.registrators.ForwardPre.modules" title="torchfunc.hooks.registrators.ForwardPre.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code></a> <strong>hook</strong>.</p>
 <p>This function will use <a class="reference internal" href="#torchfunc.hooks.registrators.ForwardPre.modules" title="torchfunc.hooks.registrators.ForwardPre.modules"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code></a> method of <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Module</span></code> to iterate over available submodules. If you wish to iterate non-recursively, use <a class="reference internal" href="#torchfunc.hooks.registrators.ForwardPre.children" title="torchfunc.hooks.registrators.ForwardPre.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code></a>.</p>
 <p><strong>Important:</strong></p>
@@ -482,9 +482,9 @@ Default: <code class="xref py py-obj docutils literal notranslate"><span class="
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="torchfunc.hooks.registrators.ForwardPre.remove">
-<code class="sig-name descname">remove</code><span class="sig-paren">(</span><em class="sig-param">index</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#torchfunc.hooks.registrators.ForwardPre.remove" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">remove</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">index</span></em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#torchfunc.hooks.registrators.ForwardPre.remove" title="Permalink to this definition">¶</a></dt>
 <dd><p><strong>Remove hook specified by</strong> <code class="xref py py-obj docutils literal notranslate"><span class="pre">index</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -553,13 +553,13 @@ Default: <code class="xref py py-obj docutils literal notranslate"><span class="
 
      
        <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-         <script type="text/javascript" src="../../_static/jquery.js"></script>
-         <script type="text/javascript" src="../../_static/underscore.js"></script>
-         <script type="text/javascript" src="../../_static/doctools.js"></script>
-         <script type="text/javascript" src="../../_static/language_data.js"></script>
-         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js"></script>
-         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js"></script>
-         <script type="text/javascript" src="../../_static/katex_autorenderer.js"></script>
+         <script src="../../_static/jquery.js"></script>
+         <script src="../../_static/underscore.js"></script>
+         <script src="../../_static/doctools.js"></script>
+         <script src="../../_static/language_data.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js"></script>
+         <script src="../../_static/katex_autorenderer.js"></script>
      
 
   
