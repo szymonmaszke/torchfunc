@@ -1,7 +1,7 @@
 ---
 name: test
 
-on: pull_request
+on: [pull_request, push]
 
 jobs:
   test:
@@ -9,7 +9,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        python-version: [3.7]
+        python-version: [3.6, 3.7, 3.8]
         os:
           - ubuntu-latest
           - ubuntu-18.04
