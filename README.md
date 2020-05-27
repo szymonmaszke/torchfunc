@@ -7,7 +7,6 @@
 * Get information about your host operating system, `torch.nn.Module` device, CUDA
 capabilities etc.
 
---------------------------------------------------------------------------------
 
 | Version | Docs | Tests | Coverage | Style | PyPI | Python | PyTorch | Docker | Roadmap |
 |---------|------|-------|----------|-------|------|--------|---------|--------|---------|
