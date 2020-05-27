@@ -40,7 +40,6 @@ Concrete methods recording different data passing through network are specified 
 
 """
 
-import dataclasses
 import pathlib
 import typing
 
@@ -263,7 +262,7 @@ class _Recorder(Base):
         if mkdir:
             path.mkdir(*args, **kwargs)
         for index, subrecorder in enumerate(self):
-            torch.save(subrecorder, path / f"{index}.pt")
+            torch.save(subrecorder, path / "{}.pt".format(index))
 
     def apply(self, function: typing.Callable):
         """**Apply function to data contained in each subrecorder.**
@@ -299,11 +298,11 @@ class _Recorder(Base):
             subrecorder = function(subrecorder, sample)
 
 
-@dataclasses.dataclass
 class _Hook:
-    index: int
-    data: typing.List
-    samples: int = 0
+    def __init__(self, index: int, data: typing.List, samples: int = 0):
+        self.index = index
+        self.data = data
+        self.samples = samples
 
     def _call(self, to_record, condition, reduction):
         if condition is None or condition():
@@ -321,16 +320,15 @@ class _Hook:
                     self.data[self.index].append(to_record[0])
 
 
-@dataclasses.dataclass(repr=False)
 class ForwardPre(_Recorder):
     __doc__ = _Recorder.__doc__.format(
         "Record input values before forward of specified layer(s)."
     )
 
-    condition: typing.Callable = None
-    reduction: typing.Callable = None
+    def __init__(self, condition: typing.Callable, reduction: typing.Callable):
+        self.condition = condition
+        self.reduction = reduction
 
-    def __post_init__(self):
         class ForwardPreHook(_Hook):
             def __call__(inner_self, module, inputs):
                 inner_self._call(inputs, self.condition, self.reduction)
@@ -338,16 +336,15 @@ class ForwardPre(_Recorder):
         super().__init__("register_forward_pre_hook", ForwardPreHook)
 
 
-@dataclasses.dataclass(repr=False)
 class ForwardInput(_Recorder):
     __doc__ = _Recorder.__doc__.format(
         "Record input values after forward of specified layer(s)."
     )
 
-    condition: typing.Callable = None
-    reduction: typing.Callable = None
+    def __init__(self, condition: typing.Callable, reduction: typing.Callable):
+        self.condition = condition
+        self.reduction = reduction
 
-    def __post_init__(self):
         class ForwardInputHook(_Hook):
             def __call__(inner_self, module, inputs, _):
                 inner_self._call(inputs, self.condition, self.reduction)
@@ -355,16 +352,15 @@ class ForwardInput(_Recorder):
         super().__init__("register_forward_hook", ForwardInputHook)
 
 
-@dataclasses.dataclass(repr=False)
 class ForwardOutput(_Recorder):
     __doc__ = _Recorder.__doc__.format(
         "Record output values after forward of specified layer(s)."
     )
 
-    condition: typing.Callable = None
-    reduction: typing.Callable = None
+    def __init__(self, condition: typing.Callable, reduction: typing.Callable):
+        self.condition = condition
+        self.reduction = reduction
 
-    def __post_init__(self):
         class ForwardOutputHook(_Hook):
             def __call__(inner_self, module, _, outputs):
                 inner_self._call(outputs, self.condition, self.reduction)
@@ -372,16 +368,15 @@ class ForwardOutput(_Recorder):
         super().__init__("register_forward_hook", ForwardOutputHook)
 
 
-@dataclasses.dataclass(repr=False)
 class BackwardInput(_Recorder):
     __doc__ = _Recorder.__doc__.format(
         "Record input gradients after those are calculated w.r.t. specified module."
     )
 
-    condition: typing.Callable = None
-    reduction: typing.Callable = None
+    def __init__(self, condition: typing.Callable, reduction: typing.Callable):
+        self.condition = condition
+        self.reduction = reduction
 
-    def __post_init__(self):
         class BackwardInputHook(_Hook):
             def __call__(inner_self, module, grad_inputs, _):
                 inner_self._call(grad_inputs, self.condition, self.reduction)
@@ -389,16 +384,15 @@ class BackwardInput(_Recorder):
         super().__init__("register_backward_hook", BackwardInputHook)
 
 
-@dataclasses.dataclass(repr=False)
 class BackwardOutput(_Recorder):
     __doc__ = _Recorder.__doc__.format(
         "Record output gradients after those are calculated w.r.t. specified module."
     )
 
-    condition: typing.Callable = None
-    reduction: typing.Callable = None
+    def __init__(self, condition: typing.Callable, reduction: typing.Callable):
+        self.condition = condition
+        self.reduction = reduction
 
-    def __post_init__(self):
         class BackwardOutputHook(_Hook):
             def __call__(inner_self, module, _, outputs):
                 inner_self._call(outputs, self.condition, self.reduction)

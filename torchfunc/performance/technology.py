@@ -6,7 +6,6 @@ technology dependent speed improvements.
 
 """
 import collections
-import dataclasses
 import typing
 
 import torch
@@ -18,7 +17,6 @@ from .._base import Base
 # Arithmetic Intensity: https://docs.nvidia.com/deeplearning/sdk/dl-performance-guide/index.html#math-mem
 
 
-@dataclasses.dataclass(repr=False)
 class TensorCores(Base):
     r"""**Perform Tensor Cores compatibility tests for given module and it's submodules/children.**
 
@@ -97,31 +95,41 @@ class TensorCores(Base):
 
     """
 
-    linear_types: typing.Tuple[torch.nn.Module] = (torch.nn.Linear, torch.nn.Bilinear)
-    convolution_types: typing.Tuple[torch.nn.Module] = (
-        torch.nn.Conv1d,
-        torch.nn.Conv2d,
-        torch.nn.Conv3d,
-    )
-    linear_inputs: typing.Dict[torch.nn.Module, typing.Tuple[str]] = None
-    linear_outputs: typing.Dict[torch.nn.Module, typing.Tuple[str]] = None
-    convolution_inputs: typing.Dict[torch.nn.Module, typing.Tuple[str]] = None
-    convolution_outputs: typing.Dict[torch.nn.Module, typing.Tuple[str]] = None
-    float_types: typing.Tuple = (torch.half,)
-    integer_types: typing.Tuple = (torch.short,)
+    def __init__(
+        self,
+        linear_types=(torch.nn.Linear, torch.nn.Bilinear,),
+        convolution_types=(torch.nn.Conv1d, torch.nn.Conv2d, torch.nn.Conv3d,),
+        linear_inputs=None,
+        linear_outputs=None,
+        convolution_inputs=None,
+        convolution_outputs=None,
+        float_types=(torch.half,),
+        integer_types=(torch.short,),
+    ):
 
-    def __post_init__(self):
-        if self.linear_inputs is None:
+        self.linear_types = linear_types
+        self.convolution_types = convolution_types
+        if linear_inputs is None:
             self.linear_inputs = collections.defaultdict(lambda: ("in_features",))
             self.linear_inputs[torch.nn.Bilinear] = ("in_features1", "in_features2")
-        if self.linear_outputs is None:
+        else:
+            self.linear_inputs = linear_inputs
+        if linear_outputs is None:
             self.linear_outputs = collections.defaultdict(lambda: ("out_features",))
-        if self.convolution_inputs is None:
+        else:
+            self.linear_outputs = linear_outputs
+        if convolution_inputs is None:
             self.convolution_inputs = collections.defaultdict(lambda: ("in_channels",))
-        if self.convolution_outputs is None:
+        else:
+            self.convolution_inputs = convolution_inputs
+        if convolution_outputs is None:
             self.convolution_outputs = collections.defaultdict(
                 lambda: ("out_channels",)
             )
+        else:
+            self.convolution_outputs = convolution_outputs
+        self.float_types = float_types
+        self.integer_types = integer_types
 
     def _analyse(self, module, function: str):
         def _correct_types(data, submodule, index, is_float: bool):
@@ -291,9 +299,9 @@ class TensorCores(Base):
             def parse_type(is_float: bool, goal):
                 key = "float" if is_float else "integer"
                 if _types[key]:
-                    return f"\nModules where {key} type is not {goal}:\n" + str(
-                        _types[key]
-                    )
+                    return "\nModules where {} type is not {}:\n".format(
+                        key, goal
+                    ) + str(_types[key])
                 return ""
 
             return parse_type(True, "torch.half") + parse_type(False, "torch.short")
@@ -302,9 +310,10 @@ class TensorCores(Base):
             def parse_shape(dictionary, is_input: bool, goal):
                 key = "inputs" if is_input else "outputs"
                 if dictionary[key]:
-                    return (
-                        f"\nModules where {key} shape should be divisable by {goal}:\n"
-                        + str(dictionary[key])
+                    return "\nModules where {} shape should be divisible by {}:\n".format(
+                        key, goal
+                    ) + str(
+                        dictionary[key]
                     )
                 return ""
 

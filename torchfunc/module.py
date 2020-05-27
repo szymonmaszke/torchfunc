@@ -309,9 +309,9 @@ class Snapshot(Base):
             if state:
                 module = module.state_dict()
             name = pathlib.Path(
-                f"module_" + "state_"
+                "module_" + "state_"
                 if state
-                else "" + f"{len(self.modules)}_{self.timestamps[index]}.pt"
+                else "" + "{}_{}.pt".format(len(self.modules), self.timestamps[index])
             )
             if remove:
                 self.pop(index)
@@ -330,7 +330,7 @@ class Snapshot(Base):
 
         Snapshot(s) will be saved using the following naming convention::
 
-            module_{index}_{timestamp}.pt
+            module_"index"_"timestamp".pt
 
         See `PyTorch's docs <https://pytorch.org/tutorials/beginner/saving_loading_models.html#save-load-entire-model>`__
         for more information.
@@ -358,7 +358,7 @@ class Snapshot(Base):
 
         Snapshot(s) will be saved with using the following naming convention::
 
-            module_{index}_{timestamp}.pt
+            module_"index"_"timestamp".pt
 
         See PyTorch's docs about `state_dict <https://pytorch.org/tutorials/beginner/saving_loading_models.html#save-load-state-dict-recommended>`__ for more
         information.

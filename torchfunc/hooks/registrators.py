@@ -23,7 +23,6 @@ You could specify indices instead of types (for example all inputs to `torch.nn.
 and iterate over `children` instead of `modules`.
 """
 
-import dataclasses
 import typing
 
 import torch
@@ -148,37 +147,31 @@ class _Registrator(Base):
         return self
 
 
-@dataclasses.dataclass(repr=False)
 class ForwardPre(_Registrator):
     __doc__ = _Registrator.__doc__.format(
         "Register forward pre hook based on module's type or indices."
     )
 
-    hook: typing.Callable
-
-    def __post_init__(self):
+    def __init__(self, hook: typing.Callable):
+        self.hook = hook
         super().__init__("register_forward_pre_hook", self.hook)
 
 
-@dataclasses.dataclass(repr=False)
 class Forward(_Registrator):
     __doc__ = _Registrator.__doc__.format(
         "Register forward hook based on module's type or indices."
     )
 
-    hook: typing.Callable
-
-    def __post_init__(self):
+    def __init__(self, hook: typing.Callable):
+        self.hook = hook
         super().__init__("register_forward_hook", self.hook)
 
 
-@dataclasses.dataclass(repr=False)
 class Backward(_Registrator):
     __doc__ = _Registrator.__doc__.format(
         "Register backward hook based on module's type or indices."
     )
 
-    hook: typing.Callable
-
-    def __post_init__(self):
+    def __init__(self, hook: typing.Callable):
+        self.hook = hook
         super().__init__("register_backward_hook", self.hook)

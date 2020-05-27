@@ -8,7 +8,6 @@ current good practices related to performance of `torch.nn.Module` concrete laye
 
 import abc
 import collections
-import dataclasses
 import sys
 import typing
 
@@ -150,7 +149,6 @@ class Depthwise(Base):
         return ""
 
 
-@dataclasses.dataclass
 class Inplace(Base):
     r"""**Check whether any submodule/child of module is set to inplace mode.**
 
@@ -182,7 +180,8 @@ class Inplace(Base):
 
     """
 
-    inplace: typing.Tuple[str] = ("inplace",)
+    def __init__(self, inplace: typing.Tuple[str] = ("inplace",)):
+        self.inplace = inplace
 
     def _analyse(self, module: torch.nn.Module, method: str):
         for index, submodule in enumerate(getattr(module, method)()):
