@@ -13,6 +13,7 @@ import torch
 from . import cuda, hooks, module, performance
 from ._base import Base
 from ._dev_utils._general import _cuda_info, _general_info
+from ._version import __version__
 
 
 class Timer(Base, contextlib.AbstractContextManager):
