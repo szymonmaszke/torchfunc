@@ -8,13 +8,16 @@ import torch
 def _general_info():
     return "\n".join(
         [
-            f"Python version: {platform.python_version()}",
-            f"Python implementation: {platform.python_implementation()}",
-            f"Python compiler: {platform.python_compiler()}",
-            f"PyTorch version: {torch.__version__}",
-            f"System: {platform.system() or 'Unable to determine'}, version: {platform.release() or 'Unable to determine'}",
-            f"Processor: {platform.processor() or 'Unable to determine'}",
-            f"Number of CPUs: {multiprocessing.cpu_count()}",
+            "Python version: {}".format(platform.python_version()),
+            "Python implementation: {}".format(platform.python_implementation()),
+            "Python compiler: {}".format(platform.python_compiler()),
+            "PyTorch version: {}".format(torch.__version__),
+            "System: {}, version: {}".format(
+                platform.system() or "Unable to determine",
+                platform.release() or "Unable to determine",
+            ),
+            "Processor: {}".format(platform.processor() or "Unable to determine"),
+            "Number of CPUs: {}".format(multiprocessing.cpu_count()),
         ]
     )
 
