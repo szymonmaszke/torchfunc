@@ -1,10 +1,9 @@
 import contextlib
-import dataclasses
+import functools
 import itertools
 import sys
 import time
 import typing
-from functools import wraps
 from importlib.util import find_spec
 
 import numpy as np
@@ -92,7 +91,7 @@ class Timer(Base, contextlib.AbstractContextManager):
         return self.last - self.last_checkpoint
 
     def __call__(self, function):
-        @wraps(function)
+        @functools.wraps(function)
         def decorated(*args, **kwargs):
             self.start = self.function()
             values = function(*args, **kwargs)
@@ -110,7 +109,6 @@ class Timer(Base, contextlib.AbstractContextManager):
         return str(self.time())
 
 
-@dataclasses.dataclass(repr=False)
 class seed(Base):
     r"""**Seed PyTorch and numpy.**
 
@@ -145,15 +143,14 @@ class seed(Base):
             Whether to set PyTorch's cuda backend into deterministic mode (setting cudnn.benchmark to `False`
             and cudnn.deterministic to `True`). If `False`, consecutive runs may be slightly different.
             If `True`, automatic autotuning for convolutions layers with consistent input shape will be turned off.
-
             Default: `False`
 
     """
 
-    value: int
-    cuda: bool = False
+    def __init__(self, value, cuda: bool = False):
+        self.value = value
+        self.cuda = cuda
 
-    def __post_init__(self):
         self._last_seed = torch.initial_seed()
         np.random.seed(self.value)
         torch.manual_seed(self.value)
@@ -171,7 +168,7 @@ class seed(Base):
         return False
 
     def __call__(self, function):
-        @wraps(function)
+        @functools.wraps(function)
         def decorated(*args, **kwargs):
             value = function(*args, **kwargs)
             self.__exit__()
