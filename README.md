@@ -1,20 +1,21 @@
-![torchfunc Logo](https://github.com/szymonmaszke/torchfunc/blob/master/assets/banner.png)
+<img align="left" width="256" height="256" src="https://github.com/szymonmaszke/torchfunc/blob/master/assets/logos/medium.png">
+
+* Improve and analyse performance of your neural network (e.g. Tensor Cores compatibility)
+* Record/analyse internal state of `torch.nn.Module` as data passes through it
+* Do the above based on external conditions (using single `Callable` to specify it)
+* Day-to-day neural network related duties (model size, seeding, time measurements etc.)
+* Get information about your host operating system, `torch.nn.Module` device, CUDA
+capabilities etc.
 
 --------------------------------------------------------------------------------
 
 | Version | Docs | Tests | Coverage | Style | PyPI | Python | PyTorch | Docker | Roadmap |
 |---------|------|-------|----------|-------|------|--------|---------|--------|---------|
-| [![Version](https://img.shields.io/static/v1?label=&message=0.1.1&color=377EF0&style=for-the-badge)](https://github.com/szymonmaszke/torchfunc/releases) | [![Documentation](https://img.shields.io/static/v1?label=&message=docs&color=EE4C2C&style=for-the-badge)](https://szymonmaszke.github.io/torchfunc/)  | ![Tests](https://github.com/szymonmaszke/torchfunc/workflows/test/badge.svg) | ![Coverage](https://img.shields.io/codecov/c/github/szymonmaszke/torchfunc?label=%20&logo=codecov&style=for-the-badge) | [![codebeat](https://img.shields.io/static/v1?label=&message=CB&color=27A8E0&style=for-the-badge)](https://codebeat.co/projects/github-com-szymonmaszke-torchfunc-master) | [![PyPI](https://img.shields.io/static/v1?label=&message=PyPI&color=377EF0&style=for-the-badge)](https://pypi.org/project/torchfunc/) | [![Python](https://img.shields.io/static/v1?label=&message=3.7&color=377EF0&style=for-the-badge&logo=python&logoColor=F8C63D)](https://www.python.org/) | [![PyTorch](https://img.shields.io/static/v1?label=&message=>=1.2.0&color=EE4C2C&style=for-the-badge)](https://pytorch.org/) | [![Docker](https://img.shields.io/static/v1?label=&message=docker&color=309cef&style=for-the-badge)](https://hub.docker.com/r/szymonmaszke/torchfunc) | [![Roadmap](https://img.shields.io/static/v1?label=&message=roadmap&color=009688&style=for-the-badge)](https://github.com/szymonmaszke/torchfunc/blob/master/ROADMAP.md) |
-
-[**torchfunc**](https://szymonmaszke.github.io/torchfunc/) is library revolving around [PyTorch](https://pytorch.org/) with a goal to help you with:
-
-* Improving and analysing performance of your neural network (e.g. Tensor Cores compatibility)
-* Record/analyse internal state of `torch.nn.Module` as data passes through it
-* Do the above based on external conditions (using single `Callable` to specify it)
-* Day-to-day neural network related duties (model size, seeding, performance measurements etc.)
-* Get information about your host operating system, CUDA devices and others
+| [![Version](https://img.shields.io/static/v1?label=&message=0.2.0&color=377EF0&style=for-the-badge)](https://github.com/szymonmaszke/torchfunc/releases) | [![Documentation](https://img.shields.io/static/v1?label=&message=docs&color=EE4C2C&style=for-the-badge)](https://szymonmaszke.github.io/torchfunc/)  | ![Tests](https://github.com/szymonmaszke/torchfunc/workflows/test/badge.svg) | ![Coverage](https://img.shields.io/codecov/c/github/szymonmaszke/torchfunc?label=%20&logo=codecov&style=for-the-badge) | [![codebeat](https://img.shields.io/static/v1?label=&message=CB&color=27A8E0&style=for-the-badge)](https://codebeat.co/projects/github-com-szymonmaszke-torchfunc-master) | [![PyPI](https://img.shields.io/static/v1?label=&message=PyPI&color=377EF0&style=for-the-badge)](https://pypi.org/project/torchfunc/) | [![Python](https://img.shields.io/static/v1?label=&message=3.6&color=377EF0&style=for-the-badge&logo=python&logoColor=F8C63D)](https://www.python.org/) | [![PyTorch](https://img.shields.io/static/v1?label=&message=>=1.2.0&color=EE4C2C&style=for-the-badge)](https://pytorch.org/) | [![Docker](https://img.shields.io/static/v1?label=&message=docker&color=309cef&style=for-the-badge)](https://hub.docker.com/r/szymonmaszke/torchfunc) | [![Roadmap](https://img.shields.io/static/v1?label=&message=roadmap&color=009688&style=for-the-badge)](https://github.com/szymonmaszke/torchfunc/blob/master/ROADMAP.md) |
 
 # :bulb: Examples
+
+## 1. Getting performance tips
 
 - __Get instant performance tips about your module. All problems described by comments
 will be shown by `torchfunc.performance.tips`:__
@@ -45,6 +46,8 @@ class Model(torch.nn.Module):
 print(torchfunc.performance.tips(Model()))
 ```
 
+## 2. Seeding, weight freezing and others
+
 - __Seed globaly (including `numpy` and `cuda`), freeze weights, check inference time and model size:__
 
 ```python
@@ -61,6 +64,8 @@ with torchfunc.Timer() as timer:
 
 print(f"Overall time {timer}; Model size: {torchfunc.sizeof(frozen)}")
 ```
+
+## 3. Record `torch.nn.Module` internal state
 
 - __Record and sum per-layer activation statistics as data passes through network:__
 
