@@ -14,6 +14,8 @@ capabilities etc.
 
 # :bulb: Examples
 
+__Check documentation here:__ [https://szymonmaszke.github.io/torchfunc](https://szymonmaszke.github.io/torchfunc)
+
 ## 1. Getting performance tips
 
 - __Get instant performance tips about your module. All problems described by comments
