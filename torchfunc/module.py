@@ -167,6 +167,127 @@ def bias_parameters(module: torch.nn.Module, prefix: str = "", recurse: bool = T
     yield from named_parameters(module, "bias", prefix, recurse)
 
 
+def gradients(module: torch.nn.Module, prefix: str = "", recurse: bool = True):
+    r"""**Iterate only over** `module`'s **parameters gradients.**
+
+    If parameter has no gradient `None` is returned.
+
+    Parameters
+    ----------
+    module : torch.nn.Module
+        Module whose weights and biases will be unfrozen.
+    prefix : str, optional
+        Prefix to prepend to all parameter names. Default: `''` (no prefix)
+    recurse : bool, optional
+        If `True`, then yields parameters of this module and all submodules.
+        Otherwise, yields only parameters that are direct members of this module.
+        Default: `True`
+
+    Yields
+    ------
+    torch.Tensor
+        Tensor containing gradient data.
+
+    """
+    for param in module.parameters():
+        if param.grad is None:
+            yield None
+        else:
+            yield param.grad.data
+
+
+def named_gradients(
+    module: torch.nn.Module, name: str, prefix: str = "", recurse: bool = True
+):
+    r"""**Iterate only over** `module`'s **parameters gradients having** `name` **as part of their name.**
+
+    If parameter has no gradient `None` is returned.
+
+    Parameters
+    ----------
+    module : torch.nn.Module
+        Module whose weights and biases will be unfrozen.
+    name : str
+        Name which parameter needs to be returned
+    prefix : str, optional
+        Prefix to prepend to all parameter names. Default: `''` (no prefix)
+    recurse : bool, optional
+        If `True`, then yields parameters of this module and all submodules.
+        Otherwise, yields only parameters that are direct members of this module.
+        Default: `True`
+
+    Yields
+    ------
+    torch.Tensor
+        Tensor containing gradient data.
+
+    """
+    for param_name, param in module.named_parameters():
+        if name in param_name:
+            if param.grad is None:
+                yield None
+            else:
+                yield param.grad.data
+
+
+def weight_gradients(module: torch.nn.Module, prefix: str = "", recurse: bool = True):
+    r"""**Iterate only over** `module`'s **parameters gradients having** `name` **as part of their name.**
+
+    If parameter has no gradient `None` is returned.
+
+    Weight will be matched based on `weight` string.
+
+    Parameters
+    ----------
+    module : torch.nn.Module
+        Module whose weights and biases will be unfrozen.
+    name : str
+        Name which parameter needs to be returned
+    prefix : str, optional
+        Prefix to prepend to all parameter names. Default: `''` (no prefix)
+    recurse : bool, optional
+        If `True`, then yields parameters of this module and all submodules.
+        Otherwise, yields only parameters that are direct members of this module.
+        Default: `True`
+
+    Yields
+    ------
+    torch.Tensor
+        Tensor containing gradient data.
+    """
+
+    yield from named_gradients(module, "weight", prefix, recurse)
+
+
+def bias_gradients(module: torch.nn.Module, prefix: str = "", recurse: bool = True):
+    r"""**Iterate only over** `module`'s **parameters gradients considered bias.**
+
+    If parameter has no gradient `None` is returned.
+
+    Weight will be matched based on `bias` string.
+
+    Parameters
+    ----------
+    module : torch.nn.Module
+        Module whose weights and biases will be unfrozen.
+    name : str
+        Name which parameter needs to be returned
+    prefix : str, optional
+        Prefix to prepend to all parameter names. Default: `''` (no prefix)
+    recurse : bool, optional
+        If `True`, then yields parameters of this module and all submodules.
+        Otherwise, yields only parameters that are direct members of this module.
+        Default: `True`
+
+    Yields
+    ------
+    torch.Tensor
+        Tensor containing gradient data.
+    """
+
+    yield from named_gradients(module, "bias", prefix, recurse)
+
+
 def device(obj):
     r"""**Return ** `device` **of** `torch.nn.module` **or other** `obj` **containing device field**.
 
