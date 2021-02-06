@@ -304,6 +304,18 @@ class _Recorder(Base):
         for subrecorder, sample in zip(self, self.iter_samples()):
             subrecorder = function(subrecorder, sample)
 
+    def set_data_method(self, data_method: str):
+        r"""**Set each subrecorder's data_method**.
+
+        Parameters
+        ----------
+        data_method: str
+            Data method of subrecorder (either 'sample' or 'batch')
+
+        """
+        for hook in self.subrecorders:
+            hook.data_method = data_method
+
 
 class _Hook:
     def __init__(self, index: int, data: typing.List, samples: int = 0, data_method: str = 'sample'):
