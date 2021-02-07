@@ -58,6 +58,8 @@ class _Recorder(Base):
     Data can be cumulated together via `reduction` parameter, which is advised
     from the memory perspective.
 
+    You can record an entire batch of data or just a sample via the `data_method` parameter.
+
     Parameters
     ----------
     condition : Callable, optional
@@ -69,6 +71,12 @@ class _Recorder(Base):
         Acts similarly to reduction argument of Python's `functools.reduce <https://docs.python.org/3/library/functools.html#functools.reduce>`__.
         If `None`, data will be added to list, which may be very memory intensive.
         Default: `None`
+    data_method : str
+        Method used when each hook is called to record the data.
+        If 'sample', only the first item in data will be recorded.
+        If 'batch', the entire data object will be recorded.
+        Default: `'sample'`.
+        Choices: `'sample'`, `'batch'`
 
     Attributes
     ----------
@@ -83,9 +91,12 @@ class _Recorder(Base):
 
     """
 
-    def __init__(self, register_method, method):
+    def __init__(self, register_method, method, data_method):
         self._register_method: typing.Callable = register_method
         self._method: typing.Callable = method
+        if data_method not in ('sample', 'batch'):
+            raise ValueError('Invalid value for parameter `data_method`. Expected either \'sample\' or \'batch\'. You put {}'.format(data_method))
+        self.data_method = data_method
         self.data = []
         self.subrecorders = []
         self.handles = []
@@ -100,7 +111,7 @@ class _Recorder(Base):
         last_index = 0
         for index, module in enumerate(getattr(network, iterating_function)()):
             if register_condition(module, types, index, indices):
-                hook = self._method(last_index, self.data)
+                hook = self._method(last_index, self.data, data_method=self.data_method)
                 self.handles.append(getattr(module, self._register_method)(hook))
                 self.subrecorders.append(hook)
                 last_index += 1
@@ -297,27 +308,49 @@ class _Recorder(Base):
         for subrecorder, sample in zip(self, self.iter_samples()):
             subrecorder = function(subrecorder, sample)
 
+    def set_data_method(self, data_method: str):
+        r"""**Set each subrecorder's** `data_method` **.**
+
+        Parameters
+        ----------
+        data_method: str
+            Data method of subrecorder (either `'sample'` or `'batch'`)
+
+        """
+        if data_method not in ('sample', 'batch'):
+            raise ValueError('Invalid value for parameter `data_method`. Expected either \'sample\' or \'batch\'. You put {}'.format(data_method))
+
+        for hook in self.subrecorders:
+            hook.data_method = data_method
+
 
 class _Hook:
-    def __init__(self, index: int, data: typing.List, samples: int = 0):
+    def __init__(self, index: int, data: typing.List, samples: int = 0, data_method: str = 'sample'):
         self.index = index
         self.data = data
         self.samples = samples
+        self.data_method = data_method
 
-    def _call(self, to_record, condition, reduction):
+    def _call(self, data, condition, reduction):
         if condition is None or condition():
+            if self.data_method == 'sample':
+                to_record = data[0]
+            elif self.data_method == 'batch':
+                to_record = data
+            else:
+                raise ValueError('Invalid value for parameter `data_method`. Expected either \'sample\' or \'batch\'. You put {}'.format(self.data_method))
             self.samples += 1
             if self.index >= len(self.data):
-                self.data.append(to_record[0])
+                self.data.append(to_record)
                 if reduction is None:
                     self.data[-1] = [self.data[-1]]
             else:
                 if reduction is not None:
                     self.data[self.index] = reduction(
-                        self.data[self.index], to_record[0]
+                        self.data[self.index], to_record
                     )
                 else:
-                    self.data[self.index].append(to_record[0])
+                    self.data[self.index].append(to_record)
 
 
 class ForwardPre(_Recorder):
@@ -326,7 +359,7 @@ class ForwardPre(_Recorder):
     )
 
     def __init__(
-        self, condition: typing.Callable = None, reduction: typing.Callable = None
+        self, condition: typing.Callable = None, reduction: typing.Callable = None, data_method: str = "sample"
     ):
         self.condition = condition
         self.reduction = reduction
@@ -335,7 +368,7 @@ class ForwardPre(_Recorder):
             def __call__(inner_self, module, inputs):
                 inner_self._call(inputs, self.condition, self.reduction)
 
-        super().__init__("register_forward_pre_hook", ForwardPreHook)
+        super().__init__("register_forward_pre_hook", ForwardPreHook, data_method)
 
 
 class ForwardInput(_Recorder):
@@ -344,7 +377,7 @@ class ForwardInput(_Recorder):
     )
 
     def __init__(
-        self, condition: typing.Callable = None, reduction: typing.Callable = None
+        self, condition: typing.Callable = None, reduction: typing.Callable = None, data_method: str = "sample"
     ):
         self.condition = condition
         self.reduction = reduction
@@ -353,7 +386,7 @@ class ForwardInput(_Recorder):
             def __call__(inner_self, module, inputs, _):
                 inner_self._call(inputs, self.condition, self.reduction)
 
-        super().__init__("register_forward_hook", ForwardInputHook)
+        super().__init__("register_forward_hook", ForwardInputHook, data_method)
 
 
 class ForwardOutput(_Recorder):
@@ -362,7 +395,7 @@ class ForwardOutput(_Recorder):
     )
 
     def __init__(
-        self, condition: typing.Callable = None, reduction: typing.Callable = None
+        self, condition: typing.Callable = None, reduction: typing.Callable = None, data_method: str = "sample"
     ):
         self.condition = condition
         self.reduction = reduction
@@ -371,7 +404,7 @@ class ForwardOutput(_Recorder):
             def __call__(inner_self, module, _, outputs):
                 inner_self._call(outputs, self.condition, self.reduction)
 
-        super().__init__("register_forward_hook", ForwardOutputHook)
+        super().__init__("register_forward_hook", ForwardOutputHook, data_method)
 
 
 class BackwardInput(_Recorder):
@@ -380,7 +413,7 @@ class BackwardInput(_Recorder):
     )
 
     def __init__(
-        self, condition: typing.Callable = None, reduction: typing.Callable = None
+        self, condition: typing.Callable = None, reduction: typing.Callable = None, data_method: str = "sample"
     ):
         self.condition = condition
         self.reduction = reduction
@@ -389,7 +422,7 @@ class BackwardInput(_Recorder):
             def __call__(inner_self, module, grad_inputs, _):
                 inner_self._call(grad_inputs, self.condition, self.reduction)
 
-        super().__init__("register_backward_hook", BackwardInputHook)
+        super().__init__("register_backward_hook", BackwardInputHook, data_method)
 
 
 class BackwardOutput(_Recorder):
@@ -398,7 +431,7 @@ class BackwardOutput(_Recorder):
     )
 
     def __init__(
-        self, condition: typing.Callable = None, reduction: typing.Callable = None
+        self, condition: typing.Callable = None, reduction: typing.Callable = None, data_method: str = "sample"
     ):
         self.condition = condition
         self.reduction = reduction
@@ -407,4 +440,4 @@ class BackwardOutput(_Recorder):
             def __call__(inner_self, module, _, outputs):
                 inner_self._call(outputs, self.condition, self.reduction)
 
-        super().__init__("register_backward_hook", BackwardOutputHook)
+        super().__init__("register_backward_hook", BackwardOutputHook, data_method)
