@@ -319,9 +319,11 @@ class _Recorder(Base):
         """
         if data_method not in ('sample', 'batch'):
             raise ValueError('Invalid value for parameter `data_method`. Expected either \'sample\' or \'batch\'. You put {}'.format(data_method))
+        
+        self.data_method = data_method
 
         for hook in self.subrecorders:
-            hook.data_method = data_method
+            hook.data_method = self.data_method
 
 
 class _Hook:
